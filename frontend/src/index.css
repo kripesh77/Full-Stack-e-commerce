@@ -1,19 +1,110 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Geograph";
-  src: url("./assets/font/TestGeograph-Bold-BF6621def2310ed.otf")
-    format("opentype");
+  font-family: "Geograph-bold";
+  src: url("./assets/font/geograph-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Geograph-bold-italic";
+  src: url("./assets/font/geograph-bold-italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Grooved";
+  src: url("./assets/font/GROOVED.ttf") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
-.font-text {
-  font-family: Geograph;
+@font-face {
+  font-family: "Geograph-regular";
+  src: url("./assets/font/geograph-regular.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Geograph-medium";
+  src: url("./assets/font/geograph-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat-mono";
+  src: url("./assets/font/akkurat-mono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rockybilly";
+  src: url("./assets/font/Rockybilly.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FunkySmile-Regular";
+  src: url("./assets/font/FunkySmile-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SuisseIntl-Medium";
+  src: url("./assets/font/SuisseIntl-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #ece9e2;
+}
+
+.font-geo-bold {
+  font-family: Geograph-bold;
+}
+.font-geo-bold-italic {
+  font-family: Geograph-bold-italic;
+}
+
+.font-geo-regular {
+  font-family: Geograph-regular;
+}
+
+.font-geo-medium {
+  font-family: Geograph-medium;
+}
+
+.font-rockybilly {
+  font-family: Rockybilly;
+}
+
+.font-funky-smile {
+  font-family: FunkySmile-Regular;
+}
+.font-grooved {
+  font-family: Grooved;
+}
+
+.font-body {
+  font-family: SuisseIntl-Medium;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 .fade-edges {
   position: relative;
+  background-color: black;
 }
 
 .fade-edges::before,
@@ -39,4 +130,31 @@
 
 .animated-span {
   padding-right: 34px;
+}
+
+.landing-main-div {
+  position: relative;
+}
+
+.landing-main-div::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  background-image: url("./assets/landing-page-helmet.jpg");
+  background-size: cover;
+  background-position: center 70%;
+  background-repeat: no-repeat;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 1;
+}
+
+@media (max-width: 1000px) {
+  .landing-main-div::after {
+    background-position: 0% 0%;
+  }
 }

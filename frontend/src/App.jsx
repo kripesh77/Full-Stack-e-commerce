@@ -3,8 +3,9 @@ import AppLayout from "./pages/AppLayout";
 import { RouterProvider } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const router = createBrowserRouter([
   {

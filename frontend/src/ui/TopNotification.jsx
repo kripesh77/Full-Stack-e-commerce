@@ -9,16 +9,16 @@ function TopNotification() {
     gsap.to(".animated-span", {
       x: "-100%",
       repeat: -1,
-      duration: 2,
+      duration: 10,
       ease: "none",
     });
   });
   return (
     <div
       ref={containerRef}
-      className="px-6 text-[10px] leading-8 tracking-wider md:text-xs text-white bg-black font-text "
+      className="font-geo-bold bg-black px-6 text-[10px] leading-8 tracking-wider text-white md:text-xs"
     >
-      <div className="overflow-x-hidden whitespace-nowrap fade-edges">
+      <div className="fade-edges overflow-x-hidden whitespace-nowrap">
         <span className="animated-span inline-block">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
