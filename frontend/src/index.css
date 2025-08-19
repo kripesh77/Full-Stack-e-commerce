@@ -66,6 +66,11 @@ body {
   height: 100%;
   width: 100%;
   background-color: #ece9e2;
+  box-sizing: border-box;
+}
+
+span {
+  display: inline-block;
 }
 
 .font-geo-bold {
@@ -142,7 +147,7 @@ body {
   top: 0;
   background-image: url("./assets/landing-page-helmet.jpg");
   background-size: cover;
-  background-position: center 70%;
+  background-position: center;
   background-repeat: no-repeat;
   left: 0;
   width: 100%;

@@ -1,6 +1,8 @@
+import FirstVideo from "../ui/FirstVideo";
 import Header from "../ui/Header";
 import LandingMain from "../ui/LandingMain";
 import SecondMain from "../ui/SecondMain";
+// import Thirdmain from "../ui/ThirdMain";
 import TopNotification from "../ui/TopNotification";
 
 function AppLayout() {
@@ -11,6 +13,8 @@ function AppLayout() {
       <main>
         <LandingMain />
         <SecondMain />
+        {/* <Thirdmain /> */}
+        <FirstVideo />
       </main>
     </>
   );

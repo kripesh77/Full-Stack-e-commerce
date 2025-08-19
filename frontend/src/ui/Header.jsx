@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router";
 
 function Header() {
-  const [scrollDirection, setScrollDirection] = useState("up");
+  const [scrollDirection, setScrollDirection] = useState("down");
   const [lastScrollY, setLastScrollY] = useState(0);
   const up = scrollDirection === "up";
 
@@ -53,13 +53,13 @@ function handleMouseLeave(e) {
   const tl = gsap.timeline();
   tl.to(e.currentTarget.firstElementChild, {
     y: "0%",
-    duration: 0.3,
+    duration: 0.2,
   });
   tl.to(
     e.currentTarget.lastElementChild,
     {
       y: "0%",
-      duration: 0.3,
+      duration: 0.2,
     },
     "<",
   );
@@ -85,9 +85,9 @@ const Head = memo(function Head() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <span className="inline-block">ABOUT</span>
+                <span className="inline-block">MEN</span>
                 <br />
-                <span className="absolute top-[100%]">ABOUT</span>
+                <span className="absolute top-[100%]">MEN</span>
               </div>
             </Link>
           </div>
@@ -98,9 +98,9 @@ const Head = memo(function Head() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <span className="inline-block">PRODUCTS</span>
+                <span className="inline-block">WOMEN</span>
                 <br />
-                <span className="absolute top-[100%]">PRODUCTS</span>
+                <span className="absolute top-[100%]">WOMEN</span>
               </div>
             </Link>
           </div>
