@@ -1,0 +1,51 @@
+// ==========================================================================
+// BUTTON COMPONENT - BEM Architecture
+// ==========================================================================
+
+.button {
+  @include button-base;
+  padding: 4px;
+  position: relative;
+  border-radius: $border-radius-full;
+  background-color: $color-secondary;
+  color: $color-text-primary;
+
+  &--big {
+    @include flex-center;
+    width: fit-content;
+    gap: $spacing-xs;
+    z-index: 2;
+
+    @include respond-to("md") {
+      margin-right: spacing("lg");
+    }
+  }
+
+  &__content {
+    font-weight: 700;
+    padding: $spacing-xs $spacing-sm;
+  }
+
+  &__icon {
+    @include flex-center;
+    width: rem(20);
+    height: rem(20);
+    border-radius: $border-radius-full;
+    background-color: $color-primary;
+    color: $color-secondary;
+    padding: $spacing-sm;
+    box-sizing: content-box;
+    overflow: hidden;
+    transition: transform $transition-fast;
+
+    svg {
+      width: rem(20);
+      height: rem(20);
+      transform: scale(0.9);
+    }
+  }
+
+  &:hover &__icon {
+    transform: rotate(35deg);
+  }
+}

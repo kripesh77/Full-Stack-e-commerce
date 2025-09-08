@@ -6,7 +6,7 @@ function TopNotification() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    gsap.to(".animated-span", {
+    gsap.to(".notification__text", {
       x: "-100%",
       repeat: -1,
       duration: 10,
@@ -14,30 +14,27 @@ function TopNotification() {
     });
   });
   return (
-    <div
-      ref={containerRef}
-      className="font-geo-bold bg-black px-6 text-[10px] leading-8 tracking-wider text-white md:text-xs"
-    >
-      <div className="fade-edges overflow-x-hidden whitespace-nowrap">
-        <span className="animated-span inline-block">
+    <div ref={containerRef} className="notification">
+      <div className="notification__container">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
-        <span className="animated-span inline-block">
+        <span className="notification__text">
           Free Shipping On Orders Over $75. Easy Returns.
         </span>
       </div>

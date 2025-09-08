@@ -1,0 +1,98 @@
+// ==========================================================================
+// IMAGE CARD COMPONENT - BEM Architecture
+// ==========================================================================
+
+.image-card {
+  position: relative;
+  aspect-ratio: 0.75;
+  overflow: hidden;
+  border-radius: calc($border-radius-xl - 4px);
+  background-color: $color-primary;
+  transition: all $transition-base 0.2s;
+
+  &:hover {
+    border-radius: 40%;
+  }
+
+  &__background {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+    border-radius: $border-radius-base;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 1;
+    transition: opacity $transition-base;
+
+    .image-card:hover & {
+      opacity: 0.9;
+    }
+  }
+
+  &__content {
+    @include flex-center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: spacing("base");
+    padding-top: spacing("2xl");
+    font-family: $font-family-primary;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    border-radius: $border-radius-base;
+
+    transition: all 0.2s;
+
+    .image-card:hover & {
+      transition: transform $transition-base;
+    }
+  }
+
+  &__title {
+    border: 1px solid currentColor;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xs $spacing-sm;
+    transform: translateY(100%);
+    transition: all $transition-slow 0.1s;
+
+    .image-card:hover & {
+      transform: translateY(0%);
+      border-color: transparent;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    text-align: center;
+    color: transparent;
+
+    .image-card:hover & {
+      color: $color-text-secondary;
+    }
+  }
+
+  &__link {
+    border: 1px solid currentColor;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xs $spacing-sm;
+    transform: translateY(100%);
+    transition: all $transition-slow 0.1s;
+
+    .image-card:hover & {
+      transform: translateY(0%);
+    }
+  }
+}

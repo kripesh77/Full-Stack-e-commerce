@@ -1,111 +1,64 @@
-import gsap from "gsap";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { Link } from "react-router";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { CiSearch } from "react-icons/ci";
 
 function Header() {
-  const [scrollDirection, setScrollDirection] = useState("up");
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const up = scrollDirection === "up";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY) {
-        setScrollDirection("down");
-      } else {
-        setScrollDirection("up");
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
   return (
-    <header
-      className={`${up ? "fixed top-5 right-5 left-5 z-50" : "absolute top-13 right-5 left-5 z-50"} ${lastScrollY < 28 && "absolute top-13 duration-100"}`}
-    >
-      <nav>
+    <header className={`header`}>
+      <nav className="header__nav">
         <Head />
       </nav>
     </header>
   );
 }
 
-function handleMouseEnter(e) {
-  const tl = gsap.timeline();
-  tl.to(e.currentTarget.firstElementChild, { y: "-100%", duration: 0.3 });
-  tl.to(
-    e.currentTarget.lastElementChild,
-    {
-      y: "-100%",
-      duration: 0.3,
-    },
-    "<",
-  );
-}
-
-function handleMouseLeave(e) {
-  const tl = gsap.timeline();
-  tl.to(e.currentTarget.firstElementChild, {
-    y: "0%",
-    duration: 0.3,
-  });
-  tl.to(
-    e.currentTarget.lastElementChild,
-    {
-      y: "0%",
-      duration: 0.3,
-    },
-    "<",
-  );
-}
-
 const Head = memo(function Head() {
   return (
-    <div
-      className={`font-geo-medium mx-auto h-12 max-w-[1920px] rounded-xl bg-white px-2.5 text-[12px] shadow lg:px-5`}
-    >
-      <div className="mx-2 grid h-full grid-cols-3">
-        <div className="font-rockybilly flex items-center text-[10px]">
-          <Link to="/">
-            <span className="text-blue-600">Ali</span>
-            <span>Sasto</span>
+    <div className="header__container">
+      <div className="header__hamburger">
+        <HiOutlineMenuAlt1 />
+      </div>
+      <div className="navigation__brand">
+        <Link to="/">
+          <span className="navigation__brand-primary">ALI</span>
+          <span>SASTO</span>
+        </Link>
+      </div>
+      <div className="navigation__menu font-geo-medium">
+        <div className="navigation__item">
+          <Link to="/about">
+            <div className="navigation__div">
+              <div className="navigation__link">
+                <span className="navigation__link-text">MEN</span>
+                <span className="navigation__link-hover">MEN</span>
+              </div>
+            </div>
           </Link>
         </div>
-        <div className="navbar flex justify-center gap-8 tracking-wider">
-          <div className="flex items-center">
-            <Link to="/about" className="">
-              <div
-                className="navlinks relative overflow-y-hidden"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <span className="inline-block">ABOUT</span>
-                <br />
-                <span className="absolute top-[100%]">ABOUT</span>
+        <div className="navigation__item">
+          <Link to="/products">
+            <div className="navigation__div">
+              <div className="navigation__link">
+                <span className="navigation__link-text">WOMEN</span>
+                <span className="navigation__link-hover">WOMEN</span>
               </div>
-            </Link>
-          </div>
-          <div className="relative flex items-center">
-            <Link to="/products" className="">
-              <div
-                className="navlinks relative overflow-y-hidden"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <span className="inline-block">PRODUCTS</span>
-                <br />
-                <span className="absolute top-[100%]">PRODUCTS</span>
-              </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
-        <div></div>
+        <div className="navigation__item">
+          <Link to="/products">
+            <div className="navigation__div">
+              <div className="navigation__link">
+                <span className="navigation__link-text">NEW ARRIVALS</span>
+                <span className="navigation__link-hover">NEW ARRIVALS</span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+      <div className="navigation__actions">
+        <CiSearch />
       </div>
     </div>
   );

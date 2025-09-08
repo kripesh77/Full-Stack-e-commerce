@@ -1,0 +1,88 @@
+// ==========================================================================
+// VARIABLES
+// ==========================================================================
+
+@font-face {
+  font-family: font-geo-medium;
+  src: url(../../assets/font/geograph-medium.woff2);
+}
+
+@font-face {
+  font-family: font-geo-bold-itallic;
+  src: url(../../assets/font/geograph-bold-italic.woff2);
+}
+@font-face {
+  font-family: font-geo-bold;
+  src: url(../../assets/font/geograph-bold.woff2);
+}
+
+@font-face {
+  font-family: font-asmovian;
+  src: url(../../assets/font/Asimovian-Regular.ttf);
+}
+
+// Colors
+$color-primary: #000;
+$color-secondary: #fff;
+$color-accent: #1e40af; // blue-600
+$color-background: #ece9e2;
+$color-background-secondary: #f1f5f9;
+$color-text-primary: #000;
+$color-text-secondary: #fff;
+$color-text-muted: #6b7280;
+
+// Typography
+$font-family-primary: font-geo-medium, sans-serif;
+$font-family-logo: font-asmovian, sans-serif;
+$font-family-geo-bold: font-geo-bold, sans-serif;
+$font-family-asmovian: font-asmovian, sans-serif;
+$font-family-secondary: "Rocky Billy", sans-serif;
+$font-family-body: "system-ui", sans-serif;
+
+$font-size-xs: 10px;
+$font-size-sm: 12px;
+$font-size-base: 13px;
+$font-size-lg: 16px;
+$font-size-xl: 24px;
+$font-size-2xl: 32px;
+$font-size-3xl: 48px;
+$font-size-4xl: 64px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.7rem;
+$spacing-base: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+
+// Border radius
+$border-radius-sm: 8px;
+$border-radius-base: 16px;
+$border-radius-lg: 20px;
+$border-radius-xl: 32px;
+$border-radius-full: 50px;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Z-index
+$z-index-dropdown: 10;
+$z-index-sticky: 20;
+$z-index-fixed: 30;
+$z-index-modal-backdrop: 40;
+$z-index-modal: 50;
+
+// Transition
+$transition-base: 0.3s ease;
+$transition-fast: 0.15s ease;
+$transition-slow: 0.5s ease;

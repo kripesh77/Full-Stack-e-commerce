@@ -1,0 +1,24 @@
+// ==========================================================================
+// MAIN SCSS FILE - 7-1 Architecture
+// ==========================================================================
+
+// 1. Configuration and helpers
+@import "abstracts/index";
+
+// 2. Vendors
+@import "vendors/index";
+
+// 3. Base stuff
+@import "base/index";
+
+// 4. Layout-related sections
+@import "layout/index";
+
+// 5. Components
+@import "components/index";
+
+// 6. Page-specific styles
+@import "pages/index";
+
+// 7. Themes
+@import "themes/index";

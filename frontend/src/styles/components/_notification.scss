@@ -1,0 +1,60 @@
+// ==========================================================================
+// NOTIFICATION COMPONENT - BEM Architecture
+// ==========================================================================
+
+.notification {
+  background-color: $color-primary;
+  padding: 0 spacing("lg");
+  font-family: $font-family-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xs;
+  line-height: 2rem;
+  letter-spacing: 0.05em;
+  color: $color-text-secondary;
+
+  @include respond-to("md") {
+    font-size: $font-size-sm;
+  }
+
+  &__container {
+    overflow-x: hidden;
+    white-space: nowrap;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 50px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(to right, $color-primary, transparent);
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(to left, $color-primary, transparent);
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    animation: scroll-text 10s linear infinite;
+    padding-right: 20px;
+  }
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

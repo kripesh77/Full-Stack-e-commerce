@@ -1,0 +1,72 @@
+.navigation {
+  &__menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+
+    @include respond-to("md") {
+      display: flex;
+    }
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 2px;
+    line-height: 0.9;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+
+    &-hover {
+      position: absolute;
+      transform: translateY(100%);
+      transition: all 0.3s;
+    }
+
+    &-text {
+      transition: all 0.3s;
+    }
+  }
+
+  &__brand {
+    font-family: $font-family-logo;
+    font-weight: $font-weight-bold;
+    font-size: 1rem;
+    color: #111;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2 / 3;
+
+    @include respond-to("md") {
+      grid-column: 1 / 2;
+      justify-content: start;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  &__div {
+    padding-block: 10px;
+  }
+
+  &__div:hover &__link-hover {
+    transform: translateY(0);
+  }
+
+  &__div:hover &__link-text {
+    transform: translateY(-100%);
+  }
+}

@@ -1,0 +1,26 @@
+.header {
+  position: absolute;
+  width: 100%;
+
+  &__nav {
+    background-color: white;
+    margin: 20px;
+    border-radius: 12px;
+  }
+
+  &__container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 8px;
+  }
+
+  &__hamburger {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    @include respond-to("md") {
+      display: none;
+    }
+  }
+}

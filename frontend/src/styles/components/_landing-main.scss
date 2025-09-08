@@ -1,0 +1,39 @@
+// ==========================================================================
+// LANDING MAIN COMPONENT - BEM Architecture
+// ==========================================================================
+
+.landing-main {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-xl 0;
+  margin-top: $spacing-3xl;
+  gap: $spacing-lg;
+
+  @include respond-to("md") {
+    gap: $spacing-xl;
+  }
+
+  &__container {
+    @include flex-center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-base;
+  }
+
+  &__content {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__button-wrapper {
+    @include flex-center;
+    gap: $spacing-base;
+    flex-wrap: wrap;
+
+    @include respond-to("md") {
+      gap: $spacing-lg;
+    }
+  }
+}

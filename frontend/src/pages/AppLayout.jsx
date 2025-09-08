@@ -1,6 +1,5 @@
+import { Outlet } from "react-router";
 import Header from "../ui/Header";
-import LandingMain from "../ui/LandingMain";
-import SecondMain from "../ui/SecondMain";
 import TopNotification from "../ui/TopNotification";
 
 function AppLayout() {
@@ -8,10 +7,7 @@ function AppLayout() {
     <>
       <TopNotification />
       <Header />
-      <main>
-        <LandingMain />
-        <SecondMain />
-      </main>
+      <Outlet />
     </>
   );
 }

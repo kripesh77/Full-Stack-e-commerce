@@ -1,0 +1,78 @@
+// ==========================================================================
+// HOME PAGE - BEM Architecture
+// ==========================================================================
+
+.hero {
+  &__div {
+    @include flex-center;
+    margin: 10px;
+    border-radius: 20px;
+    background-image: url(../../assets/landing-page-helmet.jpg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    height: calc(100vh - 8.25rem);
+    background-size: cover;
+    justify-content: center;
+
+    @include respond-to("md") {
+      height: calc(100vh - 8.25rem);
+    }
+  }
+  &__container {
+    @include flex-center;
+    width: 100%;
+    flex-direction: column;
+    margin: spacing("sm");
+    padding: spacing("2xl");
+    border-radius: $border-radius-base;
+    background-image: url("/path-to-hero-image.jpg"); // Will be set dynamically
+    background-size: cover;
+    background-position: center;
+
+    @include respond-to("md") {
+      align-items: flex-end;
+    }
+  }
+
+  &__title {
+    position: relative;
+    z-index: 20;
+    margin: 0 spacing("sm") spacing("lg");
+    font-family: $font-family-geo-bold;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: 1.1;
+    letter-spacing: 0.025em;
+    text-align: center;
+    color: $color-text-secondary;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-wrap: balance;
+
+    @include respond-to("md") {
+      margin: 0 spacing("lg") spacing("lg");
+      font-size: $font-size-2xl;
+    }
+
+    @include respond-to("lg") {
+      font-size: $font-size-4xl;
+    }
+  }
+}
+
+.product-grid {
+  margin: spacing("base") spacing("sm");
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+
+    @include respond-to("sm") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to("md") {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
