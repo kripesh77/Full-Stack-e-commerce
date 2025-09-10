@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
+import ProductsPage from "./pages/ProductsPage";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <Products />,
+        element: <ProductsPage />,
       },
     ],
   },

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Buttonbig from "./Buttonbig";
 
 function LandingMain() {
@@ -6,7 +7,9 @@ function LandingMain() {
       <div className="hero__div">
         <div className="hero__container">
           <span className="hero__title">Your Safety, Our Mission</span>
-          <Buttonbig>SHOP NOW</Buttonbig>
+          <Link to="products">
+            <Buttonbig>SHOP NOW</Buttonbig>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,11 +1,15 @@
+import { useTouchOrMobile } from "../hooks/useMediaQuery";
 import LandingMain from "../ui/LandingMain";
 import SecondMain from "../ui/SecondMain";
+import SecondMainCarousal from "../ui/SecondMainCarousal";
 
 function Home() {
+  const isTouchOrMobile = useTouchOrMobile();
+  console.log(isTouchOrMobile);
   return (
     <main>
       <LandingMain />
-      <SecondMain />
+      {isTouchOrMobile ? <SecondMainCarousal /> : <SecondMain />}
     </main>
   );
 }

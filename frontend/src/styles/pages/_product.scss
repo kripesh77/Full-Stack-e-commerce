@@ -1,22 +1,22 @@
-// ==========================================================================
-// HOME PAGE - BEM Architecture
-// ==========================================================================
-
-.hero {
+.product-hero {
   &__div {
     @include flex-center;
     margin: 10px;
     border-radius: 16px;
     background-image: url(../../assets/landing-page-helmet.jpg);
     background-repeat: no-repeat;
-    background-position: left 65%;
-    height: calc(100vh - 8.25rem);
+    background-position: left center;
     background-size: cover;
     justify-content: center;
+    aspect-ratio: 2 / 3;
 
     @include respond-to("md") {
-      height: calc(100vh - 8.25rem);
+      aspect-ratio: 3 / 1;
     }
+    @include respond-to("lg") {
+      aspect-ratio: 4 / 1;
+    }
+    /* relative m-2.5 overflow-hidden rounded-2xl max-md:aspect-2/3 md:aspect-3/1 lg:aspect-4/1 */
   }
   &__container {
     @include flex-center;
@@ -56,16 +56,5 @@
     @include respond-to("lg") {
       font-size: $font-size-4xl;
     }
-  }
-}
-
-.product-grid {
-  margin: spacing("base") spacing("sm");
-
-  &__container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-sm;
-    grid-template-columns: repeat(4, 1fr);
   }
 }

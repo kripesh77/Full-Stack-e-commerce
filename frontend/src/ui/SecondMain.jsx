@@ -6,7 +6,15 @@ const info = {
 };
 
 function SecondMain() {
-  return <section className="h-screen"></section>;
+  return (
+    <section className="product-grid">
+      <div className="product-grid__container">
+        {info.urls.map((url, index) => (
+          <ImageDivs key={index} url={url} title={info.titles[index]} />
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export default SecondMain;
