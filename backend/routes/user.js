@@ -63,8 +63,8 @@ userRouter.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const trimmedEmail = email.toLowerCase().trim();
   const user = await UserModel.findOne({ email: trimmedEmail });
-  const { _id, name } = user;
   if (user) {
+    const { _id, name } = user;
     const isPasswordCorrect = bcrypt.compare(password, user.password);
     if (!isPasswordCorrect)
       return res.status(409).json({ error: "Password Incorrect" });

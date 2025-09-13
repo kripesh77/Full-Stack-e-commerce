@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(generalLimiter);
 app.use("/api/auth/seller", authLimiter, sellerRouter);
 app.use("/api/auth/user", authLimiter, userRouter);
-app.use("/api/product", productRouter);
+app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
