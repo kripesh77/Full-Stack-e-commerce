@@ -1,4 +1,4 @@
-const url = "https://c06mzsh1-2000.inc1.devtunnels.ms";
+const url = import.meta.env.VITE_URL;
 
 export async function getProducts() {
   const res = await fetch(`${url}/api/products`);

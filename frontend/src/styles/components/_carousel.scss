@@ -1,0 +1,162 @@
+// ==========================================================================
+// CAROUSEL SECTION COMPONENT - BEM Architecture
+// ==========================================================================
+
+.carousel-section {
+  // overflow: hidden;
+  padding: 0 0 spacing("lg") spacing("sm");
+}
+
+.carousel-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.main-carousel {
+  padding: spacing("base") 0;
+  overflow: visible;
+
+  .swiper-wrapper {
+    align-items: stretch; // Ensure all slides have same height
+  }
+
+  .swiper-slide {
+    height: auto;
+    display: flex; // Make slide a flex container
+    // Remove all scaling and opacity changes - cards stay same size
+  }
+}
+
+// ==========================================================================
+// CAROUSEL CARD COMPONENT
+// ==========================================================================
+
+.carousel-card {
+  position: relative;
+  aspect-ratio: 0.77;
+  overflow: hidden;
+  border-radius: calc($border-radius-xl - 4px);
+  background-color: $color-primary;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+  flex: 1; // Ensure card fills the slide container
+  width: 100%;
+
+  &--active {
+    border-radius: 50% / 35%;
+
+    .carousel-card__background {
+      opacity: 0.8;
+    }
+
+    .carousel-card__title {
+      transform: translateY(0%);
+    }
+
+    .carousel-card__links {
+      color: $color-text-secondary;
+    }
+  }
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+    border-radius: $border-radius-base;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+    transition: opacity $transition-base;
+  }
+
+  &__content {
+    @include flex-center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: spacing("base");
+    padding-top: spacing("2xl");
+    font-family: $font-family-primary;
+    font-weight: $font-weight-regular;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    border-radius: $border-radius-base;
+    transition: all 0.2s;
+
+    @include respond-to("xs") {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__title {
+    border: 1px solid currentColor;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xs $spacing-sm;
+    transform: translateY(100%);
+    transition: all $transition-fast;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    text-align: center;
+    color: transparent;
+  }
+
+  &__link {
+    border: 1px solid currentColor;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xs $spacing-sm;
+
+    transform: translateY(100%);
+    transition: all $transition-fast;
+  }
+}
+
+// ==========================================================================
+// RESPONSIVE DESIGN
+// ==========================================================================
+
+@include respond-to("sm") {
+  .carousel-card {
+    &__content {
+      font-size: $font-size-base;
+      gap: spacing("sm");
+    }
+
+    &__link {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+@include respond-to("md") {
+  .carousel-section {
+    padding: spacing("xl") spacing("lg");
+  }
+
+  .carousel-card {
+    &__content {
+      font-size: $font-size-lg;
+      gap: spacing("base");
+    }
+
+    &__title {
+      font-size: $font-size-lg;
+    }
+
+    &__link {
+      font-size: $font-size-base;
+    }
+  }
+}

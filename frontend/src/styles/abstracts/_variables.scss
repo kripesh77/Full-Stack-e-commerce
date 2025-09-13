@@ -8,6 +8,11 @@
 }
 
 @font-face {
+  font-family: font-geo-regular;
+  src: url(../../assets/font/geograph-regular.woff2);
+}
+
+@font-face {
   font-family: font-geo-bold-itallic;
   src: url(../../assets/font/geograph-bold-italic.woff2);
 }
@@ -32,6 +37,8 @@ $color-text-secondary: #fff;
 $color-text-muted: #6b7280;
 
 // Typography
+
+$font-family-regular: font-geo-regular, sans-serif;
 $font-family-primary: font-geo-medium, sans-serif;
 $font-family-logo: font-asmovian, sans-serif;
 $font-family-geo-bold: font-geo-bold, sans-serif;
@@ -39,10 +46,11 @@ $font-family-asmovian: font-asmovian, sans-serif;
 $font-family-secondary: "Rocky Billy", sans-serif;
 $font-family-body: "system-ui", sans-serif;
 
-$font-size-xs: 10px;
+$font-size-xs: 8px;
 $font-size-sm: 12px;
 $font-size-base: 13px;
 $font-size-lg: 16px;
+$font-size-2lg: 20px;
 $font-size-xl: 24px;
 $font-size-2xl: 32px;
 $font-size-3xl: 48px;
@@ -54,7 +62,7 @@ $font-weight-bold: 700;
 
 // Spacing
 $spacing-xs: 0.25rem;
-$spacing-sm: 0.7rem;
+$spacing-sm: 0.625rem;
 $spacing-base: 1rem;
 $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
@@ -69,6 +77,7 @@ $border-radius-xl: 32px;
 $border-radius-full: 50px;
 
 // Breakpoints
+$breakpoint-xs: 480px;
 $breakpoint-sm: 640px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;

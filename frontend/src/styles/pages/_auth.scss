@@ -1,0 +1,68 @@
+.auth {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, #f5f5f5, #ece9e2);
+  font-family: $font-family-regular;
+
+  &__container {
+    background-color: white;
+    max-width: 45rem;
+    min-width: 100vw;
+    border-radius: 12px;
+    overflow: hidden;
+
+    @include respond-to("451px") {
+      min-width: 451px;
+    }
+
+    &--div {
+      padding: 38px 21px;
+      box-shadow:
+        inset -5px -5px 10px rgba(#ece5d4, 0.3),
+        /* inner top-left */ inset -5px -5px 10px rgba(#847f76, 0.2),
+        /* inner bottom-right */ -8px -8px 15px rgba(#847f76, 0.1),
+        /* outer top-left */ 8px 8px 15px rgba(white, 0.3); /* outer bottom-right */
+
+      @include respond-to("451px") {
+        padding: 38px;
+      }
+    }
+  }
+
+  &-links {
+    display: flex;
+    width: 100%;
+
+    &__item {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+
+      &:not(.active) {
+        background-color: #fcf9f2;
+        box-shadow:
+          inset 5px 5px 10px rgba(#ece9e2, 0.3),
+          inset -5px -5px 10px rgba(#847f76, 0.2),
+          8px 8px 15px rgba(#847f76, 0.1),
+          -8px -8px 15px rgba(white, 0.3);
+      }
+      border-bottom: 1px solid #ece5d4;
+    }
+
+    .active {
+      background-color: white;
+      padding: 10px;
+      height: 100%;
+      width: 100%;
+      box-shadow:
+        inset -5px -5px 10px rgba(#ece5d4, 0.3),
+        inset 5px 5px 10px rgba(#847f76, 0.2),
+        -8px -8px 15px rgba(#847f76, 0.1),
+        8px 8px 15px rgba(white, 0.3);
+    }
+  }
+}

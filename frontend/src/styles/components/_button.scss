@@ -15,21 +15,25 @@
     width: fit-content;
     gap: $spacing-xs;
     z-index: 2;
+    font-size: 0.7rem;
+    font-weight: 700;
 
     @include respond-to("md") {
+      font-size: 0.8rem;
       margin-right: spacing("lg");
     }
   }
 
+  &--small {
+    padding: $spacing-sm;
+  }
+
   &__content {
-    font-weight: 700;
     padding: $spacing-xs $spacing-sm;
   }
 
   &__icon {
     @include flex-center;
-    width: rem(20);
-    height: rem(20);
     border-radius: 50%;
     background-color: $color-primary;
     color: $color-secondary;
@@ -38,14 +42,23 @@
     transition: transform $transition-fast;
 
     svg {
-      width: rem(20);
-      height: rem(20);
       transform: scale(0.9);
       transition: transform $transition-fast;
+      width: rem(10);
+      height: rem(10);
+
+      @include respond-to("md") {
+        width: rem(20);
+        height: rem(20);
+      }
     }
   }
 
   &:hover &__icon > svg {
     transform: scale(0.9) rotateZ(35deg);
+
+    @include coarse {
+      transform: scale(0.9) rotateZ(0deg);
+    }
   }
 }

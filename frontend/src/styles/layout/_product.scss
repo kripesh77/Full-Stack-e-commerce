@@ -1,0 +1,11 @@
+.product-div {
+  margin: 10px;
+  font-family: $font-family-regular;
+
+  &__container {
+    @include respond-to("xl") {
+      padding: 0px 80px 48px;
+      margin-inline: auto;
+    }
+  }
+}

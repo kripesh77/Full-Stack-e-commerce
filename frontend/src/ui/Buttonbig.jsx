@@ -5,7 +5,7 @@ function Buttonbig({ children, className = "" }) {
   const svgRef = useRef(null);
   return (
     <div className="button button--big">
-      <Button className={className}>{children}</Button>
+      <Button className={`${className} button__content`}>{children}</Button>
       <div className="button__icon">
         <svg ref={svgRef} viewBox="0 0 52 43" fill="none">
           <path

@@ -6,7 +6,7 @@ function LandingMain() {
     <section className="hero">
       <div className="hero__div">
         <div className="hero__container">
-          <span className="hero__title">Your Safety, Our Mission</span>
+          <h1 className="hero__title">Your Safety, Our Mission</h1>
           <Link to="products">
             <Buttonbig>SHOP NOW</Buttonbig>
           </Link>

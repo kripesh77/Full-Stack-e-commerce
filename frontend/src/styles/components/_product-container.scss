@@ -1,0 +1,111 @@
+.product {
+  display: grid;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+
+  &__card {
+    border-radius: 12px;
+    background-color: white;
+    padding: 10px;
+    font-size: $font-size-sm;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+
+    &--name {
+      font-family: $font-family-primary;
+      font-size: $font-size-lg;
+
+      @include respond-to("lg") {
+        font-size: $font-size-2lg;
+      }
+    }
+
+    &--img {
+      width: 100%;
+      aspect-ratio: 1;
+      //   padding: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0px 6px 20px -12px black;
+
+      &--div {
+        padding: 20px;
+      }
+    }
+
+    &--actions {
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    &--category {
+      position: absolute;
+      right: 10px;
+      font-family: $font-family-primary;
+      background-color: #e0dacf;
+      font-size: $font-size-xs;
+      padding: 1px 5px;
+      border-radius: 10px;
+
+      //   @include respond-to("md") {
+      //     font-size: $font-size-sm;
+      //   }
+
+      @include respond-to("lg") {
+        font-size: $font-size-base;
+      }
+    }
+
+    &--price {
+      font-family: $font-family-primary;
+      color: #706e69;
+      font-size: $font-size-2lg;
+    }
+
+    &--button {
+      background-color: #212a2f;
+      color: white;
+      width: 100%;
+      text-align: center;
+      border-radius: 12px;
+      transition: all 0.1s ease-in-out;
+
+      &:focus-visible:not(:disabled) {
+        outline: 5px solid #212a2f;
+        outline-offset: 2px;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover:not(:disabled) {
+          // background-color: #ffffff;
+          transform: translateY(-5%) scale(1.02);
+          box-shadow: 0px 5px 10px -2px #212a2f;
+        }
+
+        &:active:not(:disabled) {
+          transform: translateY(-2%);
+          box-shadow: 0px 2px 10px -1px #212a2f;
+        }
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        text-decoration: line-through;
+      }
+    }
+    @include respond-to("lg") {
+      font-size: $font-size-base;
+    }
+  }
+
+  @include respond-to("sm") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to("md") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

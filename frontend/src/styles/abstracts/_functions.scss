@@ -4,7 +4,7 @@
 
 // Convert px to rem
 @function rem($pixels) {
-  @return #{$pixels / 16}rem;
+  @return ($pixels / 16) * 1rem;
 }
 
 // Get spacing value
