@@ -21,7 +21,7 @@ const Head = memo(function Head() {
       <div className="header__hamburger">
         <HiOutlineMenuAlt1 />
       </div>
-      <HeaderLogo classname="navigation__brand" />
+      <HeaderLogo classname="navigation__brand " />
       <div className="navigation__menu font-geo-medium">
         <HeaderNavigationItem to="/products" text="MEN" />
         <HeaderNavigationItem to="/products" text="WOMEN" />

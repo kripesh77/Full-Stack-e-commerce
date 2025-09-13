@@ -1,33 +1,80 @@
-function Signin() {
-  return (
-    <form class="auth-form auth-form--signin">
-      <div class="auth-form__field">
-        <input type="text" class="auth-form__input" placeholder="Name:" />
-        <label for="name" class="auth-form__label">
-          Name:
-        </label>
-      </div>
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useAuth } from "./useAuth";
 
-      <div class="auth-form__field">
-        <label for="email" class="auth-form__label">
+function Signin() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { mutate: signin, isPending } = useAuth();
+
+  function onSubmit(data) {
+    signin(data);
+  }
+
+  return (
+    <form
+      className="auth-form auth-form--signin"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="auth-form__field">
+        <input
+          type="email"
+          className="auth-form__input"
+          placeholder="Email:"
+          {...register("email", { required: "Email is required" })}
+          style={{ borderColor: `${errors.email ? "red" : ""}` }}
+        />
+        <label htmlFor="email" className="auth-form__label">
           Email:
         </label>
-        <input type="text" class="auth-form__input" placeholder="Email:" />
+        {errors?.email && (
+          <span className="auth-form__input--error">
+            {errors?.email.message}
+          </span>
+        )}
       </div>
 
-      <div class="auth-form__field">
-        <label for="password" class="auth-form__label">
+      <div className="auth-form__field">
+        <input
+          type={`${showPassword ? "text" : "password"}`}
+          className="auth-form__input"
+          placeholder="Password:"
+          {...register("password", { required: "Password is required" })}
+          style={{
+            borderColor: `${errors.password ? "red" : ""}`,
+          }}
+        />
+        <label htmlFor="password" className="auth-form__label">
           Password:
         </label>
-        <input
-          type="password"
-          class="auth-form__input"
-          placeholder="Password:"
-        />
+        <span
+          onClick={() => setShowPassword((s) => !s)}
+          className="auth-form__toogle"
+        >
+          {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+        </span>
+        {errors?.password && (
+          <span className="auth-form__input--error">
+            {errors?.password.message}
+          </span>
+        )}
       </div>
 
-      <div class="auth-form__actions">
-        <button class="auth-form__button">Sign in</button>
+      <div className="auth-form__actions">
+        <button
+          className="auth-form__button"
+          type="submit"
+          disabled={isPending}
+        >
+          Sign in
+        </button>
       </div>
     </form>
   );

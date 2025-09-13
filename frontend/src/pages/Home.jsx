@@ -5,7 +5,6 @@ import SecondMainCarousal from "../ui/SecondMainCarousal";
 
 function Home() {
   const isTouchOrMobile = useTouchOrMobile();
-  console.log(isTouchOrMobile);
   return (
     <main>
       <LandingMain />

@@ -64,15 +64,15 @@ userRouter.post("/signin", async (req, res) => {
   const trimmedEmail = email.toLowerCase().trim();
   const user = await UserModel.findOne({ email: trimmedEmail });
   if (user) {
-    const { _id, name } = user;
-    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    const { password: hash } = user;
+    const isPasswordCorrect = await bcrypt.compare(password, hash);
     if (!isPasswordCorrect)
-      return res.status(409).json({ error: "Password Incorrect" });
+      return res.status(409).json({ message: "Password Incorrect" });
 
     const token = jwt.sign({ userId: user._id }, JWT_SECRET_USER);
     res.status(200).json({ token });
   } else {
-    res.status(409).json({ error: "User doesnot exists" });
+    res.status(409).json({ message: "User doesnot exists" });
   }
 });
 

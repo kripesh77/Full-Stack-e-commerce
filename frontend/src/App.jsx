@@ -9,6 +9,7 @@ import ProductsPage from "./pages/ProductsPage";
 import Auth from "./pages/Auth";
 import Signin from "./features/user/Signin";
 import Signup from "./features/user/Signup";
+import AuthContextProvider from "./context/AuthContextProvider";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -47,7 +48,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />;
+    </AuthContextProvider>
+  );
 }
 
 export default App;

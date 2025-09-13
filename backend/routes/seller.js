@@ -65,7 +65,7 @@ sellerRouter.post("/signin", async (req, res) => {
   const trimmedEmail = email.toLowerCase().trim();
   const seller = await SellerModel.findOne({ email: trimmedEmail });
   if (seller) {
-    const isPasswordCorrect = bcrypt.compare(password, seller.password);
+    const isPasswordCorrect = await bcrypt.compare(password, seller.password);
     if (!isPasswordCorrect)
       return res.status(409).json({ error: "Password Incorrect" });
 
