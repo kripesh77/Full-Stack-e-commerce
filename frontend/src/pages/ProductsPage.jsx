@@ -10,7 +10,7 @@ function ProductsPage() {
   return (
     <main>
       <ProductHero />
-      <Products products={data.products} />
+      <Products products={data?.products} />
     </main>
   );
 }

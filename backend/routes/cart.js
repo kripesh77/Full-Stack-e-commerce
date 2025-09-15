@@ -13,9 +13,6 @@ cartRouter.get("/", async (req, res) => {
     const cart = await CartModel.findOne({ creatorId }).populate(
       "products.productId"
     );
-    if (!cart) {
-      return res.status(404).json({ error: "Cart not found" });
-    }
     return res.status(200).json(cart);
   } catch (error) {
     return res.status(500).json({ error: "Internal error occured" });
@@ -25,7 +22,7 @@ cartRouter.get("/", async (req, res) => {
 cartRouter.post("/:productId", async (req, res) => {
   const creatorId = req.userId;
   const { productId } = req.params;
-  const quantity = Number(req?.body?.quantity);
+  const quantity = Number(req?.body?.quantity || 1);
   if (
     !mongoose.Types.ObjectId.isValid(productId) ||
     !Number.isInteger(quantity) ||

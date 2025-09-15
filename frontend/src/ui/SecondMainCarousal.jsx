@@ -55,7 +55,9 @@ function CarouselCard({ url, title, isActive, isInView }) {
     <div
       ref={cardRef}
       className={`carousel-card ${isActive && isInView ? "carousel-card--active" : ""}`}
-      style={{ "--bg-image": `url(${url})` }}
+      style={{
+        "--bg-image": `url(${url})`,
+      }}
     >
       <div
         className="carousel-card__background"

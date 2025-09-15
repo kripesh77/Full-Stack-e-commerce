@@ -14,6 +14,10 @@
     gap: 8px;
     position: relative;
 
+    &--inCartText {
+      font-size: 15px;
+    }
+
     &--name {
       font-family: $font-family-primary;
       font-size: $font-size-lg;
@@ -29,7 +33,7 @@
       //   padding: 10px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0px 6px 20px -12px black;
+      box-shadow: 0px 6px 20px -12px $color-primary;
 
       &--div {
         padding: 20px;
@@ -39,6 +43,13 @@
     &--actions {
       border-radius: 12px;
       transition: all 0.2s;
+
+      &--incart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+      }
     }
 
     &--category {
@@ -66,15 +77,19 @@
     }
 
     &--button {
-      background-color: #212a2f;
+      background-color: $color-primary;
       color: white;
-      width: 100%;
+
       text-align: center;
       border-radius: 12px;
       transition: all 0.1s ease-in-out;
 
+      &-full {
+        width: 100%;
+      }
+
       &:focus-visible:not(:disabled) {
-        outline: 5px solid #212a2f;
+        outline: 5px solid $color-primary;
         outline-offset: 2px;
       }
 
@@ -82,18 +97,27 @@
         &:hover:not(:disabled) {
           // background-color: #ffffff;
           transform: translateY(-5%) scale(1.02);
-          box-shadow: 0px 5px 10px -2px #212a2f;
+          box-shadow: 0px 5px 10px -2px $color-primary;
         }
 
         &:active:not(:disabled) {
           transform: translateY(-2%);
-          box-shadow: 0px 2px 10px -1px #212a2f;
+          box-shadow: 0px 2px 10px -1px $color-primary;
         }
       }
 
       &:disabled {
         cursor: not-allowed;
         text-decoration: line-through;
+      }
+
+      &--incdec {
+        background-color: $color-primary;
+        color: $color-secondary;
+        font-size: 23px;
+        height: 100%;
+        width: 100%;
+        border-radius: 12px;
       }
     }
     @include respond-to("lg") {

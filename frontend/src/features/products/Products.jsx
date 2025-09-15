@@ -1,63 +1,67 @@
-import Button from "../../ui/Button";
+import toast from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addToCart, getCarts } from "../../utils/apiCart";
+import ProductCard from "./ProductCard";
 
 function Products({ products }) {
-  console.log(products);
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      toast.success("Item added to cart");
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const { token } = JSON.parse(localStorage.getItem("auth"));
+
+  const { data: cart } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => getCarts(token),
+  });
+
+  console.log(cart);
+
+  const cartProducts = cart?.products?.map((item) => ({
+    productId: item.productId._id,
+    quantity: item.quantity,
+  }));
+
+  if (!products)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontWeight: "bold",
+          color: "red",
+        }}
+      >
+        Failed to fetch products
+      </div>
+    );
+
   return (
     <div className="product-div">
       <div className="product-div__container">
         <ul className="product">
           {products.map((item) => (
-            <ProductCard key={products._id} product={item} />
+            <ProductCard
+              key={products._id}
+              product={item}
+              mutate={mutate}
+              cartProducts={cartProducts}
+              isLoading={isPending}
+            />
           ))}
         </ul>
       </div>
     </div>
-  );
-}
-
-function ProductCard({ product }) {
-  const { name, imageUrl, price, stock, category } = product;
-  const outOfStock = stock === 0;
-
-  // function handleClick() {
-  //   console.log("Added " + id);
-  // }
-  return (
-    <li className="product__card">
-      <div className="product__card--img--div">
-        <img src={imageUrl} alt={name} className="product__card--img" />
-      </div>
-      <div className="product__card--category">{category}</div>
-      <div className="product__card--name" title={name}>
-        {name.length <= 15 ? name : `${name.substring(0, 12) + "..."}`}
-      </div>
-      <div className="product__card--price">Rs. {price}</div>
-      <div className="product__card--stock">
-        Remaining:
-        <span style={{ color: `${stock > 10 ? "green" : "red"}` }}>
-          &nbsp;
-          {stock}
-          {stock < 10 && (
-            <span>{outOfStock ? " (out of stock)" : " (low on stock)"}</span>
-          )}
-        </span>
-      </div>
-      <div className="product__card--actions">
-        {/* <button
-          onClick={handleClick}
-          disabled={outOfStock}
-          className="product__card--button"
-        >
-          Add to cart
-        </button> */}
-        <Button
-          className="button--small product__card--button"
-          disabled={outOfStock}
-        >
-          Add to cart
-        </Button>
-      </div>
-    </li>
   );
 }
 

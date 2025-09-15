@@ -1,16 +1,18 @@
 import { Outlet } from "react-router";
 import Header from "../ui/Header";
 import TopNotification from "../ui/TopNotification";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthContext } from "../hooks/useAuthContext";
+import CartIndicator from "../ui/CartIndicator";
 
 function AppLayout() {
-  const a = useAuth();
-  console.log(a?.isAuthenticated);
+  const { isAuthenticated } = useAuthContext();
+  console.log(isAuthenticated);
   return (
     <>
       <TopNotification />
       <Header />
       <Outlet />
+      {isAuthenticated && <CartIndicator />}
     </>
   );
 }

@@ -31,7 +31,7 @@
       transition: all 0.3s;
 
       &:focus-visible {
-        outline: 2px solid #212a2f;
+        outline: 2px solid $color-primary;
         outline-offset: 1px;
       }
     }
@@ -80,6 +80,22 @@
 
   &__div:hover &__link-text {
     transform: translateY(-100%);
+  }
+
+  &__cart {
+    position: relative;
+    &--count {
+      @include flex-center;
+      height: 90%;
+      aspect-ratio: 1;
+      position: absolute;
+      font-size: 0.5rem;
+      background-color: $color-primary;
+      font-family: $font-family-regular;
+      color: white;
+      border-radius: 50%;
+      transform: translate(50%, 50%);
+    }
   }
 }
 

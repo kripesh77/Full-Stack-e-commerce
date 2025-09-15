@@ -4,10 +4,12 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { IoBagOutline, IoSearchOutline } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import HeaderLogo from "./HeaderLogo";
+import CartCounter from "./CartCounter";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function Header() {
   return (
-    <header className={`header`}>
+    <header className="header">
       <nav className="header__nav">
         <Head />
       </nav>
@@ -16,6 +18,7 @@ function Header() {
 }
 
 const Head = memo(function Head() {
+  const { isAuthenticated } = useAuthContext();
   return (
     <div className="header__container">
       <div className="header__hamburger">
@@ -32,7 +35,10 @@ const Head = memo(function Head() {
         <Link to="/auth">
           <GoPerson title="Account" />
         </Link>
-        <IoBagOutline size={18} title="View Cart" />
+        <Link to="/cart" className="navigation__cart">
+          <IoBagOutline size={18} title="View Cart" />
+          {isAuthenticated && <CartCounter />}
+        </Link>
       </div>
     </div>
   );
