@@ -4,7 +4,7 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { IoBagOutline, IoSearchOutline } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import HeaderLogo from "./HeaderLogo";
-import CartCounter from "./CartCounter";
+import CartCounter from "../features/cart/CartCounter";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 function Header() {

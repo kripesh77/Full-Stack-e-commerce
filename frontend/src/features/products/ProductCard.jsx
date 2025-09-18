@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import Button from "../../ui/Button";
+import toast from "react-hot-toast";
 
 function ProductCard({
   product,
@@ -6,17 +9,34 @@ function ProductCard({
   cartProducts = [],
   isLoading = false,
 }) {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthContext();
   const { name, imageUrl, price, stock, category, _id: id } = product;
   const outOfStock = stock === 0;
 
   const { 0: a } = cartProducts.filter((item) => item?.productId === id);
 
   const isInCart = a?.productId === id;
-  console.log(isInCart);
 
-  function handleAdd() {
-    const { token } = JSON.parse(localStorage.getItem("auth"));
-    mutate({ token, id });
+  function handleInc() {
+    if (isAuthenticated) {
+      const { token } = JSON.parse(localStorage.getItem("auth"));
+      const add = true;
+      mutate({ token, id, add });
+    } else {
+      toast.error("Please signin first to add products to cart");
+      navigate("/auth/signin");
+    }
+  }
+  function handleDec() {
+    if (isAuthenticated) {
+      const { token } = JSON.parse(localStorage.getItem("auth"));
+      const remove = true;
+      mutate({ token, id, remove });
+    } else {
+      toast.error("Please signin first to add products into cart");
+      navigate("/auth/signin");
+    }
   }
 
   return (
@@ -43,7 +63,7 @@ function ProductCard({
         <div className="product__card--actions--incart">
           <Button
             className="product__card--button product__card--button--incdec"
-            onClick={handleAdd}
+            onClick={handleInc}
             disabled={isLoading}
           >
             +
@@ -52,12 +72,13 @@ function ProductCard({
           <Button
             className="product__card--button product__card--button--incdec"
             disabled={isLoading}
+            onClick={handleDec}
           >
             -
           </Button>
         </div>
       ) : (
-        <div className="product__card--actions" onClick={handleAdd}>
+        <div className="product__card--actions" onClick={handleInc}>
           <Button
             className="button--small product__card--button product__card--button-full"
             disabled={outOfStock}

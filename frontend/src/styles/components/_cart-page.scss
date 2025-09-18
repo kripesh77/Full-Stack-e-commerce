@@ -1,0 +1,102 @@
+.cartPage {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 20px;
+  overflow: hidden;
+
+  &__header {
+    &--logo {
+      font-family: $font-family-logo;
+      font-weight: $font-weight-bold;
+      color: #111;
+      font-size: 0.7rem;
+      margin: 5px;
+      text-align: center;
+      text-shadow: 4px 4px 5px rgba($color-primary, 0.8);
+
+      @include respond-to("xs") {
+        font-size: 1rem;
+      }
+      @include respond-to("sm") {
+        font-size: 1.25rem;
+      }
+      @include respond-to("md") {
+        font-size: 1.5rem;
+      }
+      @include respond-to("lg") {
+        font-size: 1.7rem;
+      }
+      @include respond-to("xl") {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__text {
+    font-size: min(1.2rem, 100vw);
+    font-family: $font-family-geo-bold;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+
+    @include respond-to("xs") {
+      font-size: 1.7rem;
+    }
+    @include respond-to("sm") {
+      font-size: 2rem;
+    }
+    @include respond-to("md") {
+      font-size: 2.25rem;
+    }
+    @include respond-to("lg") {
+      font-size: 2.5rem;
+    }
+    @include respond-to("xl") {
+      font-size: 3rem;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    min-height: 0;
+    overflow: hidden;
+
+    &--ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      overflow-y: auto;
+      padding-right: 10px;
+
+      /* Custom scrollbar styling */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(136, 136, 136, 0.7) transparent;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(136, 136, 136, 0.7);
+        border-radius: 4px;
+        &:hover {
+          background-color: rgba(136, 136, 136, 0.9);
+        }
+      }
+    }
+
+    &--summary {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      height: fit-content;
+    }
+  }
+}

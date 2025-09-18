@@ -9,7 +9,7 @@ cartRouter.use(AuthMiddlewareUser);
 cartRouter.get("/", async (req, res) => {
   const creatorId = req.userId;
   try {
-    // Find the cart for the user and populate product details
+    // finding the cart for the user and populating product details
     const cart = await CartModel.findOne({ creatorId }).populate(
       "products.productId"
     );
@@ -19,78 +19,103 @@ cartRouter.get("/", async (req, res) => {
   }
 });
 
-cartRouter.post("/:productId", async (req, res) => {
+cartRouter.post("/add/:productId", async (req, res) => {
   const creatorId = req.userId;
   const { productId } = req.params;
-  const quantity = Number(req?.body?.quantity || 1);
-  if (
-    !mongoose.Types.ObjectId.isValid(productId) ||
-    !Number.isInteger(quantity) ||
-    quantity <= 0
-  ) {
-    return res.status(400).json({
-      error: `${!quantity ? "Please provide quantity" : "Invalid request"}`,
-    });
+
+  if (!mongoose.Types.ObjectId.isValid(productId)) {
+    return res.status(400).json({ error: "Invalid product ID" });
   }
 
   try {
     let cart = await CartModel.findOne({ creatorId });
 
     if (cart) {
-      // Checking if product already in cart
+      // checking if product already exists in cart
       const productIndex = cart.products.findIndex(
         (p) => p.productId.toString() === productId
       );
+
       if (productIndex > -1) {
-        // if product exists, updating quantity
-        cart.products[productIndex].quantity += quantity;
+        // if product exists, incrementing quantity by 1
+        cart.products[productIndex].quantity += 1;
       } else {
-        // if product is not in the cart, adding new
-        cart.products.push({ productId, quantity });
+        // if product doesn't exist, adding new product with quantity 1
+        cart.products.push({ productId, quantity: 1 });
       }
       await cart.save();
     } else {
-      // no cart, so creating new
+      // if no cart exists, creating new cart with this product
       cart = await CartModel.create({
         creatorId,
-        products: [{ productId, quantity }],
+        products: [{ productId, quantity: 1 }],
       });
     }
 
-    // Responding with the updated cart
-    return res.status(200).json(cart);
-  } catch (e) {
-    return res.status(500).json({ error: "Internal error occured" });
+    await cart.populate("products.productId");
+
+    return res.status(200).json({
+      message: "Product added to cart successfully",
+      cart,
+    });
+  } catch (error) {
+    console.error("Add to cart error:", error);
+    return res.status(500).json({ error: "Internal error occurred" });
   }
 });
 
-cartRouter.put("/:productId", async (req, res) => {
+cartRouter.post("/remove/:productId", async (req, res) => {
   const creatorId = req.userId;
   const { productId } = req.params;
-  const quantity = req?.body?.quantity;
-  if (
-    !mongoose.Types.ObjectId.isValid(productId) ||
-    typeof quantity !== "number"
-  ) {
-    return res.status(400).json({
-      error: `${!quantity ? "Please provide quantity" : "Invalid request"}`,
-    });
+
+  if (!mongoose.Types.ObjectId.isValid(productId)) {
+    return res.status(400).json({ error: "Invalid product ID" });
   }
 
   try {
-    const updatedCart = await CartModel.findOneAndUpdate(
-      { creatorId, "products.productId": productId },
-      { $set: { "products.$.quantity": quantity } },
-      { new: true }
-    );
+    let cart = await CartModel.findOne({ creatorId });
 
-    if (!updatedCart) {
-      return res.status(404).json({ error: "Product not found" });
+    if (!cart) {
+      return res.status(404).json({ error: "Cart not found" });
     }
 
-    res.status(200).json(updatedCart);
+    // finding the product in cart
+    const productIndex = cart.products.findIndex(
+      (p) => p.productId.toString() === productId
+    );
+
+    if (productIndex === -1) {
+      return res.status(404).json({ error: "Product not found in cart" });
+    }
+
+    // decreasing quantity by 1
+    cart.products[productIndex].quantity -= 1;
+
+    // removing product from the cart if quantity becomes 0
+    if (cart.products[productIndex].quantity <= 0) {
+      cart.products.splice(productIndex, 1);
+    }
+
+    //deleting the cart if products count becomes zero
+    if (cart.products.length === 0) {
+      await CartModel.deleteOne({ _id: cart._id });
+      return res.status(200).json({
+        message: "Product removed and cart deleted",
+        cart: null,
+      });
+    }
+
+    await cart.save();
+
+    await cart.populate("products.productId");
+
+    return res.status(200).json({
+      message: "Product quantity decreased successfully",
+      cart,
+    });
   } catch (error) {
-    return res.status(500).json({ error: "Internal error occured" });
+    console.error("Remove from cart error:", error);
+    return res.status(500).json({ error: "Internal error occurred" });
   }
 });
 
@@ -104,34 +129,6 @@ cartRouter.delete("/clearcart", async (req, res) => {
   }
 
   return res.status(200).json({ message: "Cart cleared successfully" });
-});
-
-cartRouter.delete("/:productId", async (req, res) => {
-  const creatorId = req.userId;
-  const { productId } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(productId)) {
-    return res.status(400).json({ error: "Invalid request" });
-  }
-
-  let cart = await CartModel.findOneAndUpdate(
-    { creatorId },
-    { $pull: { products: { productId } } },
-    { new: true }
-  );
-
-  if (!cart) {
-    return res.status(404).json({ error: "Cart not found" });
-  }
-
-  if (cart.products.length === 0) {
-    await CartModel.deleteOne({ _id: cart._id });
-    return res
-      .status(200)
-      .json({ message: "Product removed and cart deleted" });
-  }
-
-  res.status(200).json({ message: "Product removed from cart", cart });
 });
 
 module.exports = cartRouter;

@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Header from "../ui/Header";
 import TopNotification from "../ui/TopNotification";
 import { useAuthContext } from "../hooks/useAuthContext";
-import CartIndicator from "../ui/CartIndicator";
+import CartIndicator from "../features/cart/CartIndicator";
 
 function AppLayout() {
   const { isAuthenticated } = useAuthContext();

@@ -1,31 +1,26 @@
 import toast from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addToCart, getCarts } from "../../utils/apiCart";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addOrRemoveCart } from "../../utils/apiCart";
 import ProductCard from "./ProductCard";
+import useCart from "../cart/useCart";
 
 function Products({ products }) {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
-    mutationFn: addToCart,
-    onSuccess: () => {
-      toast.success("Item added to cart");
+    mutationFn: addOrRemoveCart,
+    onSuccess: (data) => {
+      toast.success(data.message);
       queryClient.invalidateQueries({
         queryKey: ["cart"],
       });
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
   });
 
-  const { token } = JSON.parse(localStorage.getItem("auth"));
-
-  const { data: cart } = useQuery({
-    queryKey: ["cart"],
-    queryFn: () => getCarts(token),
-  });
-
-  console.log(cart);
+  const auth = JSON.parse(localStorage.getItem("auth") || "{}");
+  const { data: cart } = useCart(auth?.token);
 
   const cartProducts = cart?.products?.map((item) => ({
     productId: item.productId._id,
@@ -52,7 +47,7 @@ function Products({ products }) {
         <ul className="product">
           {products.map((item) => (
             <ProductCard
-              key={products._id}
+              key={item._id}
               product={item}
               mutate={mutate}
               cartProducts={cartProducts}
