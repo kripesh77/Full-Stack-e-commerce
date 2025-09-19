@@ -1,7 +1,12 @@
 const url = import.meta.env.VITE_URL;
 
 export async function getProducts() {
-  const res = await fetch(`${url}/api/products`);
+  const page = 2;
+  const limit = 8;
+  const category = 1;
+  const res = await fetch(
+    `${url}/api/v2/products?page=${page}&limit=${limit}&category=${category}`,
+  );
 
   if (!res.ok) {
     if (!res.status === 429) {

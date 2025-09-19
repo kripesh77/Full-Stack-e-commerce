@@ -52,45 +52,6 @@ productRouter.get("/", async (req, res) => {
   }
 });
 
-// Search products by keyword
-productRouter.get("/search/:keyword", async (req, res) => {
-  try {
-    const keyword = req.params.keyword.trim();
-
-    if (!keyword) {
-      return res.status(400).json({ error: "Search keyword is required" });
-    }
-
-    // Create regex pattern for case-insensitive search
-    const searchRegex = new RegExp(keyword, "i");
-
-    // Search in name, description, and category fields
-    const products = await ProductModel.find({
-      $or: [
-        { name: { $regex: searchRegex } },
-        { description: { $regex: searchRegex } },
-        { category: { $regex: searchRegex } },
-      ],
-    });
-
-    if (products.length === 0) {
-      return res.status(404).json({
-        message: "No products found. Try searching other products.",
-        products: [],
-      });
-    }
-
-    res.status(200).json({
-      message: `Found ${products.length} product(s) matching "${keyword}"`,
-      products,
-    });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Error occurred while searching products" });
-  }
-});
-
 productRouter.get("/:id", async (req, res) => {
   const id = req.params.id.trim();
 

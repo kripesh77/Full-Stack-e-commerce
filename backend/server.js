@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const generalLimiter = require("./middleware/rate-limiter/generalLimiter");
 const authLimiter = require("./middleware/rate-limiter/authLimiter");
 const orderRouter = require("./routes/order");
+const productTestRouter = require("./routes/productTest");
 const app = express();
 
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(generalLimiter);
 app.use("/api/auth/seller", authLimiter, sellerRouter);
 app.use("/api/auth/user", authLimiter, userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/v2/products", productTestRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
