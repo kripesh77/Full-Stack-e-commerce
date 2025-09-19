@@ -4,8 +4,8 @@
   border-radius: 50%;
   aspect-ratio: 1;
   z-index: 3;
-  bottom: 5vh;
-  left: 5vh;
+  bottom: 5dvh;
+  left: 5dvh;
   padding: 10px;
   cursor: pointer;
   background-color: $color-secondary;
@@ -35,7 +35,7 @@
     }
 
     &:hover &--icon {
-      transform: translateY(10%) scale(0.8);
+      transform: translateY(9%) scale(0.8);
     }
 
     &:hover &--counter {
@@ -48,8 +48,8 @@
     top: 50%;
     left: 50%;
     z-index: 10;
-    transform: translate(-40%, -53%);
-    font-size: 0.7rem;
+    transform: translate(-25%, -53%);
+    font-size: 0.6rem;
     font-weight: 700;
     transition: all 0.3s;
     border-radius: 50%;

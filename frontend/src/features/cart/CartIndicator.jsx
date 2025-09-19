@@ -1,7 +1,9 @@
 import { LuShoppingCart } from "react-icons/lu";
 import useCart from "./useCart";
+import { useNavigate } from "react-router";
 
 function CartIndicator() {
+  const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);
 
@@ -11,8 +13,12 @@ function CartIndicator() {
     acc += item.quantity;
     return acc;
   }, 0);
+
+  function handleClick() {
+    navigate("/cart");
+  }
   return (
-    <div className="cart__indicator">
+    <div className="cart__indicator" onClick={handleClick}>
       <LuShoppingCart size={35} className="cart__indicator--icon" />
       <span className="cart__indicator--counter">{cartCount}</span>
     </div>

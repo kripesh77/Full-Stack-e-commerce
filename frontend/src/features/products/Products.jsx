@@ -1,23 +1,9 @@
-import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addOrRemoveCart } from "../../utils/apiCart";
 import ProductCard from "./ProductCard";
 import useCart from "../cart/useCart";
+import useMutateCart from "../cart/useMutateCart";
 
 function Products({ products }) {
-  const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
-    mutationFn: addOrRemoveCart,
-    onSuccess: (data) => {
-      toast.success(data.message);
-      queryClient.invalidateQueries({
-        queryKey: ["cart"],
-      });
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
+  const { mutate, isPending } = useMutateCart();
 
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);

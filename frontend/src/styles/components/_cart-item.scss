@@ -1,47 +1,60 @@
 .cartItem {
   display: flex;
-  margin-inline: 20px;
   justify-content: space-between;
+  align-items: center;
   font-family: $font-family-primary;
   color: $color-primary;
+  margin-inline: auto;
   border-top: 1px solid black;
+  max-width: 500px;
 
   &:last-child {
     border-bottom: 1px solid black;
   }
 
-  &__name {
-    font-size: 2rem;
-    font-family: $font-family-geo-bold;
-  }
-
   &__img {
-    width: 200px;
+    width: 75px;
+
+    @include respond-to("xs") {
+      width: 100px;
+    }
+
+    @include respond-to("md") {
+      width: 150px;
+    }
   }
 
-  &__price {
-    font-size: 1.5rem;
+  &__imgContainer {
+    @include flex-center;
   }
 
-  &__button {
-    &--inc {
-    }
-    &--dec {
-    }
-    &--container {
-      display: flex;
-      gap: 20px;
-      padding-top: 5px;
-      font-size: $font-size-xl;
-    }
+  @include respond-to("sm") {
+    width: 100%;
+  }
+
+  @include respond-to("lg") {
+    max-width: inherit;
+  }
+
+  @include respond-to("2xl") {
+    max-width: 800px;
   }
 
   &__typo {
-    margin: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: end;
+    text-align: end;
+    flex: 1;
+
+    @include respond-to("xs") {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
-  &__imgContainer {
+
+  &__namePrice {
+    flex: 1;
+    text-align: center;
   }
 }

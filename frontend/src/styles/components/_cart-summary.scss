@@ -1,0 +1,123 @@
+// Order Summary Component - Matching exact design
+.order-summary {
+  border: 2px solid $color-primary;
+  font-family: $font-family-geo-bold;
+  width: 100%;
+  max-width: 400px;
+
+  &__header {
+    border-bottom: 2px solid $color-primary;
+    padding: $spacing-sm;
+    text-align: center;
+
+    @include respond-to("lg") {
+      padding: $spacing-base;
+    }
+  }
+
+  &__title {
+    font-family: $font-family-geo-bold;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $color-primary;
+    margin: 0;
+  }
+
+  &__content {
+    padding: 0 $spacing-base;
+
+    @include respond-to("lg") {
+      padding: $spacing-base $spacing-lg;
+    }
+  }
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm 0;
+
+    &:not(.order-summary__line--total):not(:last-child) {
+      border-bottom: 1px solid rgba($color-primary, 0.2);
+    }
+
+    &--total {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-base;
+      padding-top: $spacing-base;
+    }
+  }
+
+  &__label {
+    font-family: $font-family-geo-bold;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__value {
+    font-family: $font-family-primary;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
+    color: $color-primary;
+    text-align: right;
+    letter-spacing: 1px;
+  }
+
+  &__divider {
+    height: 2px;
+    background-color: $color-primary;
+    margin: $spacing-base 0;
+  }
+
+  &__checkout-btn {
+    width: 100%;
+    padding: $spacing-sm;
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    font-family: $font-family-geo-bold;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all $transition-base;
+    border-top: 2px solid $color-primary;
+
+    &:hover {
+      background-color: lighten($color-primary, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      background-color: darken($color-primary, 5%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  // Responsive adjustments
+  @include respond-to("md") {
+    &__title {
+      font-size: $font-size-lg;
+    }
+
+    &__line--total {
+      font-size: $font-size-lg;
+    }
+
+    &__checkout-btn {
+      font-size: $font-size-base;
+      padding: $spacing-base;
+    }
+  }
+}

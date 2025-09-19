@@ -1,9 +1,13 @@
 .cartPage {
-  height: 100vh;
+  height: 100dvh;
   display: grid;
   grid-template-rows: auto auto 1fr;
-  gap: 20px;
+  gap: 5px;
   overflow: hidden;
+
+  @include respond-to("md") {
+    gap: 20px;
+  }
 
   &__header {
     &--logo {
@@ -13,7 +17,7 @@
       font-size: 0.7rem;
       margin: 5px;
       text-align: center;
-      text-shadow: 4px 4px 5px rgba($color-primary, 0.8);
+      text-shadow: 0px 2px 5px rgba($color-primary, 0.8);
 
       @include respond-to("xs") {
         font-size: 1rem;
@@ -34,7 +38,7 @@
   }
 
   &__text {
-    font-size: min(1.2rem, 100vw);
+    font-size: min(1.2rem, 100dvw);
     font-family: $font-family-geo-bold;
     font-weight: 600;
     text-align: center;
@@ -59,23 +63,30 @@
 
   &__content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    padding: 20px;
+    grid-template-rows: 1fr auto;
+    gap: 5px;
+    padding: 5px;
     min-height: 0;
     overflow: hidden;
+
+    &--div {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      padding-right: 10px;
+      overflow: hidden;
+    }
 
     &--ul {
       list-style: none;
       padding: 0;
       margin: 0;
       height: 100%;
+      margin: auto;
       overflow-y: auto;
-      padding-right: 10px;
 
-      /* Custom scrollbar styling */
       scrollbar-width: thin;
-      scrollbar-color: rgba(136, 136, 136, 0.7) transparent;
+      scrollbar-color: rgba($color-primary, 0.7) transparent;
 
       &::-webkit-scrollbar {
         width: 8px;
@@ -84,19 +95,43 @@
         background: transparent;
       }
       &::-webkit-scrollbar-thumb {
-        background-color: rgba(136, 136, 136, 0.7);
+        background-color: rgba($color-primary, 0.7);
         border-radius: 4px;
         &:hover {
-          background-color: rgba(136, 136, 136, 0.9);
+          background-color: rgba($color-primary, 0.9);
         }
       }
     }
 
     &--summary {
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: end;
       height: fit-content;
+      padding: 0;
+
+      @include respond-to("md") {
+        padding: 20px;
+        align-items: start;
+        gap: 20px;
+      }
+
+      @include respond-to("lg") {
+        justify-content: center;
+      }
+
+      @include respond-to("2xl") {
+        justify-content: start;
+      }
+    }
+
+    @include respond-to("md") {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+
+    @include respond-to("2xl") {
+      grid-template-columns: 2fr 1fr;
     }
   }
 }

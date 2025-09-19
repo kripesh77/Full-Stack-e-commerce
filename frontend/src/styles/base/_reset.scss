@@ -48,3 +48,22 @@ ul,
 ol {
   list-style: none;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $color-secondary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba($color-primary, 0.9);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
