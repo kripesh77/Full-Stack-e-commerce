@@ -1,9 +1,8 @@
-const url = import.meta.env.VITE_URL;
+const url = import.meta.env.VITE_API_URL || import.meta.env.VITE_URL || 'http://localhost:5000';
 
-export async function getProducts() {
-  const page = 2;
+export async function getProducts({ page }) {
   const limit = 8;
-  const category = 1;
+  const category = 0;
   const res = await fetch(
     `${url}/api/v2/products?page=${page}&limit=${limit}&category=${category}`,
   );

@@ -1,0 +1,40 @@
+.pagination {
+  &__section {
+    font-size: $font-size-lg;
+    font-family: $font-family-regular;
+  }
+
+  &__container {
+  }
+  &__wrapper {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  &__current {
+  }
+
+  &__separator {
+  }
+  &__total {
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  &__btn {
+    letter-spacing: 2px;
+    background-color: $color-primary;
+    padding: 6px 4px;
+    color: $color-white;
+  }
+}

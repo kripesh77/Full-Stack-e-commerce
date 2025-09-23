@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { PORT, MY_DATABASE_LINK } = process.env;
+const { PORT = 5000, MY_DATABASE_LINK, NODE_ENV, CORS_ORIGIN } = process.env;
 const express = require("express");
 const cors = require("cors");
 const sellerRouter = require("./routes/seller");
@@ -13,7 +13,15 @@ const orderRouter = require("./routes/order");
 const productTestRouter = require("./routes/productTest");
 const app = express();
 
-app.use(cors());
+// CORS configuration for production
+const corsOptions = {
+  origin: NODE_ENV === 'production' 
+    ? [CORS_ORIGIN, 'https://your-domain.sevalla.com'] 
+    : true,
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(generalLimiter);
 app.use("/api/auth/seller", authLimiter, sellerRouter);
