@@ -15,10 +15,11 @@ const app = express();
 
 // CORS configuration for production
 const corsOptions = {
-  origin: NODE_ENV === 'production' 
-    ? [CORS_ORIGIN, 'https://your-domain.sevalla.com'] 
-    : true,
-  credentials: true
+  origin:
+    NODE_ENV === "production"
+      ? [CORS_ORIGIN, "https://your-domain.sevalla.com"]
+      : true,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));

@@ -1,4 +1,7 @@
-const url = import.meta.env.VITE_API_URL || import.meta.env.VITE_URL || 'http://localhost:5000';
+const url =
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_URL ||
+  "http://localhost:5000";
 
 export async function getProducts({ page }) {
   const limit = 8;
