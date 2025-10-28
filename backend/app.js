@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const userRouter = require("./routes/userRoute");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controller/errorController");
@@ -27,22 +28,35 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// Health check endpoint for Sevalla
-app.get("/", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    message: "E-commerce API is running",
-    environment: process.env.NODE_ENV || "development",
-  });
-});
-
-// API routes
+// API routes - Define API routes BEFORE serving static files
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/carts", cartRouter);
 app.use("/api/v1/orders", orderRouter);
 
-app.use("*", (req, res, next) => {
+// Serve static files from React frontend app in production
+if (process.env.NODE_ENV === "production") {
+  // Serve static files from the frontend build folder
+  const frontendBuildPath = path.join(__dirname, "..", "frontend", "dist");
+  app.use(express.static(frontendBuildPath));
+  
+  // Handle React routing - return all requests to React app
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, "index.html"));
+  });
+} else {
+  // Health check endpoint for development
+  app.get("/", (req, res) => {
+    res.status(200).json({
+      status: "success",
+      message: "E-commerce API is running",
+      environment: process.env.NODE_ENV || "development",
+    });
+  });
+}
+
+// Handle undefined API routes
+app.use("/api/*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

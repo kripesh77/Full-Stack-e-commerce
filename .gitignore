@@ -281,3 +281,6 @@ sessions/
 
 # Local development files
 .local
+
+SEVALLA_DEPLOYMENT_GUIDE.md
+SEVALLA_UNIFIED_DEPLOYMENT.md
