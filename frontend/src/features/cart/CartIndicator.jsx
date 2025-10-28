@@ -1,15 +1,15 @@
 import { LuShoppingCart } from "react-icons/lu";
 import useCart from "./useCart";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function CartIndicator() {
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);
 
-  if (!cart?.products) return <span>&nbsp;</span>;
+  if (!cart?.result) return <span>&nbsp;</span>;
 
-  const cartCount = cart.products.reduce((acc, item) => {
+  const cartCount = cart.cart.reduce((acc, item) => {
     acc += item.quantity;
     return acc;
   }, 0);

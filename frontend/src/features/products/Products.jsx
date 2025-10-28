@@ -3,12 +3,13 @@ import useCart from "../cart/useCart";
 import useMutateCart from "../cart/useMutateCart";
 
 function Products({ products }) {
+  console.log(products);
   const { mutate, isPending } = useMutateCart();
 
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);
 
-  const cartProducts = cart?.products?.map((item) => ({
+  const cartProducts = cart?.cart?.map((item) => ({
     productId: item.productId._id,
     quantity: item.quantity,
   }));

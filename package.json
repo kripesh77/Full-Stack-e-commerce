@@ -11,6 +11,7 @@
     "dev-backend": "cd backend && npm run dev",
     "dev-frontend": "cd frontend && npm run dev"
   },
+  "author": "Kripesh Ghimire",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"

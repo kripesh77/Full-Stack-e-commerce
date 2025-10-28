@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useAuth } from "./useAuth";
 
 function Signup() {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -8,8 +12,11 @@ function Signup() {
     getValues,
   } = useForm();
 
+  const { mutate: signup, isPending } = useAuth({ signup: true });
+
   function onSubmit(data) {
-    console.log("Signup data:", data);
+    console.log(data);
+    signup(data);
   }
 
   return (
@@ -55,7 +62,7 @@ function Signup() {
 
       <div className="auth-form__field">
         <input
-          type="password"
+          type={`${showPassword ? "text" : "password"}`}
           className="auth-form__input"
           placeholder="Password:"
           {...register("password", { required: "Password is required" })}
@@ -64,6 +71,12 @@ function Signup() {
         <label htmlFor="password" className="auth-form__label">
           Password:
         </label>
+        <span
+          onClick={() => setShowPassword((s) => !s)}
+          className="auth-form__toogle"
+        >
+          {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+        </span>
         {errors?.password && (
           <span className="auth-form__input--error">
             {errors?.password.message}
@@ -73,30 +86,40 @@ function Signup() {
 
       <div className="auth-form__field">
         <input
-          type="password"
+          type={`${showPassword ? "text" : "password"}`}
           className="auth-form__input"
           placeholder="Confirm Password:"
-          {...register("confirmpassword", {
+          {...register("confirmPassword", {
             required: "Please confirm the password",
             validate: (value) => {
               const password = getValues("password");
               return value === password || "Passwords don't match";
             },
           })}
-          style={{ borderColor: `${errors?.confirmpassword ? "red" : ""}` }}
+          style={{ borderColor: `${errors?.confirmPassword ? "red" : ""}` }}
         />
         <label htmlFor="confirm-password" className="auth-form__label">
           Confirm Password:
         </label>
-        {errors?.confirmpassword && (
+        <span
+          onClick={() => setShowPassword((s) => !s)}
+          className="auth-form__toogle"
+        >
+          {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+        </span>
+        {errors?.confirmPassword && (
           <span className="auth-form__input--error">
-            {errors?.confirmpassword.message}
+            {errors?.confirmPassword.message}
           </span>
         )}
       </div>
 
       <div className="auth-form__actions">
-        <button className="auth-form__button" type="submit">
+        <button
+          className="auth-form__button"
+          type="submit"
+          disabled={isPending}
+        >
           Sign up
         </button>
       </div>

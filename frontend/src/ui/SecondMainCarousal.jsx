@@ -11,14 +11,12 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const info = {
-  urls: ["1.avif", "2.avif", "3.avif", "4.jpg"],
-  titles: ["Bike Helmet", "Bicycle Helmet", "Racing Helmet", "Accessories"],
+  urls: ["1.png", "2.png", "3.jpg", "4.jpg"],
+  titles: ["FULL FACE", "modular", "men", "women"],
 };
 
-function CarouselCard({ url, title, isActive, isInView }) {
+function CarouselCard({ url, title, isActive, isInView, index }) {
   const spanRef = useRef(null);
   const spanRef1 = useRef(null);
   const cardRef = useRef(null);
@@ -57,11 +55,13 @@ function CarouselCard({ url, title, isActive, isInView }) {
       className={`carousel-card ${isActive && isInView ? "carousel-card--active" : ""}`}
       style={{
         "--bg-image": `url(${url})`,
+        paddingLeft: `${index === 0 ? "10px" : ""}`,
       }}
     >
       <div
         className="carousel-card__background"
-        style={{ backgroundImage: `url(${url})` }}
+        style={{ backgroundImage: `url(${url})`, scale: 1.1 }}
+        data-speed="0.9"
       ></div>
       <div className="carousel-card__content">
         <span ref={spanRef} className="carousel-card__title">
@@ -85,38 +85,34 @@ function SecondMainCarousal() {
   useEffect(() => {
     if (!carouselRef.current) return;
 
-    // GSAP ScrollTrigger to detect when carousel comes into view
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: carouselRef.current,
-      start: "top 80%",
-      end: "bottom 20%",
-      onEnter: () => {
-        setIsInView(true);
-        // Only go to slide 0 on initial load, not every time
-        if (activeIndex === 0) {
-          setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.slideTo) {
-              swiperRef.current.slideTo(0, 600);
-            }
-          }, 100);
-        }
-      },
-      onLeave: () => {
-        setIsInView(false);
-      },
-      onEnterBack: () => {
-        setIsInView(true);
-        // Don't reset to slide 0 when scrolling back - maintain current position
-      },
-      onLeaveBack: () => {
-        setIsInView(false);
-      },
-    });
+    const timer = setTimeout(() => {
+      const scrollTrigger = ScrollTrigger.create({
+        trigger: carouselRef.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        onEnter() {
+          setIsInView(true);
+        },
+        onLeave() {
+          setIsInView(false);
+        },
+        onEnterBack() {
+          setIsInView(true);
+        },
+        onLeaveBack() {
+          setIsInView(false);
+        },
+      });
+
+      return () => {
+        scrollTrigger.kill();
+      };
+    }, 100);
 
     return () => {
-      scrollTrigger.kill();
+      clearTimeout(timer);
     };
-  }, [activeIndex]);
+  }, []);
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.activeIndex);

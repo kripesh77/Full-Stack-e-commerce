@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import HeaderLogo from "../ui/HeaderLogo";
 import AuthLinks from "../features/user/AuthLinks";
 

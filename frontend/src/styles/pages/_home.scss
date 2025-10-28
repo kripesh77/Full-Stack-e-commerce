@@ -4,18 +4,26 @@
 
 .hero {
   &__div {
-    @include flex-center;
     margin: 10px;
     border-radius: 16px;
-    background-image: url(../../assets/landing-page-helmet.jpg);
-    background-repeat: no-repeat;
-    background-position: left 65%;
-    height: calc(100vh - 8.25rem);
-    background-size: cover;
+    height: calc(100svh - 8.25rem);
     justify-content: center;
+    overflow: hidden;
+    z-index: -1;
+
+    &-img {
+      @include flex-center;
+      border-radius: 16px;
+      height: 100%;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: left 65%;
+      background-image: url(../../assets/landing-page-helmet.jpg);
+    }
 
     @include respond-to("md") {
-      height: calc(100vh - 8.25rem);
+      height: calc(100svh - 8.25rem);
     }
   }
   &__container {

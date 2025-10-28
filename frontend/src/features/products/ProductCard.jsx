@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Button from "../../ui/Button";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ function ProductCard({
   const outOfStock = stock === 0;
 
   const { 0: a } = cartProducts.filter((item) => item?.productId === id);
+  console.log(cartProducts);
 
   const isInCart = a?.productId === id;
 
@@ -48,10 +49,12 @@ function ProductCard({
       <div className="product__card--name" title={name}>
         {name.length <= 15 ? name : `${name.substring(0, 12) + "..."}`}
       </div>
-      <div className="product__card--price">Rs. {price}</div>
+      <div className="product__card--price">
+        <span className="product__card--Rs">Rs.</span> {price}
+      </div>
       <div className="product__card--stock">
         Remaining:
-        <span style={{ color: `${stock > 10 ? "green" : "red"}` }}>
+        <span style={{ color: `${stock > 10 ? "#16a34a" : "red"}` }}>
           &nbsp;
           {stock}
           {stock < 10 && (

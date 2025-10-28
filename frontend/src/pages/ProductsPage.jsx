@@ -1,4 +1,5 @@
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
+import { useMemo } from "react";
 import ProductHero from "../features/products/ProductHero";
 import ProductPagination from "../features/products/ProductPagination";
 import Products from "../features/products/Products";
@@ -8,22 +9,97 @@ import Loader from "../ui/Loader";
 function ProductsPage() {
   const [searchParams] = useSearchParams();
 
-  const page = parseInt(searchParams.get("page")) || 1;
+  const page = useMemo(() => {
+    const pageParam = searchParams.get("page");
+    const parsedPage = parseInt(pageParam, 10);
+    return parsedPage > 0 ? parsedPage : 1;
+  }, [searchParams]);
 
   const {
     data: {
-      products = [],
-      pagination: { totalPages, currentPage, hasNext, hasPrev } = {},
+      data: { products = [], totalPages, currentPage, hasNext, hasPrev } = {},
     } = {},
     isPending,
+    isFetching,
+    isError,
+    error,
   } = useProducts({ page });
 
-  if (isPending) return <Loader />;
+  // Handle error state
+  if (isError) {
+    return (
+      <main>
+        <ProductHero />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "400px",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            {error?.message || "Failed to load products"}
+          </p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      </main>
+    );
+  }
+
+  // Loading state
+  if (isPending) {
+    return (
+      <main>
+        <ProductHero />
+        <Loader />
+      </main>
+    );
+  }
+
+  // No products found
+  if (!products || products.length === 0) {
+    return (
+      <main>
+        <ProductHero />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "400px",
+          }}
+        >
+          <p style={{ fontSize: "1.2rem", color: "#666" }}>No products found</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
-    <main>
+    <main style={{ position: "relative", minHeight: "100vh" }}>
       <ProductHero />
-      <Products products={products} />
+
+      <div style={{ position: "relative", minHeight: "400px" }}>
+        {/* Conditional render: show loading OR products */}
+        {isFetching ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "400px",
+            }}
+          >
+            <Loader />
+          </div>
+        ) : (
+          <Products products={products} />
+        )}
+      </div>
+
       <ProductPagination
         totalPages={totalPages}
         currentPage={currentPage}

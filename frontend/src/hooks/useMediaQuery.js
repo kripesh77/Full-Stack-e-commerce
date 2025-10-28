@@ -1,11 +1,11 @@
 import { useMediaQuery } from "react-responsive";
 
-const useTouchOrMobile = () => {
-  const isTouchOrMobile = useMediaQuery({
-    query: "(max-width: 767px), (pointer: coarse)",
+const useMobile = () => {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 768px)",
   });
 
-  return isTouchOrMobile;
+  return isMobile;
 };
 
-export { useTouchOrMobile };
+export { useMobile };

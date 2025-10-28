@@ -1,42 +1,34 @@
-require("dotenv").config();
-const { PORT = 5000, MY_DATABASE_LINK, NODE_ENV, CORS_ORIGIN } = process.env;
-const express = require("express");
-const cors = require("cors");
-const sellerRouter = require("./routes/seller");
-const userRouter = require("./routes/user");
-const productRouter = require("./routes/product");
-const cartRouter = require("./routes/cart");
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const generalLimiter = require("./middleware/rate-limiter/generalLimiter");
-const authLimiter = require("./middleware/rate-limiter/authLimiter");
-const orderRouter = require("./routes/order");
-const productTestRouter = require("./routes/productTest");
-const app = express();
+dotenv.config({ path: "./config.env" });
 
-// CORS configuration for production
-const corsOptions = {
-  origin:
-    NODE_ENV === "production"
-      ? [CORS_ORIGIN, "https://your-domain.sevalla.com"]
-      : true,
-  credentials: true,
-};
+const app = require("./app");
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(generalLimiter);
-app.use("/api/auth/seller", authLimiter, sellerRouter);
-app.use("/api/auth/user", authLimiter, userRouter);
-app.use("/api/products", productRouter);
-app.use("/api/v2/products", productTestRouter);
-app.use("/api/cart", cartRouter);
-app.use("/api/order", orderRouter);
-
-async function main() {
-  await mongoose.connect(MY_DATABASE_LINK);
-  console.log("Connection to the database successful");
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+//this handles any uncaught exception that occurs in the app
+process.on("uncaughtException", (err) => {
+  console.log(err.name, err.message);
+  console.log("Uncaught Exception! 💥 Shutting down");
+  server.close(() => {
+    process.exit(1);
   });
-}
-main();
+});
+
+const port = process.env.PORT || 3000;
+const DB = process.env.DATABASE;
+
+mongoose.connect(DB).then(() => console.log("Database connected successfully"));
+
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
+
+//this handles any unhandled rejection such as if promise is rejected and we have not handled it, then that situation is called unhandled rejection, as the promise rejection is not handled properly.
+//Some of the scenarios might be the wrong database credentials
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("Unhandled Rejection! 💥 Shutting down");
+  //server.close first finishes all its request responses and then only call process.exit(1) {process.exit(1) crashes the server}
+  server.close(() => {
+    process.exit(1);
+  });
+});

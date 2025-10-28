@@ -1,95 +1,66 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AuthContextProvider from "./context/AuthContextProvider";
+import { useAuthContext } from "./hooks/useAuthContext";
 import AppLayout from "./pages/AppLayout";
-import { RouterProvider } from "react-router-dom";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Home from "./pages/Home";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import Auth from "./pages/Auth";
 import Signin from "./features/user/Signin";
 import Signup from "./features/user/Signup";
-import AuthContextProvider from "./context/AuthContextProvider";
-import { useAuthContext } from "./hooks/useAuthContext";
-import ReactLenis from "lenis/react";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import OrderSuccess from "./pages/OrderSuccess";
+import PaymentFailed from "./pages/PaymentFailed";
 
 function AppRouter() {
   const { isAuthenticated } = useAuthContext();
 
-  const router = createBrowserRouter([
-    {
-      element: <AppLayout />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/products",
-          element: <ProductsPage />,
-        },
-      ],
-    },
-    {
-      path: "/auth",
-      element: <Auth />,
-      children: [
-        {
-          index: true,
-          element: <Navigate replace={true} to="signin" />,
-        },
-        {
-          path: "signin",
-          element: isAuthenticated ? (
-            <Navigate replace={true} to="/products" />
-          ) : (
-            <Signin />
-          ),
-        },
-        {
-          path: "signup",
-          element: isAuthenticated ? (
-            <Navigate replace={true} to="/products" />
-          ) : (
-            <Signup />
-          ),
-        },
-      ],
-    },
-    {
-      path: "/cart",
-      element: isAuthenticated ? (
-        <CartPage />
-      ) : (
-        <Navigate replace={true} to="/auth/signin" />
-      ),
-    },
-  ]);
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductsPage />} />
+        </Route>
 
-  return <RouterProvider router={router} />;
+        <Route path="/auth" element={<Auth />}>
+          <Route index element={<Navigate replace to="signin" />} />
+          <Route
+            path="signin"
+            element={
+              isAuthenticated ? <Navigate replace to="/me" /> : <Signin />
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              isAuthenticated ? <Navigate replace to="/products" /> : <Signup />
+            }
+          />
+        </Route>
+
+        <Route
+          path="/cart"
+          element={
+            isAuthenticated ? (
+              <CartPage />
+            ) : (
+              <Navigate replace to="/auth/signin" />
+            )
+          }
+        />
+
+        {/* Payment result pages */}
+        <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/payment-failed" element={<PaymentFailed />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 function App() {
   return (
     <AuthContextProvider>
-      <ReactLenis
-        root
-        options={{
-          duration: 1.6,
-          prevent: (node) => {
-            // this prevents Lenis from affecting elements with data-lenis-prevent attribute
-            return (
-              node.hasAttribute("data-lenis-prevent") ||
-              node.closest("[data-lenis-prevent]") !== null
-            );
-          },
-        }}
-      >
-        <AppRouter />
-      </ReactLenis>
+      <AppRouter />
     </AuthContextProvider>
   );
 }

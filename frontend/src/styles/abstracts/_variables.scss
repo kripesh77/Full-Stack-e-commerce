@@ -27,7 +27,7 @@
 }
 
 // Colors
-$color-primary: #212a2f;
+$color-primary: #181717;
 $color-secondary: #ece9e2;
 $color-white: #fff;
 $color-accent: #1e40af; // blue-600
@@ -96,3 +96,8 @@ $z-index-modal: 50;
 $transition-base: 0.3s ease;
 $transition-fast: 0.15s ease;
 $transition-slow: 0.5s ease;
+
+:root {
+  --vw: 1920;
+  --multiplier: 100vw;
+}

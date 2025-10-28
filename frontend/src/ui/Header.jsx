@@ -1,10 +1,11 @@
-import { memo } from "react";
-import { Link } from "react-router";
+import { memo, useRef } from "react";
+import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { IoBagOutline, IoSearchOutline } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import HeaderLogo from "./HeaderLogo";
 import CartCounter from "../features/cart/CartCounter";
+import AnimatedLink from "./AnimatedLink";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 function Header() {
@@ -45,15 +46,15 @@ const Head = memo(function Head() {
 });
 
 function HeaderNavigationItem({ text, to }) {
+  const hoverRef = useRef(null);
   return (
-    <div className="navigation__item">
+    <div className="navigation__item" ref={hoverRef}>
       <Link to={to}>
-        <div className="navigation__div">
-          <div className="navigation__link">
-            <span className="navigation__link-text">{text}</span>
-            <span className="navigation__link-hover">{text}</span>
-          </div>
-        </div>
+        <AnimatedLink
+          text={text}
+          hoverTriggerRef={hoverRef}
+          className="navigation__div"
+        />
       </Link>
     </div>
   );

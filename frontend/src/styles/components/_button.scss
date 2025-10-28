@@ -4,10 +4,10 @@
 
 .button {
   @include button-base;
-  padding: 4px;
+  padding: 2px;
   position: relative;
   border-radius: $border-radius-full;
-  background-color: $color-white;
+  background-color: $color-secondary;
   color: $color-text-primary;
 
   &--big {
@@ -19,7 +19,7 @@
     font-weight: 700;
 
     @include respond-to("md") {
-      font-size: 0.8rem;
+      padding-block: 3px;
       margin-right: spacing("lg");
     }
   }
@@ -29,33 +29,49 @@
   }
 
   &__content {
-    padding: $spacing-xs $spacing-sm;
+    padding: 0px $spacing-sm;
+    transition: all $transition-fast;
   }
 
   &__icon {
     @include flex-center;
     border-radius: 50%;
-    background-color: $color-primary;
+    background: radial-gradient($color-primary);
     color: $color-secondary;
-    padding: $spacing-sm;
     box-sizing: content-box;
+    padding: $spacing-sm;
     transition: transform $transition-fast;
+    position: relative;
+    overflow: hidden;
 
     svg {
       transform: scale(0.9);
-      transition: transform $transition-fast;
+      transition: all 0.3s;
       width: rem(10);
       height: rem(10);
 
       @include respond-to("md") {
-        width: rem(20);
-        height: rem(20);
+        width: rem(15);
+        height: rem(15);
       }
+    }
+
+    svg:last-of-type {
+      position: absolute;
+      bottom: -32.5%;
+      left: -50%;
+    }
+
+    @include respond-to("sm") {
     }
   }
 
   &:hover &__icon > svg {
-    transform: scale(0.9) rotateZ(35deg);
+    transform: scale(0.9) translateX(282.5%) translateY(-207.5%);
+
+    @include respond-to("md") {
+      transform: scale(0.9) translateX(200%) translateY(-150%);
+    }
 
     @include coarse {
       transform: scale(0.9) rotateZ(0deg);

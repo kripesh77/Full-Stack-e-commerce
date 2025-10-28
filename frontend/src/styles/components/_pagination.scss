@@ -33,8 +33,11 @@
   }
   &__btn {
     letter-spacing: 2px;
-    background-color: $color-primary;
     padding: 6px 4px;
-    color: $color-white;
+    color: $color-primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

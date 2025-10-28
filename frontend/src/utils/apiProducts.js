@@ -5,10 +5,7 @@ const url =
 
 export async function getProducts({ page }) {
   const limit = 8;
-  const category = 0;
-  const res = await fetch(
-    `${url}/api/v2/products?page=${page}&limit=${limit}&category=${category}`,
-  );
+  const res = await fetch(`${url}/api/v1/products?page=${page}&limit=${limit}`);
 
   if (!res.ok) {
     if (!res.status === 429) {

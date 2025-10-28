@@ -1,22 +1,22 @@
-import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import Button from "../../ui/Button";
 
 function ProductPagination({ totalPages, currentPage, hasNext, hasPrev }) {
-  const navigate = useNavigate();
-
-  function handlePrev() {
-    if (currentPage !== 1) {
-      navigate(`/products?page=${currentPage - 1}`);
-    }
-  }
-
-  function handleNext() {
-    if (currentPage !== totalPages) {
-      navigate(`/products?page=${currentPage + 1}`);
-    }
-  }
+  const [, setSearchParams] = useSearchParams();
 
   if (totalPages <= 1) return null;
+
+  const handlePrevious = () => {
+    if (hasPrev && currentPage > 1) {
+      setSearchParams({ page: currentPage - 1 });
+    }
+  };
+
+  const handleNext = () => {
+    if (hasNext) {
+      setSearchParams({ page: currentPage + 1 });
+    }
+  };
 
   return (
     <section className="pagination__section">
@@ -32,16 +32,19 @@ function ProductPagination({ totalPages, currentPage, hasNext, hasPrev }) {
             <Button
               variant="outline"
               disabled={!hasPrev}
-              onClick={handlePrev}
               className="pagination__btn"
+              aria-label="Go to previous page"
+              onClick={handlePrevious}
             >
               ← Previous
             </Button>
+
             <Button
               variant="outline"
               disabled={!hasNext}
-              onClick={handleNext}
               className="pagination__btn"
+              aria-label="Go to next page"
+              onClick={handleNext}
             >
               Next →
             </Button>

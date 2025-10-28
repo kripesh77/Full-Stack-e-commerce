@@ -12,7 +12,7 @@ function Signin() {
     formState: { errors },
   } = useForm();
 
-  const { mutate: signin, isPending } = useAuth();
+  const { mutate: signin, isPending } = useAuth({ signin: true });
 
   function onSubmit(data) {
     signin(data);

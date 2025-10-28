@@ -1,5 +1,5 @@
 .cartPage {
-  height: 100dvh;
+  height: 100svh;
   display: grid;
   grid-template-rows: auto auto 1fr;
   gap: 5px;
@@ -38,7 +38,7 @@
   }
 
   &__text {
-    font-size: min(1.2rem, 100dvw);
+    font-size: min(1.2rem, 100svw);
     font-family: $font-family-geo-bold;
     font-weight: 600;
     text-align: center;

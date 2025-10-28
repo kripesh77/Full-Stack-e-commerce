@@ -8,15 +8,12 @@ function CartItems() {
 
   const { mutate, isPending } = useMutateCart();
 
-  console.log(cart);
-
-  if (!cart?.products) return <div>Cart is empty, try adding some !</div>;
-
   return (
     <div className="cartPage__content--div" data-lenis-prevent>
       <ul className="cartPage__content--ul">
-        {cart.products.map((item) => (
+        {cart.cart.map((item) => (
           <CartItem
+            em
             key={item._id}
             details={item.productId}
             quantity={item.quantity}

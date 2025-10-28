@@ -5,6 +5,7 @@
   font-family: $font-family-primary;
   color: $color-primary;
   margin-inline: auto;
+  padding: 10px;
   border-top: 1px solid black;
   max-width: 500px;
 
@@ -12,8 +13,29 @@
     border-bottom: 1px solid black;
   }
 
+  &__button {
+    // padding: 8px;
+    background-color: black;
+    height: 1.2rem;
+    width: 1.2rem;
+    color: $color-secondary;
+    border-radius: 50%;
+    &--container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @include respond-to("xs") {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+
   &__img {
     width: 75px;
+    mix-blend-mode: multiply;
 
     @include respond-to("xs") {
       width: 100px;
@@ -57,4 +79,10 @@
     flex: 1;
     text-align: center;
   }
+}
+
+.empty-cart {
+  text-align: center;
+  font-size: larger;
+  font-family: font-geo-regular;
 }

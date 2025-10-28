@@ -9,19 +9,19 @@ export async function addOrRemoveCart({
   let res;
 
   if (add) {
-    res = await fetch(`${url}/api/cart/add/${productId}`, {
+    res = await fetch(`${url}/api/v1/carts/add/${productId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        token,
+        authorization: `Bearer ${token}`,
       },
     });
   } else if (remove) {
-    res = await fetch(`${url}/api/cart/remove/${productId}`, {
+    res = await fetch(`${url}/api/v1/carts/remove/${productId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        token,
+        authorization: `Bearer ${token}`,
       },
     });
   } else {
@@ -43,11 +43,11 @@ export async function getCarts({ token }) {
   if (!token) {
     throw new Error("Authentication token required");
   }
-  const res = await fetch(`${url}/api/cart`, {
+  const res = await fetch(`${url}/api/v1/carts`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      token,
+      authorization: `Bearer ${token}`,
     },
   });
 

@@ -1,0 +1,135 @@
+// ==========================================================================
+// PAYMENT RESULT PAGES (SUCCESS & FAILED)
+// ==========================================================================
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.payment-result {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl $spacing-base;
+  background-color: $color-background;
+
+  &__container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    background: $color-white;
+    padding: $spacing-3xl $spacing-xl;
+    border-radius: $border-radius-lg;
+    box-shadow: 0 4px 20px rgba($color-primary, 0.1);
+
+    @include respond-to("md") {
+      padding: $spacing-3xl $spacing-2xl;
+    }
+  }
+
+  &__icon {
+    margin: 0 auto $spacing-xl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--success {
+      color: #10b981; // Green
+    }
+
+    &--failure {
+      color: #ef4444; // Red
+    }
+  }
+
+  &__title {
+    font-family: $font-family-geo-bold;
+    font-size: $font-size-2xl;
+    color: $color-primary;
+    margin-bottom: $spacing-base;
+
+    @include respond-to("md") {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__message {
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    color: $color-text-muted;
+    margin-bottom: $spacing-lg;
+    line-height: 1.6;
+
+    @include respond-to("md") {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__order-id {
+    font-family: $font-family-primary;
+    font-size: $font-size-sm;
+    color: $color-primary;
+    background: rgba($color-primary, 0.05);
+    padding: $spacing-sm $spacing-base;
+    border-radius: $border-radius-sm;
+    display: inline-block;
+    margin-bottom: $spacing-xl;
+    font-weight: $font-weight-medium;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-base;
+    margin-top: $spacing-xl;
+
+    @include respond-to("sm") {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__btn {
+    padding: $spacing-base $spacing-xl;
+    border-radius: $border-radius-sm;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    cursor: pointer;
+    transition: all $transition-fast;
+    border: 2px solid transparent;
+    min-width: 150px;
+
+    &--primary {
+      background-color: $color-primary;
+      color: $color-secondary;
+      border-color: $color-primary;
+
+      &:hover {
+        background-color: lighten($color-primary, 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($color-primary, 0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &--secondary {
+      background-color: transparent;
+      color: $color-primary;
+      border-color: $color-primary;
+
+      &:hover {
+        background-color: $color-primary;
+        color: $color-secondary;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}

@@ -17,17 +17,19 @@
     position: relative;
     overflow: hidden;
     letter-spacing: 2px;
-    line-height: 0.9;
+    line-height: 1;
     font-size: 12px;
     letter-spacing: 0.05em;
 
     &-hover {
+      display: flex;
       position: absolute;
       transform: translateY(100%);
       transition: all 0.3s;
     }
 
     &-text {
+      display: flex;
       transition: all 0.3s;
 
       &:focus-visible {
@@ -74,13 +76,13 @@
     padding-block: 10px;
   }
 
-  &__div:hover &__link-hover {
-    transform: translateY(0);
-  }
+  // &__div:hover &__link-hover {
+  //   transform: translateY(0);
+  // }
 
-  &__div:hover &__link-text {
-    transform: translateY(-100%);
-  }
+  // &__div:hover &__link-text {
+  //   transform: translateY(-100%);
+  // }
 
   &__cart {
     position: relative;
