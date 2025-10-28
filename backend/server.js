@@ -1,10 +1,9 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
-// Load environment variables from .env file (for local development)
-// In production (Sevalla), environment variables are set via platform
+// Load environment variables from config.env (for local development)
+// In production (Render), environment variables are set via dashboard
 dotenv.config({ path: "./config.env" });
-dotenv.config(); // Also try loading from .env in root
 
 const app = require("./app");
 
@@ -15,16 +14,30 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-// Sevalla automatically sets PORT environment variable
+// Render automatically sets PORT environment variable
 const port = process.env.PORT || 5000;
 
 // Support both DATABASE and MY_DATABASE_LINK for flexibility
 const DB = process.env.DATABASE || process.env.MY_DATABASE_LINK;
 
-mongoose.connect(DB).then(() => console.log("Database connected successfully"));
+if (!DB) {
+  console.error("ERROR: No database connection string provided!");
+  process.exit(1);
+}
 
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+console.log("Connecting to database...");
+mongoose
+  .connect(DB)
+  .then(() => console.log("✅ Database connected successfully"))
+  .catch((err) => {
+    console.error("❌ Database connection error:", err.message);
+    process.exit(1);
+  });
+
+// Bind to 0.0.0.0 for Render
+const server = app.listen(port, "0.0.0.0", () => {
+  console.log(`🚀 App running on port ${port}...`);
+  console.log(`📦 Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
 //this handles any unhandled rejection such as if promise is rejected and we have not handled it, then that situation is called unhandled rejection, as the promise rejection is not handled properly.

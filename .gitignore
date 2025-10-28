@@ -6,6 +6,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# Deployment guides (keep private)
+RENDER_DEPLOYMENT_GUIDE.md
+
 # Runtime data
 pids
 *.pid
