@@ -1,11 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import eslint from "vite-plugin-eslint";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint(), tailwindcss()],
+  plugins: [react(), tailwindcss()],
   server: {
     hmr: {
       overlay: false,
@@ -42,14 +41,8 @@ export default defineConfig({
       },
     },
 
-    // Minification
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
+    // Minification (using default esbuild minifier)
+    minify: "esbuild",
   },
 
   // Optimize dependencies
