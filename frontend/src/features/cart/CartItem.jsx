@@ -21,9 +21,9 @@ function CartItem({
   return (
     <li className="cartItem">
       <div className="cartItem__imgContainer">
-        <img 
-          src={imageUrl} 
-          alt={name} 
+        <img
+          src={imageUrl}
+          alt={name}
           className="cartItem__img"
           loading="lazy"
         />

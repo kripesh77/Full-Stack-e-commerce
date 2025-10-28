@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "production") {
   // Serve static files from the frontend build folder
   const frontendBuildPath = path.join(__dirname, "..", "frontend", "dist");
   app.use(express.static(frontendBuildPath));
-  
+
   // Handle React routing - return all requests to React app
   app.get("*", (req, res) => {
     res.sendFile(path.join(frontendBuildPath, "index.html"));

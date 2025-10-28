@@ -43,9 +43,9 @@ function ProductCard({
   return (
     <li className="product__card">
       <div className="product__card--img--div">
-        <img 
-          src={imageUrl} 
-          alt={name} 
+        <img
+          src={imageUrl}
+          alt={name}
           className="product__card--img"
           loading="lazy"
         />
