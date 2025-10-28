@@ -43,7 +43,12 @@ function ProductCard({
   return (
     <li className="product__card">
       <div className="product__card--img--div">
-        <img src={imageUrl} alt={name} className="product__card--img" />
+        <img 
+          src={imageUrl} 
+          alt={name} 
+          className="product__card--img"
+          loading="lazy"
+        />
       </div>
       <div className="product__card--category">{category}</div>
       <div className="product__card--name" title={name}>
