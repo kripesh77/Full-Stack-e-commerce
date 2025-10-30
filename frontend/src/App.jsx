@@ -1,8 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AuthContextProvider from "./context/AuthContextProvider";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Spinner from "./ui/Spinner";
+import { AnimatePresence } from "framer-motion";
 
 // Lazy load all page components
 const AppLayout = lazy(() => import("./pages/AppLayout"));
@@ -17,11 +24,12 @@ const PaymentFailed = lazy(() => import("./pages/PaymentFailed"));
 
 function AppRouter() {
   const { isAuthenticated } = useAuthContext();
+  const location = useLocation();
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
-        <Routes>
+    <Suspense fallback={<Spinner />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductsPage />} />
@@ -62,15 +70,17 @@ function AppRouter() {
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />
         </Routes>
-      </Suspense>
-    </BrowserRouter>
+      </AnimatePresence>
+    </Suspense>
   );
 }
 
 function App() {
   return (
     <AuthContextProvider>
-      <AppRouter />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </AuthContextProvider>
   );
 }

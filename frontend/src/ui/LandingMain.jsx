@@ -20,7 +20,6 @@ function LandingMain() {
           trigger: "html",
           start: "top top",
           scrub: true,
-          markers: true,
         },
       },
     );

@@ -2,6 +2,7 @@ import CartItems from "../features/cart/CartItems";
 import CartSummary from "../features/cart/CartSummary";
 import useCart from "../features/cart/useCart";
 import HeaderLogo from "../ui/HeaderLogo";
+import transition from "../ui/transition";
 function CartPage() {
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);
@@ -21,4 +22,6 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+const CartsPage = transition(CartPage);
+CartsPage.displayName = "CartsPage";
+export default CartsPage;

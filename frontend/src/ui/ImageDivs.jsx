@@ -15,7 +15,7 @@ function ImageDivs({ url, title, index }) {
         scrollTrigger: {
           trigger: "html",
           start: "top top",
-          scrub: 1.2,
+          scrub: 0.1,
         },
       },
     );

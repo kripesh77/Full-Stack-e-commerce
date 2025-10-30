@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import HeaderLogo from "../ui/HeaderLogo";
 import AuthLinks from "../features/user/AuthLinks";
+import transition from "../ui/transition";
 
 function Auth() {
   return (
@@ -18,4 +19,6 @@ function Auth() {
   );
 }
 
-export default Auth;
+const AuthPage = transition(Auth);
+AuthPage.displayName = "Auth";
+export default AuthPage;

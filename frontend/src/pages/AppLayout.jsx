@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import Header from "../ui/Header";
 import TopNotification from "../ui/TopNotification";
@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 function AppLayout() {
   const { isAuthenticated } = useAuthContext();
   const lenisRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -22,7 +23,7 @@ function AppLayout() {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: 0.5,
+      smoothTouch: 1,
       touchMultiplier: 2,
       infinite: false,
     });
@@ -44,6 +45,13 @@ function AppLayout() {
       gsap.ticker.remove(lenis.raf);
     };
   }, []);
+
+  // Instant scroll to top on route change
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+  }, [location.pathname]);
 
   return (
     <>

@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap/all";
+import transition from "../ui/transition";
 
 function Home() {
   const isMobile = useMobile();
@@ -595,4 +596,6 @@ function Home() {
   );
 }
 
-export default Home;
+const HomePage = transition(Home);
+HomePage.displayName = "Home";
+export default HomePage;

@@ -5,8 +5,9 @@ import ProductPagination from "../features/products/ProductPagination";
 import Products from "../features/products/Products";
 import { useProducts } from "../features/products/useProducts";
 import Loader from "../ui/Loader";
+import transition from "../ui/transition";
 
-function ProductsPage() {
+function ProductPage() {
   const [searchParams] = useSearchParams();
 
   const page = useMemo(() => {
@@ -110,4 +111,6 @@ function ProductsPage() {
   );
 }
 
+const ProductsPage = transition(ProductPage);
+ProductsPage.displayName = "ProductsPage";
 export default ProductsPage;
