@@ -8,13 +8,6 @@ import { useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap/all";
-import CustomEase from "gsap/CustomEase";
-
-// Create custom ease - very slow start, quick finish
-CustomEase.create(
-  "reallyLazyIn",
-  "M0,0 C0,0 0.05,0 0.1,0.05 0.15,0.1 0.95,0.9 1,1",
-);
 
 function Home() {
   const isMobile = useMobile();
@@ -144,9 +137,6 @@ function Home() {
         start: "top top",
         end: "+=1500%",
         pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        markers: true,
       },
     });
 
@@ -289,7 +279,6 @@ function Home() {
         trigger: ".landing-secondary__img1",
         start: "bottom+=270% top",
         toggleActions: "play none none reverse",
-        markers: true,
       },
     });
 
@@ -355,7 +344,6 @@ function Home() {
         trigger: ".landing-secondary__img2",
         start: "top+=430% top",
         toggleActions: "play none none reverse",
-        markers: true,
       },
     });
 
@@ -420,7 +408,6 @@ function Home() {
         trigger: ".landing-secondary__img3",
         start: "top+=810% top",
         toggleActions: "play none none reverse",
-        markers: true,
       },
     });
 
@@ -474,7 +461,6 @@ function Home() {
         trigger: ".landing-secondary__img4",
         start: "top+=1180% top",
         toggleActions: "play none none reverse",
-        markers: true,
       },
     });
 

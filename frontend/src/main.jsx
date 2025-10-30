@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "lenis/dist/lenis.css";
 import "./styles/main.scss";
 import App from "./App.jsx";
 import { Toaster } from "react-hot-toast";

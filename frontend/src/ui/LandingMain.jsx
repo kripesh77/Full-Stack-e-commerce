@@ -2,9 +2,42 @@ import { Link } from "react-router-dom";
 import Buttonbig from "./Buttonbig";
 import AnimatedLink from "./AnimatedLink";
 import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 function LandingMain() {
   const hoverRef = useRef(null);
+
+  useGSAP(function () {
+    gsap.fromTo(
+      ".hero__div-img",
+      {
+        yPercent: 0,
+      },
+      {
+        yPercent: 100,
+        scrollTrigger: {
+          trigger: "html",
+          start: "top top",
+          scrub: true,
+          markers: true,
+        },
+      },
+    );
+
+    gsap.fromTo(
+      ".hero__container",
+      { yPercent: 0 },
+      {
+        yPercent: -50,
+        scrollTrigger: {
+          trigger: "html",
+          start: "top top",
+          scrub: true,
+        },
+      },
+    );
+  }, []);
 
   return (
     <section className="hero">
