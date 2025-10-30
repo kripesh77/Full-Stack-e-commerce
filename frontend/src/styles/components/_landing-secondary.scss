@@ -162,7 +162,7 @@
           url("https://images.unsplash.com/photo-1630547752213-af38cfb722bd?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
         background-size: cover;
         background-position: center;
-        transform: scale(calc(1 / var(--wrapper3-scale, 1)));
+        transform: scale(calc(1 / var(--wrapper4-scale, 1)));
         transform-origin: center;
       }
     }
@@ -176,7 +176,7 @@
     overflow: hidden;
 
     @include coarse {
-      font-size: calc(250 / var(--vw) * var(--multiplier));
+      font-size: calc(200 / var(--vw) * var(--multiplier));
     }
   }
   &__btn-wrapper {
@@ -243,7 +243,7 @@
   &__paragraph {
     max-width: 90vw;
     margin-inline: auto;
-    font-size: 4vw;
+    font-size: calc(80 / var(--vw) * var(--multiplier));
 
     @include respond-to("md") {
       max-width: 50vw;

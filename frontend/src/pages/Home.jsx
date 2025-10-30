@@ -4,11 +4,17 @@ import Button from "../ui/Button";
 import LandingMain from "../ui/LandingMain";
 import SecondMain from "../ui/SecondMain";
 import SecondMainCarousal from "../ui/SecondMainCarousal";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import { useNavigate } from "react-router-dom";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import gsap from "gsap/all";
+import CustomEase from "gsap/CustomEase";
+
+// Create custom ease - very slow start, quick finish
+CustomEase.create(
+  "reallyLazyIn",
+  "M0,0 C0,0 0.05,0 0.1,0.05 0.15,0.1 0.95,0.9 1,1",
+);
 
 function Home() {
   const isMobile = useMobile();
@@ -22,16 +28,6 @@ function Home() {
   const splitText7 = useRef(null);
   const splitText8 = useRef(null);
 
-  // Force scroll to top when Home page mounts
-  useEffect(() => {
-    const smoother = ScrollSmoother.get();
-    if (smoother) {
-      smoother.scrollTo(0, false); // false = instant, no animation
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, []);
-
   useGSAP(function () {
     splitText1.current = SplitText.create(
       ".landing-secondary__img1 .landing-secondary__img-text",
@@ -41,7 +37,7 @@ function Home() {
       },
     );
 
-    // Wrap each char in a span for splitText1
+    // Wrapping each char in a span for splitText1
     splitText1.current.chars.forEach((char) => {
       const span = document.createElement("span");
       span.className = "char-span";
@@ -58,7 +54,7 @@ function Home() {
       },
     );
 
-    // Wrap each char in a span for splitText2
+    // Wrapping each char in a span for splitText2
     splitText2.current.chars.forEach((char) => {
       const span = document.createElement("span");
       span.className = "char-span";
@@ -75,7 +71,7 @@ function Home() {
       },
     );
 
-    // Wrap each char in a span for splitText3
+    // Wrapping each char in a span for splitText3
     splitText3.current.chars.forEach((char) => {
       const span = document.createElement("span");
       span.className = "char-span";
@@ -104,7 +100,7 @@ function Home() {
     splitText5.current = SplitText.create(
       ".landing-secondary__img1 .landing-secondary__paragraph1",
       {
-        type: "lines words chars",
+        type: "lines, words",
         linesClass: "lines",
         wordsClass: "words",
         charsClass: "chars",
@@ -114,7 +110,7 @@ function Home() {
     splitText6.current = SplitText.create(
       ".landing-secondary__img2 .landing-secondary__paragraph2",
       {
-        type: "lines words chars",
+        type: "lines, words",
         linesClass: "lines",
         wordsClass: "words",
         charsClass: "chars",
@@ -124,7 +120,7 @@ function Home() {
     splitText7.current = SplitText.create(
       ".landing-secondary__img3 .landing-secondary__paragraph3",
       {
-        type: "lines words chars",
+        type: "lines, words",
         linesClass: "lines",
         wordsClass: "words",
         charsClass: "chars",
@@ -134,7 +130,7 @@ function Home() {
     splitText8.current = SplitText.create(
       ".landing-secondary__img4 .landing-secondary__paragraph4",
       {
-        type: "lines words chars",
+        type: "lines, words",
         linesClass: "lines",
         wordsClass: "words",
         charsClass: "chars",
@@ -144,10 +140,9 @@ function Home() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".landing-secondary",
-        scrub: 1,
+        scrub: 2,
         start: "top top",
-        end: "+=2000%",
-        ease: "power2.out",
+        end: "+=1500%",
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
@@ -167,7 +162,7 @@ function Home() {
         scale: 0.98,
         "--wrapper1-scale": 0.98,
         borderRadius: 32,
-        duration: 1,
+        duration: 0.8,
         "--before-opacity1": 0.6,
       },
       "<",
@@ -176,83 +171,169 @@ function Home() {
     tl.to(
       "body",
       {
-        backgroundColor: "#2D2926",
+        backgroundColor: "#111",
+        duration: 0.3,
+      },
+      "<",
+    );
+
+    tl.fromTo(
+      ".landing-secondary__wrapper2",
+      {
+        yPercent: 0,
+        scale: 1,
+        "--wrapper2-scale": 0.7,
+      },
+      {
+        yPercent: -100,
+        scale: 0.98,
+        "--wrapper2-scale": 1,
+        delay: 1,
+        duration: 0.5,
+      },
+    );
+
+    tl.fromTo(
+      ".landing-secondary__wrapper1",
+      { scale: 0.98 },
+      {
+        scale: 0.8,
+        autoAlpha: 0,
+        rotateX: -30,
+        duration: 0.5,
+      },
+      "<+=0.1",
+    );
+
+    tl.fromTo(
+      ".landing-secondary__wrapper3",
+      {
+        yPercent: -100,
+        scale: 1,
+        "--wrapper3-scale": 0.7,
+      },
+      {
+        "--wrapper3-scale": 1,
+        yPercent: -200,
+        scale: 0.98,
+        delay: 1,
+        duration: 0.5,
+      },
+    );
+
+    tl.to(
+      ".landing-secondary__wrapper3",
+      {
+        scale: 0.98,
+        borderRadius: 32,
         duration: 0.5,
       },
       "<",
     );
 
-    // Add a label where independent timeline should trigger
-    tl.addLabel("tl1Start", ">+=1");
-
-    // Create independent timeline (no ScrollTrigger yet)
-    const tl1 = gsap.timeline({ paused: true });
-
-    tl1.fromTo(
-      ".landing-secondary__img1 .landing-secondary__img-text .chars .char-span",
+    tl.fromTo(
+      ".landing-secondary__wrapper2",
+      { scale: 0.98 },
       {
-        xPercent: 110,
+        scale: 0.8,
+        autoAlpha: 0,
+        rotateX: -30,
+        duration: 0.5,
+      },
+      "<+=0.1",
+    );
+
+    tl.fromTo(
+      ".landing-secondary__wrapper4",
+      {
+        yPercent: -200,
+        scale: 1,
+        "--wrapper4-scale": 0.7,
       },
       {
-        xPercent: 0,
-        ease: "circ.inOut",
-        stagger: { amount: 0.2 },
-        duration: 2,
+        "--wrapper4-scale": 1,
+        yPercent: -300,
+        scale: 0.98,
+        delay: 1,
+        duration: 0.5,
+      },
+    );
+
+    tl.to(
+      ".landing-secondary__wrapper4",
+      {
+        scale: 0.98,
+        borderRadius: 32,
+        duration: 0.5,
       },
       "<",
     );
 
+    tl.fromTo(
+      ".landing-secondary__wrapper3",
+      { scale: 0.98 },
+      {
+        scale: 0.8,
+        autoAlpha: 0,
+        rotateX: -30,
+        duration: 0.5,
+      },
+      "<+=0.1",
+    );
+
+    tl.to({}, { duration: 1 });
+
+    //wrapper1 content animations
+    const tl1 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".landing-secondary__img1",
+        start: "bottom+=270% top",
+        toggleActions: "play none none reverse",
+        markers: true,
+      },
+    });
+
+    tl1.fromTo(
+      ".landing-secondary__img1 .landing-secondary__img-text .chars .char-span",
+      { xPercent: 110 },
+      {
+        xPercent: 0,
+        stagger: { amount: 0.1 },
+        ease: "circ.inOut",
+        duration: 1,
+      },
+    );
+
     tl1.fromTo(
       ".landing-secondary__img1 .landing-secondary__btn--primary",
-      {
-        autoAlpha: 0,
-        xPercent: -10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: -10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl1.fromTo(
       ".landing-secondary__img1 .landing-secondary__btn--secondary",
-      {
-        autoAlpha: 0,
-        xPercent: 10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: 10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl1.fromTo(
       splitText5.current.lines,
-      {
-        "--position": "100% 0%",
-      },
+      { "--position": "100% 0%" },
       {
         "--position": "0% 0%",
         duration: 0.28,
         stagger: { amount: 0.14 },
         ease: "circ.inOut",
       },
-      ">+=100%",
+      ">",
     );
 
     tl1.fromTo(
       splitText5.current.words,
-      {
-        autoAlpha: 0,
-      },
-      {
-        autoAlpha: 1,
-        duration: 0.01,
-      },
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.01 },
       ">",
     );
 
@@ -268,106 +349,57 @@ function Home() {
       ">",
     );
 
-    // tl.to({}, { duration: 1 });
-
-    tl.fromTo(
-      ".landing-secondary__wrapper2",
-      {
-        yPercent: 0,
-        scale: 1,
-        "--wrapper2-scale": 0.7,
+    // Wrapper2 content animations
+    const tl2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".landing-secondary__img2",
+        start: "top+=430% top",
+        toggleActions: "play none none reverse",
+        markers: true,
       },
-      {
-        yPercent: -100,
-        scale: 0.98,
-        "--wrapper2-scale": 1,
-        delay: 1.5,
-        duration: 0.5,
-      },
-    );
-
-    tl.fromTo(
-      ".landing-secondary__wrapper1",
-      { scale: 0.98 },
-      {
-        scale: 0.9,
-        autoAlpha: 0,
-        rotateX: -30,
-        // transformOrigin: "50% 100%",
-        duration: 0.5,
-      },
-      "<+=0.1",
-    );
-
-    tl.addLabel("tl2Start", ">+=0.5");
-
-    const tl2 = gsap.timeline({ paused: true });
+    });
 
     tl2.fromTo(
       ".landing-secondary__img2 .landing-secondary__img-text .chars .char-span",
-      {
-        xPercent: 110,
-      },
+      { xPercent: 110 },
       {
         xPercent: 0,
-        stagger: { amount: 0.2 },
+        stagger: { amount: 0.1 },
         ease: "circ.inOut",
-        duration: 2,
+        duration: 1,
       },
-      "<",
     );
 
     tl2.fromTo(
       ".landing-secondary__img2 .landing-secondary__btn--primary",
-      {
-        autoAlpha: 0,
-        xPercent: -10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: -10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl2.fromTo(
       ".landing-secondary__img2 .landing-secondary__btn--secondary",
-      {
-        autoAlpha: 0,
-        xPercent: 10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: 10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl2.fromTo(
       splitText6.current.lines,
-      {
-        "--position": "100% 0%",
-      },
+      { "--position": "100% 0%" },
       {
         "--position": "0% 0%",
         duration: 0.28,
         stagger: { amount: 0.14 },
         ease: "circ.inOut",
       },
-      ">+=100%",
+      ">",
     );
 
     tl2.fromTo(
       splitText6.current.words,
-      {
-        autoAlpha: 0,
-      },
-      {
-        autoAlpha: 1,
-        duration: 0.01,
-      },
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.01 },
       ">",
     );
 
@@ -376,90 +408,38 @@ function Home() {
       {
         "--position": "-95% 0%",
         duration: 0.28,
-        delay: 0.1,
         stagger: { amount: 0.14 },
         ease: "circ.inOut",
       },
       ">",
     );
 
-    // tl.to({}, { duration: 1 });
-
-    tl.fromTo(
-      ".landing-secondary__wrapper3",
-      {
-        yPercent: -100,
-        scale: 1,
-        "--wrapper3-scale": 0.7,
+    // Wrapper3 content animations
+    const tl3 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".landing-secondary__img3",
+        start: "top+=810% top",
+        toggleActions: "play none none reverse",
+        markers: true,
       },
-      {
-        "--wrapper3-scale": 1,
-        yPercent: -200,
-        scale: 0.98,
-        delay: 1.5,
-        duration: 0.5,
-      },
-    );
-
-    tl.to(
-      ".landing-secondary__wrapper3",
-      {
-        scale: 0.98,
-        borderRadius: 32,
-        duration: 0.5,
-      },
-      "<",
-    );
-
-    tl.fromTo(
-      ".landing-secondary__wrapper2",
-      { scale: 0.98 },
-      {
-        scale: 0.9,
-        autoAlpha: 0,
-        rotateX: -30,
-        // transformOrigin: "50% 100%",
-        duration: 0.5,
-      },
-      "<+=0.1",
-    );
-
-    tl.addLabel("tl3Start", ">+=0.5");
-
-    const tl3 = gsap.timeline({ paused: true });
+    });
 
     tl3.fromTo(
       ".landing-secondary__img3 .landing-secondary__img-text .chars .char-span",
-      {
-        xPercent: 110,
-      },
-      {
-        xPercent: 0,
-        ease: "circ.inOut",
-        duration: 1,
-      },
-      "<",
+      { xPercent: 110 },
+      { xPercent: 0, ease: "circ.inOut", duration: 1 },
     );
 
     tl3.fromTo(
       ".landing-secondary__img3 .landing-secondary__btn--primary",
-      {
-        autoAlpha: 0,
-        xPercent: -10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: -10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl3.fromTo(
       splitText7.current.lines,
-      {
-        "--position": "100% 0%",
-      },
+      { "--position": "100% 0%" },
       {
         "--position": "0% 0%",
         duration: 0.28,
@@ -471,13 +451,8 @@ function Home() {
 
     tl3.fromTo(
       splitText7.current.words,
-      {
-        autoAlpha: 0,
-      },
-      {
-        autoAlpha: 1,
-        duration: 0.01,
-      },
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.01 },
       ">",
     );
 
@@ -493,84 +468,37 @@ function Home() {
       ">",
     );
 
-    // tl.to({}, { duration: 1 });
-
-    tl.fromTo(
-      ".landing-secondary__wrapper4",
-      {
-        yPercent: -200,
-        scale: 1,
-        "--wrapper4-scale": 0.7,
+    // Wrapper4 content animations
+    const tl4 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".landing-secondary__img4",
+        start: "top+=1180% top",
+        toggleActions: "play none none reverse",
+        markers: true,
       },
-      {
-        "--wrapper4-scale": 1,
-        yPercent: -300,
-        scale: 0.98,
-        delay: 1.5,
-        duration: 0.5,
-      },
-    );
-
-    tl.to(
-      ".landing-secondary__wrapper4",
-      {
-        scale: 0.98,
-        borderRadius: 32,
-        duration: 0.5,
-      },
-      "<",
-    );
-
-    tl.fromTo(
-      ".landing-secondary__wrapper3",
-      { scale: 0.98 },
-      {
-        scale: 0.9,
-        autoAlpha: 0,
-        rotateX: -30,
-        // transformOrigin: "50% 100%",
-        duration: 0.5,
-      },
-      "<+=0.1",
-    );
-
-    tl.addLabel("tl4Start", ">+=0.5");
-
-    const tl4 = gsap.timeline({ paused: true });
+    });
 
     tl4.fromTo(
       ".landing-secondary__img4 .landing-secondary__img-text .chars .char-span",
-      {
-        xPercent: 110,
-      },
+      { xPercent: 110 },
       {
         xPercent: 0,
-        stagger: { amount: 0.2 },
         ease: "circ.inOut",
+        stagger: { amount: 0.1 },
         duration: 1,
       },
-      ">+=0.5",
     );
 
     tl4.fromTo(
       ".landing-secondary__img4 .landing-secondary__btn--secondary",
-      {
-        autoAlpha: 0,
-        xPercent: 10,
-      },
-      {
-        autoAlpha: 1,
-        xPercent: 0,
-        ease: "circ.inOut",
-      },
+      { autoAlpha: 0, xPercent: -10 },
+      { autoAlpha: 1, xPercent: 0, ease: "circ.inOut" },
       "<",
     );
 
     tl4.fromTo(
       splitText8.current.lines,
-      {
-        "--position": "100% 0%",
-      },
+      { "--position": "100% 0%" },
       {
         "--position": "0% 0%",
         duration: 0.28,
@@ -582,13 +510,8 @@ function Home() {
 
     tl4.fromTo(
       splitText8.current.words,
-      {
-        autoAlpha: 0,
-      },
-      {
-        autoAlpha: 1,
-        duration: 0.01,
-      },
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.01 },
       ">",
     );
 
@@ -603,51 +526,6 @@ function Home() {
       },
       ">",
     );
-
-    tl.to({}, { duration: 1 });
-
-    // Set up onUpdate callback to control all independent timelines
-    tl.scrollTrigger.vars.onUpdate = (self) => {
-      // Handle tl1
-      const labelTime1 = tl.labels.tl1Start;
-      const labelProgress1 = labelTime1 / tl.duration();
-
-      if (self.progress >= labelProgress1 && self.direction === 1) {
-        if (tl1.progress() === 0) tl1.play();
-      } else if (self.progress < labelProgress1 && self.direction === -1) {
-        if (tl1.progress() > 0) tl1.reverse();
-      }
-
-      // Handle tl2
-      const labelTime2 = tl.labels.tl2Start;
-      const labelProgress2 = labelTime2 / tl.duration();
-
-      if (self.progress >= labelProgress2 && self.direction === 1) {
-        if (tl2.progress() === 0) tl2.play();
-      } else if (self.progress < labelProgress2 && self.direction === -1) {
-        if (tl2.progress() > 0) tl2.reverse();
-      }
-
-      // Handle tl3
-      const labelTime3 = tl.labels.tl3Start;
-      const labelProgress3 = labelTime3 / tl.duration();
-
-      if (self.progress >= labelProgress3 && self.direction === 1) {
-        if (tl3.progress() === 0) tl3.play();
-      } else if (self.progress < labelProgress3 && self.direction === -1) {
-        if (tl3.progress() > 0) tl3.reverse();
-      }
-
-      // Handle tl4
-      const labelTime4 = tl.labels.tl4Start;
-      const labelProgress4 = labelTime4 / tl.duration();
-
-      if (self.progress >= labelProgress4 && self.direction === 1) {
-        if (tl4.progress() === 0) tl4.play();
-      } else if (self.progress < labelProgress4 && self.direction === -1) {
-        if (tl4.progress() > 0) tl4.reverse();
-      }
-    };
   });
 
   return (
@@ -657,7 +535,7 @@ function Home() {
       <section className="landing-secondary">
         <div className="landing-secondary__wrapper landing-secondary__wrapper1">
           <div className="landing-secondary__img landing-secondary__img1">
-            <h2 className="landing-secondary__img-text">FULL FACE</h2>
+            <h2 className="landing-secondary__img-text">Full Face</h2>
             <p className="landing-secondary__paragraph landing-secondary__paragraph1">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam
               dignissimos voluptates illum nemo id labore

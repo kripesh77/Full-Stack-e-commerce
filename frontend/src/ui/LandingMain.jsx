@@ -11,7 +11,7 @@ function LandingMain() {
       <div className="hero__div">
         <div className="hero__div-img" data-speed="clamp(0.5)">
           <div className="hero__container">
-            <h1 className="hero__title">Your Safety, Our Mission</h1>
+            <h1 className="hero__title">Gear Up With Confidence</h1>
             <Link to="/products" ref={hoverRef}>
               <Buttonbig>
                 <Link to="/products">

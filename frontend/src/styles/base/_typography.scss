@@ -28,5 +28,38 @@
 .font-family-logo {
   font-family: $font-family-logo;
   font-weight: $font-weight-medium;
-  font-size: 2rem;
+  font-size: $font-size-2xl;
+}
+
+// Typography utility classes using fluid sizing
+.text-h1 {
+  @include heading-1;
+}
+
+.text-h2 {
+  @include heading-2;
+}
+
+.text-h3 {
+  @include heading-3;
+}
+
+.text-h4 {
+  @include heading-4;
+}
+
+.text-body-lg {
+  @include body-large;
+}
+
+.text-body {
+  @include body-base;
+}
+
+.text-body-sm {
+  @include body-small;
+}
+
+.text-label {
+  @include label-text;
 }

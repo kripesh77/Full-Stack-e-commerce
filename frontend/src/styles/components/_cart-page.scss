@@ -14,20 +14,10 @@
       font-family: $font-family-logo;
       font-weight: $font-weight-bold;
       color: #111;
-      font-size: 0.7rem;
+      font-size: $font-size-xl; // Now fluid: clamp(18px → 24px)
       margin: 5px;
       text-align: center;
       text-shadow: 0px 2px 5px rgba($color-primary, 0.8);
-
-      @include respond-to("xs") {
-        font-size: 1rem;
-      }
-      @include respond-to("sm") {
-        font-size: 1.25rem;
-      }
-      @include respond-to("md") {
-        font-size: 1.5rem;
-      }
       @include respond-to("lg") {
         font-size: 1.7rem;
       }

@@ -61,7 +61,7 @@
     justify-content: end;
     gap: 9px;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: $font-size-xl; // Fluid clamp(18px → 24px)
 
     @include respond-to("md") {
       padding-right: 10px;

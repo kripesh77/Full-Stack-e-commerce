@@ -15,8 +15,8 @@
     width: fit-content;
     gap: $spacing-xs;
     z-index: 2;
-    font-size: 0.7rem;
-    font-weight: 700;
+    @include body-small; // Using fluid typography mixin
+    font-weight: $font-weight-bold;
 
     @include respond-to("md") {
       padding-block: 3px;
@@ -58,7 +58,7 @@
 
     svg:last-of-type {
       position: absolute;
-      bottom: -32.5%;
+      bottom: -32%;
       left: -50%;
     }
 
@@ -70,7 +70,7 @@
     transform: scale(0.9) translateX(282.5%) translateY(-207.5%);
 
     @include respond-to("md") {
-      transform: scale(0.9) translateX(200%) translateY(-150%);
+      transform: scale(0.9) translateX(200%) translateY(-155%);
     }
 
     @include coarse {

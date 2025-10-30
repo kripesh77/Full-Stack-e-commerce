@@ -50,7 +50,7 @@
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     line-height: 1.1;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.01em;
     text-align: center;
     color: $color-text-secondary;
     text-shadow: 0 2px 4px rgba($color-primary, 0.5);
@@ -58,6 +58,10 @@
 
     @include respond-to("md") {
       margin: 0 spacing("lg") spacing("lg");
+      font-size: $font-size-xl;
+    }
+
+    @include respond-to("xl") {
       font-size: $font-size-2xl;
     }
 
