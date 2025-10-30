@@ -86,3 +86,8 @@ ol {
 // ::-webkit-scrollbar-thumb:hover {
 //   background: #555;
 // }
+
+::selection {
+  color: $color-primary;
+  background-color: #d3fd50;
+}

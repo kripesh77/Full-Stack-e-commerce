@@ -162,7 +162,7 @@ function Home() {
     tl.to(
       "body",
       {
-        backgroundColor: "#111",
+        backgroundColor: "#0f0f0f",
         duration: 0.3,
       },
       "<",

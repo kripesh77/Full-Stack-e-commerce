@@ -17,7 +17,7 @@ const transition = (OgComponent) => {
             animate={{ scaleY: 0 }}
             exit={{ scaleY: 1 }}
             transition={{
-              duration: 0.5,
+              duration: 0.8,
               delay: (5 - i) * 0.04,
               ease: [0.22, 1, 0.36, 1],
             }}
@@ -35,7 +35,7 @@ const transition = (OgComponent) => {
             animate={{ scaleY: 0 }}
             exit={{ scaleY: 0 }}
             transition={{
-              duration: 0.5,
+              duration: 0.8,
               delay: (5 - i) * 0.04 + 0.5,
               ease: [0.22, 1, 0.36, 1],
             }}

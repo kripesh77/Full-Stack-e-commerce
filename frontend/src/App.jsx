@@ -27,55 +27,47 @@ function AppRouter() {
   const location = useLocation();
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductsPage />} />
-          </Route>
+    // <Suspense fallback={<Spinner />}>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductsPage />} />
+        </Route>
 
-          <Route path="/auth" element={<Auth />}>
-            <Route index element={<Navigate replace to="signin" />} />
-            <Route
-              path="signin"
-              element={
-                isAuthenticated ? (
-                  <Navigate replace to="/products" />
-                ) : (
-                  <Signin />
-                )
-              }
-            />
-            <Route
-              path="signup"
-              element={
-                isAuthenticated ? (
-                  <Navigate replace to="/products" />
-                ) : (
-                  <Signup />
-                )
-              }
-            />
-          </Route>
-
+        <Route path="/auth" element={<Auth />}>
+          <Route index element={<Navigate replace to="signin" />} />
           <Route
-            path="/cart"
+            path="signin"
             element={
-              isAuthenticated ? (
-                <CartPage />
-              ) : (
-                <Navigate replace to="/auth/signin" />
-              )
+              isAuthenticated ? <Navigate replace to="/products" /> : <Signin />
             }
           />
+          <Route
+            path="signup"
+            element={
+              isAuthenticated ? <Navigate replace to="/products" /> : <Signup />
+            }
+          />
+        </Route>
 
-          {/* Payment result pages */}
-          <Route path="/order-success" element={<OrderSuccess />} />
-          <Route path="/payment-failed" element={<PaymentFailed />} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+        <Route
+          path="/cart"
+          element={
+            isAuthenticated ? (
+              <CartPage />
+            ) : (
+              <Navigate replace to="/auth/signin" />
+            )
+          }
+        />
+
+        {/* Payment result pages */}
+        <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/payment-failed" element={<PaymentFailed />} />
+      </Routes>
+    </AnimatePresence>
+    //</Suspense>
   );
 }
 
