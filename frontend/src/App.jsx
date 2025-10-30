@@ -40,7 +40,11 @@ function AppRouter() {
             <Route
               path="signin"
               element={
-                isAuthenticated ? <Navigate replace to="/me" /> : <Signin />
+                isAuthenticated ? (
+                  <Navigate replace to="/products" />
+                ) : (
+                  <Signin />
+                )
               }
             />
             <Route

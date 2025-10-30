@@ -7,7 +7,11 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Product description is required"],
     },
-    price: { type: Number, required: [true, "Product price is required"] },
+    price: {
+      type: mongoose.Schema.Types.Decimal128,
+      required: [true, "Product price is required"],
+      get: (value) => (value ? parseFloat(value.toString()) : value),
+    },
     imageUrl: {
       type: String,
       required: [true, "Product imageUrl is required"],
@@ -23,8 +27,8 @@ const productSchema = new mongoose.Schema(
     creatorId: mongoose.Schema.Types.ObjectId,
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    toJSON: { virtuals: true, getters: true },
+    toObject: { virtuals: true, getters: true },
   }
 );
 
