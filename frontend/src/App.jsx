@@ -5,11 +5,11 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import AuthContextProvider from "./context/AuthContextProvider";
 import { useAuthContext } from "./hooks/useAuthContext";
-import Spinner from "./ui/Spinner";
 import { AnimatePresence } from "framer-motion";
+import gsap from "gsap";
 
 // Lazy load all page components
 const AppLayout = lazy(() => import("./pages/AppLayout"));
@@ -22,12 +22,16 @@ const Signup = lazy(() => import("./features/user/Signup"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
 const PaymentFailed = lazy(() => import("./pages/PaymentFailed"));
 
-function AppRouter() {
+function AppRouter({ onComponentLoaded }) {
   const { isAuthenticated } = useAuthContext();
   const location = useLocation();
 
+  // Notify when first component is loaded
+  useEffect(() => {
+    onComponentLoaded();
+  }, [onComponentLoaded]);
+
   return (
-    // <Suspense fallback={<Spinner />}>
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route element={<AppLayout />}>
@@ -67,15 +71,59 @@ function AppRouter() {
         <Route path="/payment-failed" element={<PaymentFailed />} />
       </Routes>
     </AnimatePresence>
-    //</Suspense>
   );
 }
 
 function App() {
+  const [isReady, setIsReady] = useState(false);
+  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloader = document.getElementById("preloader");
+    if (!preloader) {
+      setIsReady(true);
+      return;
+    }
+
+    const minDisplayTime = 1000;
+
+    setTimeout(() => {
+      preloader.style.background = "transparent";
+      preloader.style.pointerEvents = "none";
+      setIsReady(true);
+    }, minDisplayTime);
+  }, []);
+
+  useEffect(() => {
+    if (!isComponentLoaded) return;
+
+    const preloader = document.getElementById("preloader");
+    if (!preloader) return;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        gsap.to(".bars", {
+          animationPlayState: "paused",
+          transformOrigin: "bottom",
+          scaleY: 0,
+          duration: 0.5,
+          ease: "power3.inOut",
+          onComplete: () => {
+            preloader.remove();
+          },
+        });
+      });
+    });
+  }, [isComponentLoaded]);
+
+  if (!isReady) return null;
+
   return (
     <AuthContextProvider>
       <BrowserRouter>
-        <AppRouter />
+        <Suspense fallback={null}>
+          <AppRouter onComponentLoaded={() => setIsComponentLoaded(true)} />
+        </Suspense>
       </BrowserRouter>
     </AuthContextProvider>
   );

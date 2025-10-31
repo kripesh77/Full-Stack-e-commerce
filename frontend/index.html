@@ -7,7 +7,72 @@
     <title>AliSasto</title>
   </head>
   <body>
+    <div id="preloader">
+      <div class="bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+
     <div id="root"></div>
+
+    <style>
+      html{
+        background-color: black;
+      }
+        #preloader {
+          position: fixed;
+          inset: 0;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-end;
+          background: #0a0a0a;
+          z-index: 9999;
+          overflow: hidden;
+          transition: background 0.3s ease;
+          padding: 2rem;
+        }
+        .bars {
+          display: flex;
+          position: relative;
+          z-index: 10000;
+          align-items: flex-end;
+          height: 40px;
+        }
+        .bar {
+          height: 100%;
+          transform: scaleY(0.3);
+          width: 15px;
+          background: #fff;
+          animation: anim 0.5s infinite alternate  cubic-bezier(0.785, 0.135, 0.15, 0.86);
+          transform-origin: bottom;
+        }
+        .bar:nth-child(1) {
+          animation-delay: 0s;
+        }
+        .bar:nth-child(2) {
+          animation-delay: 0.08s;
+          
+        }
+        .bar:nth-child(3) {
+          animation-delay: 0.18s;
+        }
+        .bar:nth-child(4) {
+          animation-delay: 0.28s;
+        }
+
+        @keyframes anim {
+          from {
+            transform: scaleY(0.3);
+          }
+          to {
+            transform: scaleY(1);
+          }
+        }
+      </style>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
