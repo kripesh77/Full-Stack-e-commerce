@@ -17,13 +17,20 @@ function AppLayout() {
   const location = useLocation();
 
   useEffect(() => {
+    // Only initialize Lenis on desktop (768px and above)
+    // const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+    // if (!isDesktop) {
+    //   return; // Skip Lenis on mobile
+    // }
+
     const lenis = new Lenis({
       duration: 1.2,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: 1,
+      smoothTouch: 0.5,
       touchMultiplier: 2,
       infinite: false,
     });

@@ -8,34 +8,39 @@ import gsap from "gsap";
 function LandingMain() {
   const hoverRef = useRef(null);
 
-  useGSAP(function () {
-    gsap.fromTo(
-      ".hero__div-img",
-      {
-        yPercent: 0,
-      },
-      {
-        yPercent: 100,
-        scrollTrigger: {
-          trigger: "html",
-          start: "top top",
-          scrub: true,
-        },
-      },
-    );
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
 
-    gsap.fromTo(
-      ".hero__container",
-      { yPercent: 0 },
-      {
-        yPercent: -50,
-        scrollTrigger: {
-          trigger: "html",
-          start: "top top",
-          scrub: true,
+    mm.add("(min-width: 768px)", () => {
+      gsap.fromTo(
+        ".hero__div-img",
+        { yPercent: 0 },
+        {
+          yPercent: 100,
+          scrollTrigger: {
+            trigger: "html",
+            start: "top top",
+            scrub: true,
+          },
         },
-      },
-    );
+      );
+
+      gsap.fromTo(
+        ".hero__container",
+        { yPercent: 0 },
+        {
+          yPercent: -50,
+          scrollTrigger: {
+            trigger: "html",
+            start: "top top",
+            scrub: true,
+          },
+        },
+      );
+    });
+
+    // optional cleanup
+    return () => mm.revert();
   }, []);
 
   return (

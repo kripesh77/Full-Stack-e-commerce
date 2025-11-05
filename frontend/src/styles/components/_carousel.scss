@@ -17,9 +17,9 @@
   padding: spacing("base") 0;
   overflow: visible;
 
-  .swiper-wrapper {
-    align-items: stretch; // Ensure all slides have same height
-  }
+  // .swiper-wrapper {
+  //   align-items: stretch; // Ensure all slides have same height
+  // }
 
   .swiper-slide {
     height: auto;
@@ -40,21 +40,28 @@
   background-color: $color-primary;
   transition: all 0.3s ease-in-out;
   height: 100%;
-  flex: 1; // Ensure card fills the slide container
+  flex: 1;
   width: 100%;
 
-  &--active {
-    border-radius: 50% / 35%;
+  &__title {
+    transition: all 0.5s 0.05s ease;
+  }
 
+  &--active {
     .carousel-card__background {
       opacity: 0.8;
     }
 
     .carousel-card__title {
-      transform: translateY(0%);
+      transform: translateY(-100%);
+      border-color: transparent;
     }
 
     .carousel-card__links {
+      transform: translateY(-50%);
+    }
+
+    .carousel-card__link {
       color: $color-text-secondary;
     }
   }
@@ -72,7 +79,7 @@
     pointer-events: none;
     opacity: 0.4;
     z-index: 1;
-    transition: opacity $transition-base;
+    transition: all 0.5s 0.05s ease;
   }
 
   &__content {
@@ -90,7 +97,7 @@
     color: $color-text-secondary;
     text-transform: uppercase;
     border-radius: $border-radius-base;
-    transition: all 0.2s;
+    transition: all 0.5s 0.05s ease;
 
     @include respond-to("xs") {
       font-size: $font-size-base;
@@ -101,8 +108,7 @@
     border: 1px solid currentColor;
     border-radius: $border-radius-lg;
     padding: $spacing-xs $spacing-sm;
-    transform: translateY(100%);
-    transition: all $transition-fast;
+    transition: all 0.5s 0.05s ease;
   }
 
   &__links {
@@ -111,15 +117,14 @@
     gap: spacing("base");
     text-align: center;
     color: transparent;
+    transition: all 0.5s 0.05s ease;
   }
 
   &__link {
     border: 1px solid currentColor;
     border-radius: $border-radius-lg;
     padding: $spacing-xs $spacing-sm;
-
-    transform: translateY(100%);
-    transition: all $transition-fast;
+    transition: all 0.5s 0.05s ease;
   }
 }
 

@@ -1,25 +1,8 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { useRef } from "react";
 
 function ImageDivs({ url, title, index }) {
   const spanRef = useRef(null);
   const spanRef1 = useRef(null);
-
-  useGSAP(function () {
-    gsap.fromTo(
-      ".image-card__background",
-      { yPercent: 0 },
-      {
-        yPercent: 10,
-        scrollTrigger: {
-          trigger: "html",
-          start: "top top",
-          scrub: 0.1,
-        },
-      },
-    );
-  });
 
   return (
     <div className="image-card" style={{ "--bg-image": `url(${url})` }}>

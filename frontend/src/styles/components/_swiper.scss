@@ -1,0 +1,22 @@
+.mySwiper {
+  width: 80vw;
+  aspect-ratio: 0.7;
+
+  @include respond-to("sm") {
+    width: 50vw;
+  }
+}
+
+.swiper {
+  margin-bottom: 10px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
