@@ -5,6 +5,59 @@
     <link rel="icon" href="/favicon.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AliSasto</title>
+
+    <!-- Preload critical fonts -->
+    <link
+      rel="preload"
+      href="/src/assets/font/geograph-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/src/assets/font/geograph-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/src/assets/font/geograph-medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/src/assets/font/akkurat-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Preload critical landing page background images -->
+    <link
+      rel="preload"
+      href="https://images.unsplash.com/photo-1611004061262-3a925aa7fc31?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      as="image"
+    />
+    <link
+      rel="preload"
+      href="https://plus.unsplash.com/premium_photo-1744395627552-1349f5d80199?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D"
+      as="image"
+    />
+    <link
+      rel="preload"
+      href="https://images.unsplash.com/photo-1630547752213-af38cfb722bd?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      as="image"
+    />
+
+    <!-- Preload carousel/swiper images -->
+    <link rel="preload" href="/1.avif" as="image" type="image/avif" />
+    <link rel="preload" href="/2.avif" as="image" type="image/avif" />
+    <link rel="preload" href="/3.avif" as="image" type="image/avif" />
+    <link rel="preload" href="/fullf.avif" as="image" type="image/avif" />
   </head>
   <body>
     <div id="preloader">
@@ -19,60 +72,119 @@
     <div id="root"></div>
 
     <style>
-      html{
+      html {
         background-color: #0f0f0f;
       }
-        #preloader {
-          position: fixed;
-          inset: 0;
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
-          background: #0a0a0a;
-          z-index: 9999;
-          overflow: hidden;
-          transition: background 0.3s ease;
-          padding: 2rem;
-        }
-        .bars {
-          display: flex;
-          position: relative;
-          z-index: 10000;
-          align-items: flex-end;
-          height: 40px;
-        }
-        .bar {
-          height: 100%;
-          width: 15px;
-          background: #fff;
-          animation: anim 0.5s infinite alternate  cubic-bezier(0.785, 0.135, 0.15, 0.86);
-          transform-origin: bottom;
+      #preloader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        background: #0a0a0a;
+        z-index: 9999;
+        overflow: hidden;
+        transition: background 0.3s ease;
+        padding: 2rem;
+      }
+      .bars {
+        display: flex;
+        position: relative;
+        z-index: 10000;
+        align-items: flex-end;
+        height: 40px;
+      }
+      .bar {
+        height: 100%;
+        width: 15px;
+        background: #fff;
+        animation: anim 0.5s infinite alternate
+          cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        transform-origin: bottom;
+        transform: scaleY(0.3);
+      }
+      .bar:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .bar:nth-child(2) {
+        animation-delay: 0.07s;
+      }
+      .bar:nth-child(3) {
+        animation-delay: 0.14s;
+      }
+      .bar:nth-child(4) {
+        animation-delay: 0.21s;
+      }
+
+      @keyframes anim {
+        from {
           transform: scaleY(0.3);
         }
-        .bar:nth-child(1) {
-          animation-delay: 0s;
+        to {
+          transform: scaleY(1);
         }
-        .bar:nth-child(2) {
-          animation-delay: 0.07s;
-          
-        }
-        .bar:nth-child(3) {
-          animation-delay: 0.14s;
-        }
-        .bar:nth-child(4) {
-          animation-delay: 0.21s;
+      }
+    </style>
+
+    <script>
+      // Wait for critical resources before loading React
+      (function () {
+        let resourcesLoaded = false;
+
+        // Check if all critical resources are loaded
+        function checkResourcesLoaded() {
+          // Check fonts
+          const fontsReady =
+            document.fonts.check("16px geograph-regular") &&
+            document.fonts.check("16px geograph-bold") &&
+            document.fonts.check("16px geograph-medium");
+
+          // Check images
+          const images = document.querySelectorAll(
+            'link[rel="preload"][as="image"]',
+          );
+          let imagesLoaded = true;
+
+          if (images.length > 0) {
+            images.forEach((link) => {
+              const img = new Image();
+              img.src = link.href;
+              if (!img.complete) {
+                imagesLoaded = false;
+              }
+            });
+          }
+
+          return fontsReady && imagesLoaded;
         }
 
-        @keyframes anim {
-          from {
-            transform: scaleY(0.3);
-          }
-          to {
-            transform: scaleY(1);
+        // Wait for fonts and images with a 3-second timeout
+        const maxWait = 3000;
+        const startTime = Date.now();
+
+        function waitForResources() {
+          if (checkResourcesLoaded() || Date.now() - startTime > maxWait) {
+            resourcesLoaded = true;
+            // Resources loaded, React script will load
+          } else {
+            requestAnimationFrame(waitForResources);
           }
         }
-      </style>
-    </div>
+
+        // Start checking after fonts are ready
+        document.fonts.ready
+          .then(() => {
+            waitForResources();
+          })
+          .catch(() => {
+            // Fallback if fonts.ready fails
+            setTimeout(() => {
+              resourcesLoaded = true;
+            }, maxWait);
+          });
+      })();
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
