@@ -13,7 +13,7 @@ function CartItems() {
       <ul className="cartPage__content--ul">
         {cart.cart.map((item) => (
           <CartItem
-            em
+            name={item.name}
             key={item._id}
             details={item.productId}
             quantity={item.quantity}

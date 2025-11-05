@@ -14,10 +14,9 @@ function ProductCard({
   const { name, imageUrl, price, stock, category, _id: id } = product;
   const outOfStock = stock === 0;
 
-  const { 0: a } = cartProducts.filter((item) => item?.productId === id);
-  console.log(cartProducts);
+  const { 0: a } = cartProducts.filter((item) => item?.productId._id === id);
 
-  const isInCart = a?.productId === id;
+  const isInCart = a?.productId._id === id;
 
   function handleInc() {
     if (isAuthenticated) {

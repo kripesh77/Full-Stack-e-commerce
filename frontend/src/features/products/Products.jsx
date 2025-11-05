@@ -3,7 +3,6 @@ import useCart from "../cart/useCart";
 import useMutateCart from "../cart/useMutateCart";
 
 function Products({ products }) {
-  console.log(products);
   const { mutate, isPending } = useMutateCart();
 
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
