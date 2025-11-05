@@ -184,12 +184,16 @@
   }
   &__img-text {
     font-family: $font-family-primary;
-    font-size: calc(80 / var(--vw) * var(--multiplier));
+    font-size: calc(150 / var(--vw) * var(--multiplier));
     width: calc(1080 / var(--vw) * var(--multiplier));
     letter-spacing: calc(5 / var(--vw) * var(--multiplier));
     text-transform: uppercase;
     z-index: 1;
     overflow: hidden;
+
+    @include respond-to("sm") {
+      font-size: calc(100 / var(--vw) * var(--multiplier));
+    }
 
     @include coarse {
       font-size: calc(150 / var(--vw) * var(--multiplier));
