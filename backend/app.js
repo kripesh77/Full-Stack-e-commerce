@@ -28,6 +28,11 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Health check endpoint (lightweight, no DB query)
+app.get("/api/v1/users/health", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: Date.now() });
+});
+
 // API routes - Define API routes BEFORE serving static files
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);

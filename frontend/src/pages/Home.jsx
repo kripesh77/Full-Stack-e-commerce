@@ -148,7 +148,7 @@ function Home() {
         ".landing-secondary__wrapper1",
         {
           scale: 0.4,
-          "--wrapper1-scale": 0.7,
+          "--wrapper1-scale": 0.6,
           borderRadius: 500,
           "--before-opacity1": 0,
         },
@@ -157,7 +157,7 @@ function Home() {
           "--wrapper1-scale": 0.98,
           borderRadius: 32,
           duration: 0.8,
-          "--before-opacity1": 0.6,
+          "--before-opacity1": 0.3,
         },
         "<",
       );
@@ -528,7 +528,8 @@ function Home() {
           <div className="landing-secondary__img landing-secondary__img1">
             <h2 className="landing-secondary__img-text">Full Face</h2>
             <p className="landing-secondary__paragraph landing-secondary__paragraph1">
-              Lorem ipsum dolor amet sit vel non sed nec duo nam rex leo
+              Lorem ipsum dolor amet sit vel non sed nec duo nam rex leo vel non
+              sed nec duo nam rex leo
             </p>
             <div className="landing-secondary__btn-wrapper">
               <Button
