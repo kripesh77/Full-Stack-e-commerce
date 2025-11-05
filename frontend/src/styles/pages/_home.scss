@@ -47,7 +47,7 @@
     z-index: 20;
     margin: 0 spacing("sm") spacing("lg");
     font-family: $font-family-geo-bold;
-    font-size: $font-size-xl;
+    font-size: calc(150 / var(--vw) * var(--multiplier));
     font-weight: $font-weight-bold;
     line-height: 1.1;
     letter-spacing: 0.01em;
@@ -58,7 +58,7 @@
 
     @include respond-to("md") {
       margin: 0 spacing("lg") spacing("lg");
-      font-size: $font-size-xl;
+      font-size: calc(100 / var(--vw) * var(--multiplier));
     }
 
     @include respond-to("xl") {

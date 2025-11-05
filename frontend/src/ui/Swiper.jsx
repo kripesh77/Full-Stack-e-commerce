@@ -12,7 +12,7 @@ const cardData = [
   { url: "/1d.png", title: "FULL FACE" },
   { url: "/2b.png", title: "MODULAR" },
   { url: "/3.jpg", title: "MEN" },
-  { url: "/4.jpg", title: "WOMEN" },
+  { url: "/3a.jpg", title: "WOMEN" },
 ];
 
 export default function App() {
