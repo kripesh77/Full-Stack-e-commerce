@@ -77,6 +77,7 @@ function AppRouter({ onComponentLoaded }) {
 function App() {
   const [isReady, setIsReady] = useState(false);
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
+  const [allResourcesLoaded, setAllResourcesLoaded] = useState(false);
 
   useEffect(() => {
     const preloader = document.getElementById("preloader");
@@ -86,16 +87,58 @@ function App() {
     }
 
     const minDisplayTime = 1000;
+    let resourcesReady = false;
+
+    // Wait for images and fonts to load
+    const waitForResources = async () => {
+      try {
+        // Wait for fonts
+        await document.fonts.ready;
+
+        // Wait for all images
+        const images = Array.from(document.images);
+        await Promise.all(
+          images.map(
+            (img) =>
+              new Promise((resolve) => {
+                if (img.complete) {
+                  resolve();
+                } else {
+                  img.onload = resolve;
+                  img.onerror = resolve;
+                }
+              }),
+          ),
+        );
+
+        resourcesReady = true;
+        setAllResourcesLoaded(true);
+      } catch (error) {
+        console.warn("Resource loading error:", error);
+        resourcesReady = true;
+        setAllResourcesLoaded(true);
+      }
+    };
+
+    waitForResources();
 
     setTimeout(() => {
-      preloader.style.background = "transparent";
-      preloader.style.pointerEvents = "none";
-      setIsReady(true);
+      const checkReady = () => {
+        if (resourcesReady) {
+          preloader.style.background = "transparent";
+          preloader.style.pointerEvents = "none";
+          setIsReady(true);
+        } else {
+          // Check again after a short delay
+          setTimeout(checkReady, 100);
+        }
+      };
+      checkReady();
     }, minDisplayTime);
   }, []);
 
   useEffect(() => {
-    if (!isComponentLoaded) return;
+    if (!isComponentLoaded || !allResourcesLoaded) return;
 
     const preloader = document.getElementById("preloader");
     if (!preloader) return;
@@ -114,7 +157,7 @@ function App() {
         });
       });
     });
-  }, [isComponentLoaded]);
+  }, [isComponentLoaded, allResourcesLoaded]);
 
   if (!isReady) return null;
 
