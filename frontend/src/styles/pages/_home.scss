@@ -19,7 +19,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: left 65%;
-      background-image: url(../../assets/landing-page-helmet.jpg);
+      background-image: url("/landing-page-helmet.jpg");
     }
 
     @include respond-to("md") {
