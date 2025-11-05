@@ -14,7 +14,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 
   const count = await ProductModel.countDocuments();
 
-  const limit = req.query.limit * 1 || 30;
+  const limit = req.query.limit * 1 || 8;
 
   const totalPages = Math.ceil(count / limit);
   const currentPage = req.query.page * 1 || 1;
