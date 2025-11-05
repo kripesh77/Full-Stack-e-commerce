@@ -10,7 +10,7 @@ function Products({ products }) {
   const { data: cart } = useCart(auth?.token);
 
   const cartProducts = cart?.cart?.map((item) => ({
-    productId: item.productId._id,
+    productId: item.productId,
     quantity: item.quantity,
   }));
 
