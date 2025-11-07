@@ -184,20 +184,13 @@
   }
   &__img-text {
     font-family: $font-family-primary;
-    font-size: calc(150 / var(--vw) * var(--multiplier));
+    // font-size: calc(150 / var(--vw) * var(--multiplier));
+    font-size: calc(2 * (7.92453px + 1.88679vw));
     width: calc(1080 / var(--vw) * var(--multiplier));
     letter-spacing: calc(5 / var(--vw) * var(--multiplier));
     text-transform: uppercase;
     z-index: 1;
     overflow: hidden;
-
-    @include respond-to("sm") {
-      font-size: calc(100 / var(--vw) * var(--multiplier));
-    }
-
-    @include coarse {
-      font-size: calc(150 / var(--vw) * var(--multiplier));
-    }
   }
   &__btn-wrapper {
     display: flex;
@@ -231,12 +224,12 @@
       background 0.3s ease-in,
       color 0.3s linear;
     font-family: $font-family-primary;
-    font-size: calc(50 / var(--vw) * var(--multiplier));
+    // font-size: calc(50 / var(--vw) * var(--multiplier));
+    font-size: calc(0.7 * (7.92453px + 1.88679vw));
     will-change: transform;
 
     @include respond-to("md") {
       padding: 10px 20px;
-      font-size: calc(25 / var(--vw) * var(--multiplier));
     }
 
     &:hover {
@@ -252,7 +245,6 @@
       background-position: 0%;
       color: $color-secondary;
       background: linear-gradient(50deg, transparent, transparent);
-      font-size: calc(75 / var(--vw) * var(--multiplier));
     }
     &--primary {
     }
@@ -263,13 +255,14 @@
   &__paragraph {
     max-width: 90vw;
     margin-inline: auto;
-    font-size: calc(80 / var(--vw) * var(--multiplier));
+    // font-size: calc(80 / var(--vw) * var(--multiplier));
+    font-size: calc(0.8 * (7.92453px + 1.88679vw));
     z-index: 1;
     overflow: hidden;
 
     @include respond-to("md") {
       max-width: 50vw;
-      font-size: inherit;
+      // font-size: inherit;
     }
   }
 }

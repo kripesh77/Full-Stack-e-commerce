@@ -1,0 +1,25 @@
+.hero__title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: red; // Color for the masked text
+  mask-image: url("/mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 40px;
+  pointer-events: none;
+
+  .hero__title {
+    margin: 0;
+  }
+}
+
+.hero__title--base {
+  color: inherit; // Base text color
+}

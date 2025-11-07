@@ -39,7 +39,8 @@
     z-index: 20;
     margin: 0 spacing("sm") spacing("lg");
     font-family: $font-family-geo-bold;
-    font-size: $font-size-xl;
+    // font-size: $font-size-xl;
+    font-size: calc(2 * (7.92453px + 1.88679vw));
     font-weight: $font-weight-bold;
     line-height: 1.1;
     letter-spacing: 0.025em;
@@ -50,11 +51,7 @@
 
     @include respond-to("md") {
       margin: 0 spacing("lg") spacing("lg");
-      font-size: $font-size-2xl;
-    }
-
-    @include respond-to("lg") {
-      font-size: $font-size-4xl;
+      // font-size: $font-size-2xl;
     }
   }
 }
