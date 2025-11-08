@@ -157,7 +157,7 @@ function Home() {
           "--wrapper1-scale": 0.98,
           borderRadius: 32,
           duration: 0.8,
-          "--before-opacity1": 0.3,
+          "--before-opacity1": 0.4,
         },
         "<",
       );
@@ -313,7 +313,7 @@ function Home() {
 
       tl1.fromTo(
         splitText5.current.lines,
-        { "--position": "100% 0%" },
+        { "--position": "99% 0%" },
         {
           "--position": "0% 0%",
           duration: 0.28,
@@ -378,7 +378,7 @@ function Home() {
 
       tl2.fromTo(
         splitText6.current.lines,
-        { "--position": "100% 0%" },
+        { "--position": "99% 0%" },
         {
           "--position": "0% 0%",
           duration: 0.28,
@@ -430,7 +430,7 @@ function Home() {
 
       tl3.fromTo(
         splitText7.current.lines,
-        { "--position": "100% 0%" },
+        { "--position": "99% 0%" },
         {
           "--position": "0% 0%",
           duration: 0.28,
@@ -488,7 +488,7 @@ function Home() {
 
       tl4.fromTo(
         splitText8.current.lines,
-        { "--position": "100% 0%" },
+        { "--position": "99% 0%" },
         {
           "--position": "0% 0%",
           duration: 0.28,

@@ -9,7 +9,7 @@
     height: calc(100svh - 8.25rem);
     justify-content: center;
     overflow: hidden;
-    z-index: -1;
+    z-index: 100;
 
     &-img {
       @include flex-center;
@@ -33,7 +33,6 @@
     margin: spacing("sm");
     padding: spacing("2xl");
     border-radius: $border-radius-base;
-    background-image: url("/path-to-hero-image.jpg"); // Will be set dynamically
     background-size: cover;
     background-position: center;
 
@@ -53,21 +52,12 @@
     line-height: 1.1;
     letter-spacing: 0.01em;
     text-align: center;
-    color: $color-text-secondary;
+    color: $color-secondary;
     text-shadow: 0 2px 4px rgba($color-primary, 0.5);
     text-wrap: balance;
 
     @include respond-to("md") {
       margin: 0 spacing("lg") spacing("lg");
-      // font-size: calc(100 / var(--vw) * var(--multiplier));
-    }
-
-    @include respond-to("xl") {
-      // font-size: $font-size-2xl;
-    }
-
-    @include respond-to("lg") {
-      // font-size: $font-size-4xl;
     }
   }
 }

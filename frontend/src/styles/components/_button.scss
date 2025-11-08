@@ -14,7 +14,7 @@
     @include flex-center;
     width: fit-content;
     gap: $spacing-xs;
-    z-index: 2;
+    z-index: 50;
     @include body-small; // Using fluid typography mixin
     font-weight: $font-weight-bold;
 
