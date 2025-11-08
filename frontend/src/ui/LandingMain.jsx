@@ -85,7 +85,7 @@ function MaskText() {
       });
     }
   };
-  const size = isHovered ? 150 : 0;
+  const size = isHovered ? 200 : 0;
   return (
     <div
       ref={wrapperRef}
@@ -102,7 +102,7 @@ function MaskText() {
         }}
         transition={{ type: "tween", ease: "easeOut", duration: 0.2 }}
       >
-        <h1 className="mask__title">Atleast protect your head</h1>
+        <h1 className="mask__title">Gear Up With Dominance</h1>
       </motion.div>
       <h1 className="hero__title hero__title--base">Gear Up With Confidence</h1>
     </div>
