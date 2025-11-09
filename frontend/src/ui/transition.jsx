@@ -20,14 +20,14 @@ const transition = (OgComponent) => {
         gsap.to(spinner, {
           scaleY: 1,
           duration: 0,
-          delay: 0.5,
+          delay: 0.2,
         });
       } else {
         // while component is entering (slide-out phase) - scaling spinner down
         gsap.to(spinner, {
           scaleY: 0,
           duration: 0.3,
-          delay: 0.5
+          delay: 0.2
         });
       }
     }, [isPresent]);
