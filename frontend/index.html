@@ -54,26 +54,22 @@
     />
 
     <!-- Preload carousel/swiper images -->
-
-    <link
-      rel="preload"
-      href="/landing-page-helmet.jpg"
-      as="image"
-      type="image/jpg"
-    />
+    <link rel="preload" href="/landing-page-helmet.jpg" as="image" type="image/jpg" />
     <link rel="preload" href="/1d.png" as="image" type="image/png" />
     <link rel="preload" href="/2b.png" as="image" type="image/png" />
     <link rel="preload" href="/3.jpg" as="image" type="image/jpg" />
     <link rel="preload" href="/3a.jpg" as="image" type="image/jpg" />
   </head>
+
   <body>
-    <div id="preloader">
-      <div class="bars">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
+    <div id="preloader"></div>
+    
+    <!-- Spinner for page transitions - outside preloader so it's always accessible -->
+    <div class="c-loader_spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
 
     <div id="root"></div>
@@ -82,6 +78,7 @@
       html {
         background-color: #0f0f0f;
       }
+
       #preloader {
         position: fixed;
         inset: 0;
@@ -94,41 +91,63 @@
         transition: background 0.3s ease;
         padding: 2rem;
       }
-      .bars {
+
+      .c-loader_spinner {
+        position: fixed; /* Changed to fixed so it's always visible during transitions */
+        bottom: 0.625rem;
+        right: 0.625rem;
+        width: 3.125rem;
+        height: 1.7578125rem;
         display: flex;
-        position: relative;
-        z-index: 10000;
-        align-items: flex-end;
-        height: 40px;
-      }
-      .bar {
-        height: 100%;
-        width: 15px;
-        background: #fff;
-        animation: anim 0.6s infinite alternate
-          cubic-bezier(0.785, 0.135, 0.15, 0.86);
-        transform-origin: bottom;
-        transform: scaleY(0.1);
-      }
-      .bar:nth-child(1) {
-        animation-delay: 0s;
-      }
-      .bar:nth-child(2) {
-        animation-delay: 0.055s;
-      }
-      .bar:nth-child(3) {
-        animation-delay: 0.11s;
-      }
-      .bar:nth-child(4) {
-        animation-delay: 0.165s;
+        transform: scaleY(0);
+        transform-origin: center bottom;
+        transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+        z-index: 10000; /* Higher z-index to appear above everything */
+        perspective: 500px;
+        pointer-events: none; /* Don't interfere with clicks */
       }
 
-      @keyframes anim {
-        from {
-          transform: scaleY(0.1);
+      html:not(.is-loaded) .c-loader_spinner {
+        transform: scaleY(1);
+        transition-delay: 0.3s;
+        transition: all .3s;
+      }
+
+      .c-loader_spinner div {
+        flex-grow: 1;
+        background-color: #ffffff;
+        animation: loaderSpinnerCol 1s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        margin-left: -1px;
+      }
+
+      .c-loader_spinner div:nth-child(1) {
+        animation-delay: -0.1s;
+      }
+
+      .c-loader_spinner div:nth-child(2) {
+        animation-delay: -0.2s;
+      }
+
+      .c-loader_spinner div:nth-child(3) {
+        animation-delay: -0.3s;
+      }
+
+      .c-loader_spinner div:nth-child(4) {
+        animation-delay: -0.4s;
+      }
+
+      @keyframes loaderSpinnerCol {
+        0% {
+          transform: scale3d(1, 0.25, 1);
+          transform-origin: bottom center;
         }
-        to {
-          transform: scaleY(1);
+        50% {
+          transform: scale3d(1, 1, 1);
+          transform-origin: bottom center;
+        }
+        100% {
+          transform: scale3d(1, 0.25, 1);
+          transform-origin: bottom center;
         }
       }
     </style>
@@ -138,18 +157,13 @@
       (function () {
         let resourcesLoaded = false;
 
-        // Check if all critical resources are loaded
         function checkResourcesLoaded() {
-          // Check fonts
           const fontsReady =
             document.fonts.check("16px geograph-regular") &&
             document.fonts.check("16px geograph-bold") &&
             document.fonts.check("16px geograph-medium");
 
-          // Check images
-          const images = document.querySelectorAll(
-            'link[rel="preload"][as="image"]',
-          );
+          const images = document.querySelectorAll('link[rel="preload"][as="image"]');
           let imagesLoaded = true;
 
           if (images.length > 0) {
@@ -165,26 +179,22 @@
           return fontsReady && imagesLoaded;
         }
 
-        // Wait for fonts and images with a 3-second timeout
         const maxWait = 4000;
         const startTime = Date.now();
 
         function waitForResources() {
           if (checkResourcesLoaded() || Date.now() - startTime > maxWait) {
             resourcesLoaded = true;
-            // Resources loaded, React script will load
           } else {
             requestAnimationFrame(waitForResources);
           }
         }
 
-        // Start checking after fonts are ready
         document.fonts.ready
           .then(() => {
             waitForResources();
           })
           .catch(() => {
-            // Fallback if fonts.ready fails
             setTimeout(() => {
               resourcesLoaded = true;
             }, maxWait);

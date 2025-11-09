@@ -143,20 +143,13 @@ function App() {
     const preloader = document.getElementById("preloader");
     if (!preloader) return;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        gsap.to(".bars", {
-          animationPlayState: "paused",
-          transformOrigin: "bottom",
+        gsap.to(".c-loader_spinner", {
           scaleY: 0,
-          duration: 0.5,
-          ease: "power3.inOut",
-          onComplete: () => {
-            preloader.remove();
-          },
+          duration: 0.4,
+          // onComplete: () => {
+          //   preloader.remove();
+          // },
         });
-      });
-    });
   }, [isComponentLoaded, allResourcesLoaded]);
 
   if (!isReady) return null;

@@ -1,12 +1,37 @@
 //eslint-disable-next-line
-import { motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 import { useMobile } from "../hooks/useMediaQuery";
+import { useEffect } from "react";
+import gsap from "gsap";
 
 //eslint-disable-next-line
 const transition = (OgComponent) => {
   return () => {
     const isMobile = useMobile();
     const divCount = isMobile ? 2 : 5;
+    const isPresent = useIsPresent(); // Track if component is entering or exiting
+
+    useEffect(() => {
+      const spinner = document.querySelector(".c-loader_spinner");
+      if (!spinner) return;
+
+      if (!isPresent) {
+        // while component is exiting (slide-in phase) - scaling spinner up
+        gsap.to(spinner, {
+          scaleY: 1,
+          duration: 0,
+          delay: 0.5,
+          ease: "power2.out",
+        });
+      } else {
+        // while component is entering (slide-out phase) - scaling spinner down
+        gsap.to(spinner, {
+          scaleY: 0,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+      }
+    }, [isPresent]);
 
     return (
       <>
