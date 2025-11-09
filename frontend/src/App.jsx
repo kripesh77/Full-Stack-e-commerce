@@ -144,8 +144,7 @@ function App() {
     if (!preloader) return;
 
         gsap.to(".c-loader_spinner", {
-          scaleY: 0,
-          duration: 0.4,
+          "--sy": 0,
           // onComplete: () => {
           //   preloader.remove();
           // },

@@ -21,14 +21,13 @@ const transition = (OgComponent) => {
           scaleY: 1,
           duration: 0,
           delay: 0.5,
-          ease: "power2.out",
         });
       } else {
         // while component is entering (slide-out phase) - scaling spinner down
         gsap.to(spinner, {
           scaleY: 0,
-          duration: 0.5,
-          ease: "power2.inOut",
+          duration: 0.3,
+          delay: 0.5
         });
       }
     }, [isPresent]);
@@ -47,9 +46,9 @@ const transition = (OgComponent) => {
               animate={{ scaleY: 0 }}
               exit={{ scaleY: 1 }}
               transition={{
-                duration: 0.8,
+                duration: 0.3,
                 delay: (divCount - i) * 0.05,
-                ease: [0.68, -0.6, 0.32, 1.6],
+                ease: [0.215, 0.61, 0.355, 1],
               }}
             />
           ))}
@@ -65,9 +64,9 @@ const transition = (OgComponent) => {
               animate={{ scaleY: 0 }}
               exit={{ scaleY: 0 }}
               transition={{
-                duration: 0.8,
+                duration: 0.3,
                 delay: (divCount - i) * 0.05 + 0.2,
-                ease: [0.68, -0.6, 0.32, 1.6],
+                ease: [0.215, 0.61, 0.355, 1],
               }}
             ></motion.div>
           ))}
