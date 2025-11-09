@@ -86,7 +86,7 @@ function App() {
       return;
     }
 
-    const minDisplayTime = 1000;
+    const minDisplayTime = 3000;
     let resourcesReady = false;
 
     // Wait for images and fonts to load
@@ -144,10 +144,10 @@ function App() {
     if (!preloader) return;
 
         gsap.to(".c-loader_spinner", {
-          "--sy": 0,
-          // onComplete: () => {
-          //   preloader.remove();
-          // },
+          scaleY: 0,
+          onComplete: () => {
+            preloader.remove();
+          },
         });
   }, [isComponentLoaded, allResourcesLoaded]);
 

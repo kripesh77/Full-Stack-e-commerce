@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Buttonbig from "./Buttonbig";
 import AnimatedLink from "./AnimatedLink";
-import { useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 //eslint-disable-next-line
@@ -14,6 +14,8 @@ function LandingMain() {
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
+
+    
 
     mm.add("(min-width: 768px)", () => {
       gsap.fromTo(
@@ -53,7 +55,7 @@ function LandingMain() {
         <div className="hero__div-img" data-speed="clamp(0.5)">
           <div className="hero__container">
             {isMobile ? (
-              <h1 className="hero__title">Gear Up With Confidence</h1>
+              <h1 className="hero__title" >Gear Up With Confidence</h1>
             ) : (
               <MaskText />
             )}
