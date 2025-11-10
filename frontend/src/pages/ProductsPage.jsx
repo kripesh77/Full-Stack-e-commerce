@@ -8,6 +8,7 @@ import Loader from "../ui/Loader";
 import transition from "../ui/transition";
 
 function ProductPage() {
+  
   const [searchParams] = useSearchParams();
 
   const page = useMemo(() => {

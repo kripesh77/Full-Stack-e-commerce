@@ -4,6 +4,7 @@ import AuthLinks from "../features/user/AuthLinks";
 import transition from "../ui/transition";
 
 function Auth() {
+  
   return (
     <div className="auth">
       <div className="auth__container">

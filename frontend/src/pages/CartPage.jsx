@@ -4,6 +4,7 @@ import useCart from "../features/cart/useCart";
 import HeaderLogo from "../ui/HeaderLogo";
 import transition from "../ui/transition";
 function CartPage() {
+  
   const auth = JSON.parse(localStorage.getItem("auth") || "{}");
   const { data: cart } = useCart(auth?.token);
   return (

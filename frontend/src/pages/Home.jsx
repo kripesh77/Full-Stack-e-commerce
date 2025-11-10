@@ -23,6 +23,7 @@ function Home() {
   const splitText8 = useRef(null);
 
   useGSAP(function () {
+    
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {

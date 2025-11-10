@@ -9,7 +9,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import AuthContextProvider from "./context/AuthContextProvider";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { AnimatePresence } from "framer-motion";
-import gsap from "gsap";
+// import gsap from "gsap";
 
 // Lazy load all page components
 const AppLayout = lazy(() => import("./pages/AppLayout"));
@@ -143,12 +143,7 @@ function App() {
     const preloader = document.getElementById("preloader");
     if (!preloader) return;
 
-        gsap.to(".c-loader_spinner", {
-          scaleY: 0,
-          onComplete: () => {
-            preloader.remove();
-          },
-        });
+        document.querySelector("html").classList.add("is-loaded");
   }, [isComponentLoaded, allResourcesLoaded]);
 
   if (!isReady) return null;
