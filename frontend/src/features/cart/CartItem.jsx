@@ -6,7 +6,6 @@ function CartItem({
   mutate,
   isPending,
 }) {
-  console.log(productId);
 
   function handleInc() {
     const { token } = JSON.parse(localStorage.getItem("auth"));
