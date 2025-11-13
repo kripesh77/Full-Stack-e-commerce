@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Buttonbig from "./Buttonbig";
 import AnimatedLink from "./AnimatedLink";
-import {  useRef, useState } from "react";
+import {  useRef, useState, memo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 //eslint-disable-next-line
@@ -73,7 +73,7 @@ function LandingMain() {
   );
 }
 
-function MaskText() {
+const MaskText = memo(function MaskText() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const wrapperRef = useRef(null);
@@ -104,11 +104,11 @@ function MaskText() {
         }}
         transition={{ type: "tween", ease: "easeOut", duration: 0.2 }}
       >
-        <h1 className="mask__title">Gear Up With Dominance</h1>
+        <h1 className="mask__title">What? Waiting for a crash?</h1>
       </motion.div>
       <h1 className="hero__title hero__title--base">Gear Up With Confidence</h1>
     </div>
   );
-}
+});
 
 export default LandingMain;
