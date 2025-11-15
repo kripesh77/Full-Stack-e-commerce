@@ -11,7 +11,7 @@ function CartPage() {
     <div className="cartPage">
       <HeaderLogo classname="cartPage__header--logo" />
       <div className="cartPage__text">SHOPPING CART</div>
-      {!cart?.cart ? (
+      {!cart?.cart?.length ? (
         <div className="empty-cart">Your Cart is empty, try adding some !</div>
       ) : (
         <div className="cartPage__content">
