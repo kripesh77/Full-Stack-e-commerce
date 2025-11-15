@@ -13,41 +13,44 @@
     &--logo {
       font-family: $font-family-logo;
       font-weight: $font-weight-bold;
-      color: #111;
-      font-size: $font-size-xl; // Now fluid: clamp(18px → 24px)
-      margin: 5px;
+      color: $color-primary;
+      font-size: $font-size-base;
+      margin: $spacing-base;
       text-align: center;
-      text-shadow: 0px 2px 5px rgba($color-primary, 0.8);
-      @include respond-to("lg") {
-        font-size: 1.7rem;
+      transition: opacity $transition-fast;
+
+      &:hover {
+        opacity: 0.7;
       }
-      @include respond-to("xl") {
-        font-size: 2rem;
+
+      @include respond-to("sm") {
+        font-size: $font-size-lg;
+      }
+
+      @include respond-to("md") {
+        font-size: $font-size-xl;
       }
     }
   }
 
   &__text {
-    font-size: min(1.2rem, 100svw);
     font-family: $font-family-geo-bold;
-    font-weight: 600;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
     text-align: center;
-    margin-top: 10px;
+    margin-top: $spacing-sm;
+    color: $color-primary;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 
-    @include respond-to("xs") {
-      font-size: 1.7rem;
-    }
     @include respond-to("sm") {
-      font-size: 2rem;
+      font-size: $font-size-xl;
+      margin-top: $spacing-base;
+      letter-spacing: -0.02em;
     }
+
     @include respond-to("md") {
-      font-size: 2.25rem;
-    }
-    @include respond-to("lg") {
-      font-size: 2.5rem;
-    }
-    @include respond-to("xl") {
-      font-size: 3rem;
+      font-size: $font-size-2xl;
     }
   }
 

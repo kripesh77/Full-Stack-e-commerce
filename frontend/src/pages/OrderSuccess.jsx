@@ -34,7 +34,7 @@ function OrderSuccess() {
             Continue Shopping
           </button>
           <button
-            onClick={() => navigate("/order/history")}
+            onClick={() => navigate("/orders")}
             className="payment-result__btn payment-result__btn--secondary"
           >
             View Orders

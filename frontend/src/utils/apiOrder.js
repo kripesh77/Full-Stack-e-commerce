@@ -50,5 +50,7 @@ export async function getOrderHistory(token) {
     throw new Error(error.message || "Failed to get order history");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  return data;
 }

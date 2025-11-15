@@ -1,0 +1,546 @@
+// ==========================================================================
+// ORDERS PAGE
+// ==========================================================================
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins"; 
+
+.orders-page {
+  min-height: 100vh;
+  background-color: $color-secondary;
+  padding: 0;
+
+  &__header { 
+    z-index: 10;
+    border-bottom: 1px solid rgba($color-primary, 0.08);
+    padding: $spacing-base $spacing-base;
+    backdrop-filter: blur(8px);
+    background-color: $color-secondary;
+
+    @include respond-to("sm") {
+      padding: $spacing-lg $spacing-base;
+    }
+
+    @include respond-to("md") {
+      padding: $spacing-xl $spacing-2xl;
+    }
+  }
+
+  &__logo {
+    font-family: $font-family-logo;
+    font-size: $font-size-base;
+    color: $color-primary;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: $spacing-sm;
+    transition: opacity $transition-fast;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    @include respond-to("sm") {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-base;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__title-section {
+    max-width: 1200px;
+  }
+
+  &__title {
+    font-family: $font-family-geo-bold;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+
+    @include respond-to("sm") {
+      font-size: $font-size-xl;
+      letter-spacing: -0.02em;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__subtitle {
+    font-family: $font-family-primary;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin: 4px 0 0;
+
+    @include respond-to("sm") {
+      font-size: $font-size-sm;
+      margin: $spacing-xs 0 0;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// ==========================================================================
+// ORDERS CONTENT
+// ==========================================================================
+
+.orders {
+  &__content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: $spacing-base $spacing-base $spacing-2xl;
+
+    @include respond-to("sm") {
+      padding: $spacing-lg $spacing-base $spacing-3xl;
+    }
+
+    @include respond-to("md") {
+      padding: $spacing-2xl $spacing-xl $spacing-3xl;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-base;
+
+    @include respond-to("sm") {
+      gap: $spacing-lg;
+    }
+
+    @include respond-to("md") {
+      gap: $spacing-xl;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  &__error {
+    text-align: center;
+    padding: $spacing-3xl $spacing-lg;
+    color: $color-error;
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    background-color: rgba($color-error, 0.05);
+    border-radius: $border-radius-base;
+    margin: $spacing-xl;
+
+    @include respond-to("md") {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-3xl $spacing-lg;
+    color: $color-text-muted;
+    font-family: $font-family-primary;
+    background-color: $color-white;
+    border-radius: $border-radius-base;
+    margin: $spacing-xl;
+    box-shadow: 0 1px 3px rgba($color-primary, 0.08);
+
+    p {
+      margin: $spacing-sm 0;
+      font-size: $font-size-base;
+      line-height: 1.6;
+
+      &:first-child {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-medium;
+        color: $color-text;
+        margin-bottom: $spacing-base;
+      }
+
+      @include respond-to("md") {
+        font-size: $font-size-lg;
+
+        &:first-child {
+          font-size: $font-size-xl;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// ORDER ITEM
+// ==========================================================================
+
+.order-item {
+  background: $color-white;
+  border-radius: $border-radius-sm;
+  padding: $spacing-base;
+  border: 1px solid rgba($color-primary, 0.08);
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: rgba($color-primary, 0.15);
+    box-shadow: 0 4px 12px rgba($color-primary, 0.06);
+  }
+
+  @include respond-to("sm") {
+    padding: $spacing-lg;
+    border-radius: $border-radius-base;
+  }
+
+  @include respond-to("md") {
+    padding: $spacing-xl;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-base;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba($color-primary, 0.06);
+
+    @include respond-to("sm") {
+        flex-direction: row;
+      align-items: center;
+      gap: $spacing-base;
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-base;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-family: $font-family-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+    
+    span{
+        
+        font-size: $font-size-xs;
+    }
+  }
+
+  &__date {
+    font-family: $font-family-primary;
+    font-size: $font-size-sm;
+    color: $color-primary;
+    margin: 0;
+    font-weight: $font-weight-medium;
+
+    @include respond-to("sm") {
+      font-size: $font-size-base;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__badges {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    @include respond-to("xs") {
+      gap: $spacing-base;
+    }
+  }
+
+  &__badge-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__badge-label {
+    font-family: $font-family-primary;
+    font-size: 11px;
+    color: $color-text-muted;
+    font-weight: $font-weight-regular;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+
+    @include respond-to("md") {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-family: $font-family-primary;
+    font-size: 11px;
+    font-weight: $font-weight-medium;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    white-space: nowrap;
+
+    @include respond-to("md") {
+      padding: 5px 12px;
+      font-size: $font-size-xs;
+    }
+
+    &--success,
+    &--completed,
+    &--delivered {
+      background-color: rgba($color-success, 0.08);
+      color: darken($color-success, 20%);
+    }
+
+    &--pending {
+      background-color: rgba(#fbbf24, 0.08);
+      color: #b45309;
+    }
+
+    &--failed {
+      background-color: rgba($color-error, 0.08);
+      color: darken($color-error, 15%);
+    }
+
+    &--shipped {
+      background-color: rgba(#3b82f6, 0.08);
+      color: #1e40af;
+    }
+  }
+
+  &__products {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__products-title {
+    font-family: $font-family-primary;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin: 0 0 $spacing-base 0;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    @include respond-to("md") {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__products-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-base;
+
+    .order-item__product:not(:last-child){
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba($color-primary, 0.06);
+    }
+  }
+
+  &__product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-base;
+    padding: 0;
+
+    @include respond-to("md") {
+      gap: $spacing-lg;
+    }
+  }
+
+  &__product-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-base;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: $border-radius-sm;
+    flex-shrink: 0;
+    background-color: #fafafa;
+    border: 1px solid rgba($color-primary, 0.06);
+
+    @include respond-to("sm") {
+      width: 60px;
+      height: 60px;
+    }
+
+    @include respond-to("md") {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  &__product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__product-name {
+    font-family: $font-family-primary;
+    font-size: $font-size-xs;
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: no-wrap;
+    text-overflow: ellipsis;
+    
+
+    @include respond-to("sm") {
+      font-size: $font-size-sm;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__product-quantity {
+    font-family: $font-family-primary;
+    font-size: 10px;
+    color: $color-text-muted;
+    font-weight: $font-weight-regular;
+
+    @include respond-to("sm") {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__product-price {
+    font-family: $font-family-geo-bold;
+    font-size: $font-size-sm;
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+    min-width: fit-content;
+    flex-shrink: 0;
+
+    @include respond-to("sm") {
+      font-size: $font-size-base;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-top: $spacing-base;
+    border-top: 1px solid rgba($color-primary, 0.06);
+
+    @include respond-to("xs") {
+        flex-direction: row;
+      gap: $spacing-base;
+      padding-top: $spacing-lg;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-base;
+  }
+
+  &__total-label {
+    font-family: $font-family-primary;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    @include respond-to("md") {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__total-amount {
+    font-family: $font-family-geo-bold;
+    font-size: $font-size-lg;
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.01em;
+
+    @include respond-to("sm") {
+      font-size: $font-size-2lg;
+      letter-spacing: -0.02em;
+    }
+
+    @include respond-to("md") {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__transaction {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__transaction-label {
+    font-family: $font-family-primary;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  &__transaction-code {
+    font-family: $font-family-primary;
+    color: $color-primary;
+    background-color: rgba($color-primary, 0.04);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: $font-size-xs;
+    word-break: break-all;
+    font-weight: $font-weight-medium;
+    border: 1px solid rgba($color-primary, 0.06);
+
+    @include respond-to("md") {
+      font-size: $font-size-sm;
+    }
+  }
+}

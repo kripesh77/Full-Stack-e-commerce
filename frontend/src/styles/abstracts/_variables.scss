@@ -35,9 +35,12 @@ $color-accent: #1e40af; // blue-600
 $color-background: #ece9e2;
 $color-background-secondary: #f1f5f9;
 $color-text-primary: #0f0f0f;
+$color-text: #0f0f0f;
 $color-text-secondary: #fff;
 $color-text-muted: #6b7280;
 $color-transition-background: #0f0f0f;
+$color-error: #ef4444;
+$color-success: #10b981;
 
 // Typography
 
@@ -78,6 +81,7 @@ $spacing-3xl: 4rem;
 // Border radius
 $border-radius-sm: 8px;
 $border-radius-base: 16px;
+$border-radius-md: 18px;
 $border-radius-lg: 20px;
 $border-radius-xl: 32px;
 $border-radius-full: 50px;

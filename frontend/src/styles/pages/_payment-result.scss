@@ -34,11 +34,11 @@
     align-items: center;
 
     &--success {
-      color: #10b981; // Green
+      color: $color-success; // Green
     }
 
     &--failure {
-      color: #ef4444; // Red
+      color: $color-error; // Red
     }
   }
 

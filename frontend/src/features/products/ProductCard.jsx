@@ -17,7 +17,6 @@ function ProductCard({
   const { 0: a } = cartProducts.filter((item) => item?.productId._id === id);
 
   const isInCart = a?.productId._id === id;
-  console.log(cartProducts, id);
 
   function handleInc() {
     if (isAuthenticated) {
