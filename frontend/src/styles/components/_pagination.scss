@@ -39,5 +39,11 @@
     &:hover {
       text-decoration: underline;
     }
+
+    &:disabled{
+      cursor: not-allowed;
+      text-decoration: none;
+      color: rgba($color: $color-primary, $alpha: 0.5)
+    }
   }
 }
