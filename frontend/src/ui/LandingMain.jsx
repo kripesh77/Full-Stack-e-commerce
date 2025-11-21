@@ -106,7 +106,7 @@ const MaskText = memo(function MaskText() {
       >
         <h1 className="mask__title">What? Waiting for a crash?</h1>
       </motion.div>
-      <h1 className="hero__title hero__title--base">Gear Up With Confidence</h1>
+      <h1 className="hero__title hero__title--base noselect">Gear Up With Confidence</h1>
     </div>
   );
 });
