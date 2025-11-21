@@ -25,7 +25,7 @@ function AppLayout() {
     // }
 
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 1.2,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,

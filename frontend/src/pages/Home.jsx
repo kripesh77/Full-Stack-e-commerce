@@ -138,7 +138,7 @@ function Home() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".landing-secondary",
-          scrub: 2,
+          scrub: 1.2,
           start: "top top",
           end: "+=1500%",
           pin: true,
