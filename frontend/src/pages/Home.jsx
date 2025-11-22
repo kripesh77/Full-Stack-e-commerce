@@ -138,7 +138,7 @@ function Home() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".landing-secondary",
-          scrub: 1.2,
+          scrub: 1.5,
           start: "top top",
           end: "+=1500%",
           pin: true,
@@ -177,7 +177,7 @@ function Home() {
         {
           yPercent: 0,
           scale: 1,
-          "--wrapper2-scale": 0.7,
+          "--wrapper2-scale": 0.6,
         },
         {
           yPercent: -100,
@@ -205,7 +205,7 @@ function Home() {
         {
           yPercent: -100,
           scale: 1,
-          "--wrapper3-scale": 0.7,
+          "--wrapper3-scale": 0.6,
         },
         {
           "--wrapper3-scale": 1,
@@ -243,7 +243,7 @@ function Home() {
         {
           yPercent: -200,
           scale: 1,
-          "--wrapper4-scale": 0.7,
+          "--wrapper4-scale": 0.6,
         },
         {
           "--wrapper4-scale": 1,
