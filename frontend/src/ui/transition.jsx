@@ -6,49 +6,44 @@ import { useEffect } from "react";
 //eslint-disable-next-line
 const transition = (OgComponent) => {
   return () => {
+    const isPresent = useIsPresent();
+    
     useEffect(function(){
       document.querySelector("html").classList.add("is-loaded");
     }, []);
+    
+    useEffect(() => {
+      if (!isPresent) {
+        document.querySelector("html").classList.remove("is-loaded");
+      }
+    }, [isPresent]);
+    
     const isMobile = useMobile();
     const divCount = isMobile ? 2 : 5;
-
-    // Handler to remove .is-loaded when slide-in starts (page exit)
-    const handleSlideInEnd = () => {
-      document.querySelector("html").classList.remove("is-loaded");
-    };
-
-    // Handler to add .is-loaded when slide-out starts (page enter)
-    // const handleSlideOutStart = () => {
-    //   document.querySelector("html").classList.add("is-loaded");
-    // };
 
     return (
       <>
         <OgComponent />
 
         {/* Slide-in animation with staggered divs */}
-        <div className="slide-in">
-          {[...Array(divCount)].map((_, i) => (
-            <motion.div
-              key={`slide-in-${i}`}
-              className="slide-in-child"
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 0 }}
-              exit={{ scaleY: 1 }}
-              transition={{
-                duration: 0.3,
-                delay: (divCount - i) * 0.05,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-              onAnimationStart={(definition) => {
-                // Only trigger on exit animation (when scaleY becomes 1)
-                if (definition.scaleY === 1 && i === 0) {
-                  handleSlideInEnd();
-                }
-              }}
-            />
-          ))}
-        </div>
+        <motion.div
+          initial={false}
+          exit={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 1000 }}
+        >
+          <div className="slide-in" data-exiting={!isPresent ? "true" : "false"}>
+            {[...Array(divCount)].map((_, i) => (
+              <div
+                key={`slide-in-${i}`}
+                className="slide-in-child"
+                style={{
+                  transitionDelay: `${(divCount - i) * 0.05}s`,
+                }}
+              />
+            ))}
+          </div>
+        </motion.div>
 
         {/* Slide-out animation with staggered divs */}
         <div className="slide-out">

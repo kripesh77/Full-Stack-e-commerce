@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import transition from "../ui/transition";
 
 function OrderSuccess() {
   const [searchParams] = useSearchParams();
@@ -45,4 +46,6 @@ function OrderSuccess() {
   );
 }
 
-export default OrderSuccess;
+const OrderSuccessWithTransition = transition(OrderSuccess);
+OrderSuccessWithTransition.displayName = "OrderSuccess";
+export default OrderSuccessWithTransition;

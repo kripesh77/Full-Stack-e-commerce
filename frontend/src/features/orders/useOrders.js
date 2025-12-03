@@ -9,7 +9,6 @@ export default function useOrders(token) {
     staleTime: 0,
   });
 
-  console.log(data?.data);
 
   return {
     orders: data?.data || [],

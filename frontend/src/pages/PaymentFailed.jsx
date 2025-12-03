@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { FaTimesCircle } from "react-icons/fa";
+import transition from "../ui/transition";
 
 function PaymentFailed() {
   const [searchParams] = useSearchParams();
