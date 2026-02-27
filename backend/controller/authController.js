@@ -124,11 +124,14 @@ exports.updateMyPassword = catchAsyncError(async (req, res, next) => {
 
   const updatedUser = await user.save();
 
+  const token = signToken(user._id);
+
   //to avoid responding with password, we've set password to undefined.
   updatedUser.password = undefined;
 
   res.status(200).json({
     status: "success",
+    token,
     data: {
       user: updatedUser,
     },

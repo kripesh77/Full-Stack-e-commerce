@@ -23,26 +23,34 @@ export function useUser() {
 export function useUpdateUser() {
   const queryClient = useQueryClient();
 
-  const { mutate: updateUser, isPending: isUpdating } = useMutation({
+  const { mutateAsync, isPending: isUpdating } = useMutation({
     mutationFn: updateUserDataApi,
     onSuccess: ({ user }) => {
-      toast.success("User account successfully updated");
       queryClient.setQueryData(["user"], user);
     },
-    onError: (err) => toast.error(err.message),
   });
+
+  const updateUser = (data) =>
+    toast.promise(mutateAsync(data), {
+      loading: "updating...",
+      success: "user account successfully updated",
+      error: (err) => err.message,
+    });
 
   return { updateUser, isUpdating };
 }
 
 export function useUpdatePassword() {
-  const { mutate: updatePassword, isPending: isUpdatingPassword } = useMutation({
+  const { mutateAsync, isPending: isUpdatingPassword } = useMutation({
     mutationFn: updateUserPasswordApi,
-    onSuccess: () => {
-      toast.success("Password updated successfully");
-    },
-    onError: (err) => toast.error(err.message),
   });
+
+  const updatePassword = (data) =>
+    toast.promise(mutateAsync(data), {
+      loading: "updating...",
+      success: "password updated successfully",
+      error: (err) => err.message,
+    });
 
   return { updatePassword, isUpdatingPassword };
 }

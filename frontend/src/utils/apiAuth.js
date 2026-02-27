@@ -103,5 +103,12 @@ export async function updateUserPassword({
     throw new Error(error.message || "Failed to update password");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  localStorage.setItem(
+    "auth",
+    JSON.stringify({ role: "user", token: data.token }),
+  );
+
+  return data;
 }
