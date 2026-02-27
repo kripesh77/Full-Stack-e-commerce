@@ -24,12 +24,11 @@ exports.updateMe = catchAsyncError(async (req, res, next) => {
   // we should have separate route to change our password
 
   if (req.body.password || req.body.confirmPassword) {
-    console.log("hello");
     return next(
       new AppError(
         "Cannot update password through route. Please use /api/v1/users/updateMyPassword route",
-        400
-      )
+        400,
+      ),
     );
   }
 
@@ -40,7 +39,7 @@ exports.updateMe = catchAsyncError(async (req, res, next) => {
   const updatedUserInfo = await UserModel.findByIdAndUpdate(
     req.user._id,
     filteredBody,
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
 
   res.status(200).json({ status: "success", data: { user: updatedUserInfo } });

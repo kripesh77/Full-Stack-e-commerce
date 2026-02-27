@@ -8,7 +8,7 @@ export function useAuth({ signin = false, signup = false }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setIsAuthenticatedUser } = useAuthContext();
-  const result = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: signin ? signinApi : signup && signupApi,
     onSuccess: (data) => {
       localStorage.setItem(
@@ -16,14 +16,18 @@ export function useAuth({ signin = false, signup = false }) {
         JSON.stringify({ role: "user", token: data.token }),
       );
       queryClient.setQueryData(["user"], data.user);
-      toast.success(`${signin ? "Signin successful" : "Signup successful"}`);
       setIsAuthenticatedUser(true);
-      setTimeout(() => navigate("/products"), 1000);
-    },
-    onError: (error) => {
-      toast.error(error.message);
+      setTimeout(() => navigate("/products"), 500);
     },
   });
 
-  return result;
+  const mutate = (data) =>
+    toast.promise(mutateAsync(data), {
+      loading: "loading...",
+      success: (data) =>
+        data.message || `${signin ? "Signin" : "Signup"} successful`,
+      error: (error) => error.message,
+    });
+
+  return { mutate, isPending };
 }

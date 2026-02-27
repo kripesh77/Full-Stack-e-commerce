@@ -9,7 +9,6 @@ exports.signup = catchAsyncError(async (req, res, next) => {
   const { name, email, password, confirmPassword, passwordChangedAt, role } =
     req.body;
 
-  console.log(req.body);
   //2. CREATE NEW USER
   const newUser = await UserModel.create({
     name,
@@ -60,7 +59,7 @@ exports.protect = catchAsyncError(async (req, res, next) => {
   }
   if (!token) {
     return next(
-      new AppError("You're not logged in! Please login to continue", 401)
+      new AppError("You're not logged in! Please login to continue", 401),
     );
   }
 
@@ -71,19 +70,18 @@ exports.protect = catchAsyncError(async (req, res, next) => {
   const freshUser = await UserModel.findById(decoded.id);
   if (!freshUser)
     return next(
-      new AppError("The token belonging to the user doesn't exists", 401)
+      new AppError("The token belonging to the user doesn't exists", 401),
     );
 
   //4.CHECK IF USER CHANGED THE PASSWORD AFTER THE TOKEN WAS ISSUED
   if (freshUser.changedPasswordAfter(decoded.iat)) {
     return next(
-      new AppError("Password is recently changed. Please login again", 401)
+      new AppError("Password is recently changed. Please login again", 401),
     );
   }
 
   //GRANT ACCESS TO PROTECTED ROUTE
   req.user = freshUser;
-  console.log(freshUser);
   next();
 });
 
@@ -93,8 +91,8 @@ exports.restrictTo = (...roles) => {
       return next(
         new AppError(
           "You don't have the permission to perform this action",
-          403
-        )
+          403,
+        ),
       );
     next();
   };
@@ -106,8 +104,8 @@ exports.updateMyPassword = catchAsyncError(async (req, res, next) => {
     return next(
       new AppError(
         "Please provide all field (currentPassword, password and confirmPassword) to update your password",
-        400
-      )
+        400,
+      ),
     );
 
   //1. GET USER FROM COLLECTOIN
@@ -116,7 +114,7 @@ exports.updateMyPassword = catchAsyncError(async (req, res, next) => {
   //2. COMPARE AND CHECK IF CURRENT PASSWORD IS CORRECT OR NOT
   if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
     return next(
-      new AppError("Incorrect current password! Password cannot be updated")
+      new AppError("Incorrect current password! Password cannot be updated"),
     );
   }
 

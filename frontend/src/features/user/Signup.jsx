@@ -15,7 +15,6 @@ function Signup() {
   const { mutate: signup, isPending } = useAuth({ signup: true });
 
   function onSubmit(data) {
-    console.log(data);
     signup(data);
   }
 

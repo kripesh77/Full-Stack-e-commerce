@@ -4,12 +4,9 @@ const { catchAsyncError } = require("../utils/catchAsyncError");
 const AppError = require("../utils/appError");
 
 exports.getCart = catchAsyncError(async (req, res, next) => {
-  console.log(req.user._id);
   const cart = await CartModel.findOne({ creatorId: req.user._id }).populate(
-    "products.productId"
+    "products.productId",
   );
-
-  console.log(cart?.products);
 
   return res.status(200).json({
     status: "success",
