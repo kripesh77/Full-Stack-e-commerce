@@ -23,9 +23,9 @@ export function useAuth({ signin = false, signup = false }) {
 
   const mutate = (data) =>
     toast.promise(mutateAsync(data), {
-      loading: "loading...",
+      loading: `signing ${signin ? "in" : "up"}...`,
       success: (data) =>
-        data.message || `${signin ? "Signin" : "Signup"} successful`,
+        data.message || `${signin ? "signin" : "signup"} successful`,
       error: (error) => error.message,
     });
 

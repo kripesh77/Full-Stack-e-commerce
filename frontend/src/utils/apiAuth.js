@@ -15,7 +15,7 @@ export async function signin({ email, password }) {
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || "Signin failed");
+    throw new Error(error.message || "signin failed");
   }
 
   return response.json();
@@ -32,7 +32,7 @@ export async function signup({ name, email, password, confirmPassword }) {
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || "Signin failed");
+    throw new Error(error.message || "signup failed");
   }
 
   return response.json();
@@ -91,7 +91,11 @@ export async function updateUserPassword({
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ currentPassword:passwordCurrent, password, confirmPassword: passwordConfirm }),
+    body: JSON.stringify({
+      currentPassword: passwordCurrent,
+      password,
+      confirmPassword: passwordConfirm,
+    }),
   });
 
   if (!response.ok) {
