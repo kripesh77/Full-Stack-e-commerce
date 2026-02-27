@@ -33,7 +33,7 @@ const Head = memo(function Head() {
       </div>
       <div className="navigation__actions">
         <IoSearchOutline title="Search" />
-        <Link to="/auth">
+        <Link to="/account">
           <GoPerson title="Account" />
         </Link>
         <Link to="/cart" className="navigation__cart">

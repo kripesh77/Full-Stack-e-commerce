@@ -22,6 +22,7 @@ const Signup = lazy(() => import("./features/user/Signup"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
 const PaymentFailed = lazy(() => import("./pages/PaymentFailed"));
 const OrdersPage = lazy(() => import("./pages/OrdersPage"));
+const Account = lazy(() => import("./features/user/Account"));
 
 function AppRouter({ onComponentLoaded }) {
   const { isAuthenticated } = useAuthContext();
@@ -72,6 +73,17 @@ function AppRouter({ onComponentLoaded }) {
           element={
             isAuthenticated ? (
               <OrdersPage />
+            ) : (
+              <Navigate replace to="/auth/signin" />
+            )
+          }
+        />
+
+        <Route
+          path="/account"
+          element={
+            isAuthenticated ? (
+              <Account />
             ) : (
               <Navigate replace to="/auth/signin" />
             )

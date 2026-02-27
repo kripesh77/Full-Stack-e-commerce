@@ -22,7 +22,7 @@ function LandingMain() {
         ".hero__div-img",
         { yPercent: 0 },
         {
-          yPercent: 100,
+          yPercent: 50,
           scrollTrigger: {
             trigger: "html",
             start: "top top",
@@ -35,7 +35,7 @@ function LandingMain() {
         ".hero__container",
         { yPercent: 0 },
         {
-          yPercent: -50,
+          yPercent: -100,
           scrollTrigger: {
             trigger: "html",
             start: "top top",
@@ -77,14 +77,20 @@ const MaskText = memo(function MaskText() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const wrapperRef = useRef(null);
+  const lastUpdateTime = useRef(0);
 
   const handleMouseMove = (e) => {
+    const now = Date.now();
+    const timeSinceLastUpdate = now - lastUpdateTime.current;
+    if (timeSinceLastUpdate < 16.67) return;
+    
     if (wrapperRef.current) {
       const rect = wrapperRef.current.getBoundingClientRect();
       setMousePosition({
         x: e.clientX - rect.left + 200, // Adding padding offset
         y: e.clientY - rect.top + 200, // Adding padding offset
       });
+      lastUpdateTime.current = now;
     }
   };
   const size = isHovered ? 200 : 0;
