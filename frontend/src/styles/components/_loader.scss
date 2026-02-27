@@ -1,5 +1,6 @@
 .loader {
   width: 45px;
+  display: inline-block;
   aspect-ratio: 0.75;
   --c: no-repeat linear-gradient(#333 0 0);
   background:
@@ -16,7 +17,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(226, 232, 240, 0.2);
     backdrop-filter: blur(4px);
   }
 }

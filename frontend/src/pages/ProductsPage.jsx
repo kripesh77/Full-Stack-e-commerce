@@ -8,7 +8,6 @@ import Loader from "../ui/Loader";
 import transition from "../ui/transition";
 
 function ProductPage() {
-  
   const [searchParams] = useSearchParams();
 
   const page = useMemo(() => {
@@ -52,7 +51,7 @@ function ProductPage() {
   }
 
   // Loading state
-  if (isPending) {
+  if (!isPending) {
     return (
       <main>
         <ProductHero />
