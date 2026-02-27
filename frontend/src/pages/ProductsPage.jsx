@@ -51,7 +51,7 @@ function ProductPage() {
   }
 
   // Loading state
-  if (!isPending) {
+  if (isPending) {
     return (
       <main>
         <ProductHero />
