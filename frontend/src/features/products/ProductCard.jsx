@@ -88,7 +88,7 @@ function ProductCard({
         <div className="product__card--actions" onClick={handleInc}>
           <Button
             className="button--small product__card--button product__card--button-full"
-            disabled={outOfStock}
+            disabled={isLoading || outOfStock}
           >
             Add to cart
           </Button>
