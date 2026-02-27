@@ -4,18 +4,23 @@ import toast from "react-hot-toast";
 
 function useMutateCart() {
   const queryClient = useQueryClient();
-  return useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: addOrRemoveCart,
-    onSuccess: (data) => {
-      toast.success(data.message);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["cart"],
       });
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
   });
+
+  const mutate = (data) =>
+    toast.promise(mutateAsync(data), {
+      loading: "loading...",
+      success: (data) => data.message,
+      error: (error) => error.message,
+    });
+
+  return { mutate, isPending };
 }
 
 export default useMutateCart;
