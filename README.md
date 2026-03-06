@@ -56,6 +56,9 @@ A modern, full-stack e-commerce application built with Node.js/Express backend a
 - Cart persistence per user
 - Automatic cart cleanup after order
 
+#### Payment Integration
+- Integrated the payment system of esewa
+
 #### Order System
 
 - Complete order processing
@@ -71,7 +74,7 @@ A modern, full-stack e-commerce application built with Node.js/Express backend a
 - Input validation middleware
 - Protected routes with authentication
 
-### Frontend Features 🚧 (In Development)
+### Frontend Features 🚧
 
 - Modern responsive layout with ECOM branding
 - Product browsing and search
@@ -224,19 +227,6 @@ The backend will run on `http://localhost:5000`
    npm run dev
    ```
 
-## 🎯 Upcoming Frontend Features
-
-- [ ] User registration and login forms
-- [ ] Product catalog with search and filtering
-- [ ] Product detail pages
-- [ ] Shopping cart interface
-- [ ] Checkout process
-- [ ] Order confirmation and tracking
-- [ ] User dashboard
-- [ ] Seller dashboard (if implemented)
-- [ ] Responsive mobile design
-- [ ] Payment integration (future)
-
 ## 🤝 Contributing
 
 This is a learning project. Feel free to explore the code, suggest improvements, or contribute new features!
@@ -247,4 +237,4 @@ This project is for educational purposes. Feel free to use and modify as needed.
 
 ---
 
-**Note**: The frontend is currently under development. The backend is fully functional and ready for integration with any frontend framework or for API testing with tools like Postman or Insomnia.
+**Note**: The frontend is currently under development. The backend is fully functional and ready for integration with any frontend framework or for API testing with tools like Postman.
