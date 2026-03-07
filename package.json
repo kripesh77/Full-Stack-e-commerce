@@ -10,5 +10,8 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "goey-toast": "^0.3.0"
   }
 }

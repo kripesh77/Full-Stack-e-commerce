@@ -15,7 +15,7 @@ function useMutateCart() {
 
   const mutate = (data) =>
     toast.promise(mutateAsync(data), {
-      loading: "loading...",
+      loading: "processing...",
       success: (data) => data.message,
       error: (error) => error.message,
     });

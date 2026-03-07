@@ -50,13 +50,8 @@ const server = app.listen(port, "0.0.0.0", () => {
       `https://${process.env.RENDER_SERVICE_NAME}.onrender.com`;
 
     console.log(`⏰ Self-ping enabled for: ${selfPingUrl}`);
-    let pingCount = 0;
 
     const pingServer = () => {
-      pingCount++;
-      if (pingCount < 5) {
-        setTimeout(pingServer, 5 * 60 * 1000);
-      }
       https
         .get(`${selfPingUrl}/api/v1/users/health`, (res) => {
           console.log(`✅ Self-ping successful: ${res.statusCode}`);
@@ -66,8 +61,8 @@ const server = app.listen(port, "0.0.0.0", () => {
         });
     };
 
-    // Ping every 5 minutes (300000ms)
-    setTimeout(pingServer, 5 * 60 * 1000);
+    // Ping every 10 minutes (300000ms)
+    setInterval(pingServer, 10 * 60 * 1000);
   }
 });
 
