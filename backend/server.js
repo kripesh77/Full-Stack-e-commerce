@@ -38,32 +38,6 @@ mongoose
 const server = app.listen(port, "0.0.0.0", () => {
   console.log(`🚀 App running on port ${port}...`);
   console.log(`📦 Environment: ${process.env.NODE_ENV || "development"}`);
-
-  // Self-ping to prevent Render from suspending (only in production)
-  if (
-    process.env.NODE_ENV === "production" /* &&
-    process.env.RENDER_SERVICE_NAME */
-  ) {
-    const https = require("https");
-    const selfPingUrl =
-      process.env.RENDER_EXTERNAL_URL ||
-      `https://${process.env.RENDER_SERVICE_NAME}.onrender.com`;
-
-    console.log(`⏰ Self-ping enabled for: ${selfPingUrl}`);
-
-    const pingServer = () => {
-      https
-        .get(`${selfPingUrl}/api/v1/users/health`, (res) => {
-          console.log(`✅ Self-ping successful: ${res.statusCode}`);
-        })
-        .on("error", (err) => {
-          console.log(`⚠️ Self-ping failed: ${err.message}`);
-        });
-    };
-
-    // Ping every 10 minutes (300000ms)
-    setInterval(pingServer, 10 * 60 * 1000);
-  }
 });
 
 //this handles any unhandled rejection such as if promise is rejected and we have not handled it, then that situation is called unhandled rejection, as the promise rejection is not handled properly.
